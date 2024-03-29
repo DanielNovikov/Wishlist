@@ -1,0 +1,29 @@
+@import "../../styles/advert-styles";
+
+:host {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  overflow-x: hidden;
+}
+
+.header-decoration {
+  background: var(--secondary-background-color);
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  position: absolute;
+  left: -40px;
+  height: 100%;
+
+  color: rgba(121, 114, 221, 0.38);
+  text-align: center;
+  font-family: $primary-font-family;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.header-decoration p {
+  margin: 0;
+}

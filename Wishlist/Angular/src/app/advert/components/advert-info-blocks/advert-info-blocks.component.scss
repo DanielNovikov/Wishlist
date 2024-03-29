@@ -1,0 +1,94 @@
+@import "../../styles/advert-styles";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  
+  @include content-padding();
+  
+  @include not-mobile() {
+    flex-direction: row;
+    justify-content: center;
+    gap: 150px;
+  }
+}
+
+.info-block {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 40px;
+  background: var(--primary-background-color);
+  box-shadow: 1px 1px 1px 0 #9793FF;
+  padding: 40px;
+  display: flex;
+  gap: 25px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+    
+  @include not-mobile() {
+    width: 400px;
+  }
+}
+
+.info-block p {
+  margin: 0;
+}
+
+.info-block:hover {
+  background: linear-gradient(180deg, #DE59FB 0%, #A383FF 52.08%, #87A6FF 100%);
+}
+
+.info-block-image {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  height: 75px;
+  width: 75px;
+  
+  @include not-mobile() {
+    height: 100px;
+    width: 100px; 
+  }  
+}
+
+.info-block-creating {
+  background-image: url('/assets/icons/advert/create-primary.svg');
+}
+
+.info-block:hover .info-block-creating {
+  background-image: url('/assets/icons/advert/create-white.svg');
+}
+
+.info-block-getting {
+  background-image: url('/assets/icons/advert/idea-primary.svg');
+}
+
+.info-block:hover .info-block-getting {
+  background-image: url('/assets/icons/advert/idea-white.svg');
+}
+
+.info-block-header {
+  color: #7972DD;
+  font-family: $primary-font-family;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  /*transition: color 0.3s;*/
+}
+
+.info-block:hover .info-block-header, .info-block:hover .info-block-description {
+  color: white;
+}
+
+.info-block-description {
+  color: #9B96DB;
+  font-family: $primary-font-family;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+}

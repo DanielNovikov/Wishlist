@@ -23,6 +23,9 @@
 
     <ItemGroup>
       <Folder Include="Angular\" />
+      <Folder Include="Angular\src\app\advert\models\" />
+      <Folder Include="Angular\src\app\advert\services\" />
+      <Folder Include="Angular\src\app\main\components\" />
       <Folder Include="Angular\src\assets\" />
     </ItemGroup>
 

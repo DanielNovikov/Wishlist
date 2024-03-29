@@ -1,0 +1,141 @@
+@import "../../styles/advert-styles";
+
+.container-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  align-items: center;
+  text-align: center;
+  
+  @include not-mobile() {
+    display: none;
+  }
+}
+
+.container-pc {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: center;
+  
+  @include content-padding();
+  
+  @include mobile() {
+    display: none;
+  }
+}
+
+.banner-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 35px;
+}
+
+.banner-info-header {
+  color: #7972DD;
+  font-family: $secondary-font-family;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  line-height: 25px;
+  font-size: 35px;
+  
+  @include tablet() {
+    line-height: 40px;
+    font-size: 50px;
+  }
+  
+  @include pc() {
+    line-height: 50px;
+    font-size: 60px;
+  }  
+
+  span {
+    font-family: $primary-font-family;
+    font-weight: 500;
+    font-size: 30px;
+    
+    @include tablet() {
+      font-size: 40px;
+    }
+    
+    @include pc() {
+      font-size: 50px;
+    }
+  }
+}
+
+.banner-info-description {
+  color: #9B96DB;
+  font-family: $primary-font-family;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.banner-info-description-logo {
+  color: #7972DD;
+  font-family: $secondary-font-family;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.banner-image {
+  text-align: center;
+
+  img {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+
+/*BUTTON*/
+
+.banner-info-button {
+  border-radius: 50px;
+  background: linear-gradient(to right, #EFA3FF, #AA8BFF, #87A6FF);
+  font-size: 30px;
+  border: 0;
+  position: relative;
+  z-index: 1;
+  padding: 20px 60px;
+  cursor: pointer;
+}
+
+.banner-info-button::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  bottom: 3px;
+  left: 3px;
+  background-color: var(--primary-background-color);
+  border-radius: 48px;
+  z-index: -1;
+  transition: 0.2s all;
+}
+
+.banner-info-button::after {
+  content: attr(data);
+  font-family: $primary-font-family;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  background: linear-gradient(to right, #EFA3FF, #AA8BFF, #87A6FF);
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: 0.2s all;
+}
+
+.banner-info-button:hover::before {
+  background: linear-gradient(to right, #EFA3FF, #AA8BFF, #87A6FF);
+}
+
+.banner-info-button:hover::after {
+  background: transparent;
+  color: white;
+}

@@ -1,0 +1,15 @@
+<img class="header-logo" src="assets/icons/advert/logo.svg" alt="Логотип">
+
+<div class="header-actions">
+    <img class="header-account" src="assets/icons/advert/account.svg" alt="Аккаунт">
+
+    <div class="header-theme-selector" (click)="toggleTheme()">
+        <div [ngClass]="{'header-active-theme': theme === Theme.Light }">
+            <img src="assets/icons/advert/theme-mode-light.svg" alt="Світла тема">
+        </div>
+
+        <div [ngClass]="{'header-active-theme': theme === Theme.Dark }">
+            <img src="assets/icons/advert/theme-mode-dark.svg" alt="Темна тема">
+        </div>
+    </div>
+</div>

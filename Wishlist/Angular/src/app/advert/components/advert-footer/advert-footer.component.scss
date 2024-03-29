@@ -1,0 +1,69 @@
+@import "../../styles/advert-styles";
+
+:host {
+  text-align: center;
+  position: relative;
+  background: var(--secondary-background-color);
+  padding-top: 20px;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.bottom-text {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding-bottom: 10px;
+}
+
+.text-footer {
+  color: #7972DD;
+  font-family: $secondary-font-family;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.text-footer {
+  color: #7972DD;
+  font-family: $primary-font-family;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 10px;
+}
+
+.copyright {
+  margin-bottom: 10px;
+}
+
+.arrow {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 20px 0 0 0;
+  background: #CCC9F2;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: 0.15s all;
+  
+  @include mobile() {
+    display: none;
+  }
+  
+  &:hover {
+    background: #7972DD;
+  }
+}
+
+.arrow-image {
+  margin: auto;
+}
