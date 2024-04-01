@@ -25,7 +25,11 @@
       <Folder Include="Angular\" />
       <Folder Include="Angular\src\app\advert\models\" />
       <Folder Include="Angular\src\app\advert\services\" />
+      <Folder Include="Angular\src\app\auth\components\" />
       <Folder Include="Angular\src\app\main\components\" />
+      <Folder Include="Angular\src\app\shared\components\" />
+      <Folder Include="Angular\src\app\shared\models\" />
+      <Folder Include="Angular\src\app\shared\services\" />
       <Folder Include="Angular\src\assets\" />
     </ItemGroup>
 

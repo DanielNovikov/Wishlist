@@ -1,0 +1,21 @@
+@import "./medias";
+
+$primary-font-family: Montserrat, serif;
+$secondary-font-family: Sniglet, serif;
+
+@mixin transition {
+  transition: var(--animation-transition) all;
+}
+
+@mixin disable-selection {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  outline: none;
+
+  &:focus, &:active {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+}

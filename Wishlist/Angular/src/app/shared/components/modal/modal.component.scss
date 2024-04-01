@@ -1,0 +1,141 @@
+@import "../../styles/styles";
+
+$animation-delay: 0.23s;
+$fast-animation-delay: 0.17s;
+
+.modal-container {
+  position: fixed;
+  z-index: 1001;
+  height: auto;
+  background-color: var(--primary-background-color);
+}
+
+.close-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2000;
+
+  height: 19px;
+  padding: 10px;
+
+  @include not-mobile() {
+    right: 5px;
+    top: 5px;
+  }
+}
+
+@include mobile() {
+  .modal-container {
+    top: initial;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    box-sizing: border-box;
+    max-height: 90vh;
+    max-height: 90dvh;
+
+    &.default {
+      padding: 25px 15px;
+    }
+
+    &.sidebar {
+      padding: 25px 0;
+    }
+
+    animation: modalShowMobileBottom $animation-delay forwards;
+    @keyframes modalShowMobileBottom {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    &.hide {
+      animation: modalHideMobileBottom $animation-delay forwards;
+      @keyframes modalHideMobileBottom {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(100%);
+        }
+      }
+    }
+  }
+}
+
+@include not-mobile() {
+
+  // PC - DEFAULT
+  .modal-container {
+    left: 50%;
+    top: 50%;
+
+    padding: 20px 18px;
+    width: 300px;
+    border-radius: 8px;
+
+    animation: modalShowPcDefault $animation-delay forwards;
+    @keyframes modalShowPcDefault {
+      from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    &.hide {
+      animation: modalHidePcDefault $animation-delay forwards;
+      @keyframes modalHidePcDefault {
+        from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        to { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+      }
+    }
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+
+  opacity: 0;
+  visibility: hidden;
+  background: rgba(0, 0, 0, .35);
+}
+
+.modal-overlay.show {
+  animation: overlayShow $animation-delay forwards;
+}
+
+.modal-overlay.hide {
+  animation: overlayHide $animation-delay forwards;
+}
+
+@keyframes overlayShow {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes overlayHide {
+  from {
+    visibility: visible;
+    opacity: 1;
+  }
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}

@@ -6,15 +6,22 @@ body {
 }
 
 :root {
-  --primary-font-color: #7972DD; /* Default color */
+  --primary-font-color: #7972DD;
+  --secondary-font-color: #9B96DB;
   
+  --animation-transition: 0s;
+}
+
+div.light-theme {
   --primary-background-color: white;
   --secondary-background-color: rgb(249, 249, 249);
 }
 
-body[is-light-theme="false"] {
-  --primary-font-color: #32a852; /* Dark theme color */
-  
+div.dark-theme {  
   --primary-background-color: #1A1729;
   --secondary-background-color: #211E32;
+}
+
+div.initialized {
+  --animation-transition: 0.2s;
 }

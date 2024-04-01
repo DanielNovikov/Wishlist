@@ -1,1 +1,9 @@
-<router-outlet />
+<div [ngClass]="{
+    'light-theme': themeService.Value() == Theme.Light, 
+    'dark-theme': themeService.Value() == Theme.Dark,
+    'initialized': isInitialized()}">
+    
+    <router-outlet />
+</div>
+
+<div #modalContainer></div>

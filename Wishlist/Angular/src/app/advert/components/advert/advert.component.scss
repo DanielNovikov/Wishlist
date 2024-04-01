@@ -5,7 +5,8 @@
   flex-direction: column;
   gap: 90px;
   background: var(--primary-background-color);
-  transition: 0.2s all;
+  
+  @include transition();
   
   @include not-mobile() {
     gap: 150px;

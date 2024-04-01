@@ -10,16 +10,10 @@ export class ThemeService {
   public Value : WritableSignal<Theme> = signal<Theme>(Theme.Light);
   
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    if (isPlatformBrowser(this.platformId)) {
-      effect(() => {
-        document.body.setAttribute('is-light-theme', (this.Value() == Theme.Light).toString());
-      });
-    }
   }
   
   public initialize() {
-    if (isPlatformBrowser(this.platformId)) {
-      
+    if (isPlatformBrowser(this.platformId)) {      
       let theme = localStorage.getItem('theme');
       if (theme != null) {
         this.Value.set(Theme[theme as keyof typeof Theme]);
