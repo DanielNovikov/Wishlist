@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgClass} from "@angular/common";
 import {Theme} from "../../models/theme";
 import {ThemeService} from "../../services/theme.service";
@@ -12,21 +12,12 @@ import {ThemeService} from "../../services/theme.service";
   templateUrl: './advert-header.component.html',
   styleUrl: './advert-header.component.scss'
 })
-export class AdvertHeaderComponent implements OnInit {
+export class AdvertHeaderComponent {
 
-  protected theme: Theme = Theme.Light;
-
-  constructor(private themeService: ThemeService) {}
-
-  ngOnInit(): void {
-    this.themeService.initialize();
-  }
+  constructor(public themeService: ThemeService) {}
 
   toggleTheme(): void {    
-  }
-  
-  setTheme(theme: boolean) {
-    // document.body.setAttribute('is-light-theme', this.isLightTheme.toString());
+    this.themeService.toggle();
   }
 
   protected readonly Theme = Theme;
