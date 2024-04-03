@@ -24,8 +24,10 @@ export class ModalService {
     this.componentRef.instance.onClose.subscribe(() => this.closeModal());
     
     this.componentRef.instance.onViewInitialized.subscribe(() => {
-      let contentRef = this.componentRef!.instance.content.createComponent(componentType);
-      contentRef.instance.onClose.subscribe(() => this.closeModal());
+      setTimeout(() => {
+        let contentRef = this.componentRef!.instance.content.createComponent(componentType);
+        contentRef.instance.onClose.subscribe(() => this.closeModal());
+      });
     });
     
     this.componentSubscriber = new Subject<any>();

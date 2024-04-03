@@ -1,4 +1,5 @@
-﻿using Wishlist.Data.Models.Enums;
+﻿using Wishlist.Data.Models.Base;
+using Wishlist.Data.Models.Enums;
 
 namespace Wishlist.Data.Models;
 

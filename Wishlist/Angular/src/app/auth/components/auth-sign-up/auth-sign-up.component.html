@@ -1,0 +1,39 @@
+<div class="form" [formGroup]="authForm">
+    <app-text text="Реєстрація" type="h2" textAlign="center"></app-text>
+
+    <div class="auth-choice">
+        <app-text text="Вже є акаунт?" type="h4"></app-text>
+        <app-text text="Увійти" [underline]="true" type="h4" fontWeight="medium" (click)="onSignInClicked.emit()"></app-text>
+    </div>
+
+    <div class="input-container">
+        <input placeholder="Ім'я" formControlName="name">
+        <div *ngIf="submitAttempted() && name?.invalid">
+            <app-text-error *ngIf="name?.errors?.['required']" text="Ім'я має бути заповнене."></app-text-error>
+            <app-text-error *ngIf="name?.errors?.['maxlength']" text="Ім'я не може бути довше 50 символів."></app-text-error>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <input placeholder="Електронна пошта" formControlName="email" type="email">
+        <div *ngIf="submitAttempted() && email?.invalid">
+            <app-text-error *ngIf="email?.errors?.['required']" text="Електронна пошта має бути заповнена."></app-text-error>
+            <app-text-error *ngIf="email?.errors?.['maxlength']" text="Електронна пошта не може бути довше 100 символів."></app-text-error>
+            <app-text-error *ngIf="email?.errors?.['email']" text="Невірний формат електронної пошти."></app-text-error>
+        </div>
+    </div>
+
+    <div class="input-container">
+        <input placeholder="Пароль" formControlName="password" type="password">
+        <div *ngIf="submitAttempted() && password?.invalid">
+            <app-text-error *ngIf="password?.errors?.['required']" text="Пароль має бути заповнений."></app-text-error>
+            <app-text-error *ngIf="password?.errors?.['maxlength']" text="Парот не може бути довше 50 символів."></app-text-error>
+        </div>
+    </div>
+
+    <div class="submit-button-container">
+        <app-text-error *ngIf="submitFailureMessage() !== ''" [text]="submitFailureMessage()" textAlign="center"></app-text-error>
+
+        <app-gradient-button [text]="'РЕЄСТРАЦІЯ'" (click)="onSubmit()"></app-gradient-button>
+    </div>
+</div>

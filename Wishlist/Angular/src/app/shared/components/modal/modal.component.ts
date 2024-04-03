@@ -28,7 +28,6 @@ export class ModalComponent extends ModalBase implements AfterViewInit {
   
   @Output() onViewInitialized = new EventEmitter();
   ngAfterViewInit() {
-    console.log(this.content);
     this.onViewInitialized.emit();
   }
 }

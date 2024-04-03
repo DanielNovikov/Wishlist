@@ -6,7 +6,6 @@ namespace Wishlist.Data;
 public class ApplicationDbContext : DbContext
 {
     public DbSet<User> Users { get; set; } = default!;
-    public DbSet<UserConfirmationCode> UserConfirmationCodes { get; set; } = default!;
     public DbSet<Image> Images { get; set; } = default!;
     public DbSet<UserList> UserLists { get; set; } = default!;
     public DbSet<UserListItem> UserListItems { get; set; } = default!;

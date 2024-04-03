@@ -19,7 +19,6 @@
   width: 100%;
   box-sizing: border-box;
   border-radius: 40px;
-  box-shadow: 1px 1px 1px 0 #9793FF;
   padding: 40px;
   display: flex;
   gap: 25px;
@@ -27,6 +26,7 @@
   align-items: center;
   text-align: center;
   cursor: pointer;
+  box-shadow: 1px 1px 1px 0 $box-shadow-color;
   
   @include transition();
     

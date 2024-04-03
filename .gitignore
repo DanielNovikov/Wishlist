@@ -10,6 +10,7 @@ typings/
 *.user
 *.userosscache
 *.sln.docstates
+*/appsettings.Development.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -140,7 +141,6 @@ DocProject/Help/*.hhk
 DocProject/Help/*.hhp
 DocProject/Help/Html2
 DocProject/Help/html
-*/appsettings.Development.json
 
 # Click-Once directory
 publish/

@@ -4,8 +4,8 @@
     <div class="banner-image">
         <img src="assets/icons/advert/banner.svg" alt="Банер">
     </div>
-    
-    <button class="banner-info-button" data="СТВОРИ СВІЙ" (click)="open()"></button>
+
+    <app-gradient-button (onClick)="open()" [text]="'СТВОРИ СВІЙ'" size="big"></app-gradient-button>
 </div>
 
 <div class="container-pc">
@@ -14,7 +14,7 @@
         <h2 class="banner-info-description">Отримуй подарунки із задоволенням з <br/><span class="banner-info-description-logo">WISH-LIST.UA!</span> Просто додай все, що бажаєш та очікуй свята з нетерпінням!</h2>
     
         <div>
-            <app-gradient-button (onClick)="open()" [text]="'СТВОРИ СВІЙ'"></app-gradient-button>
+            <app-gradient-button (onClick)="open()" [text]="'СТВОРИ СВІЙ'" size="big"></app-gradient-button>
         </div>
     </div>
     

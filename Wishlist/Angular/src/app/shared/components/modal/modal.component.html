@@ -1,6 +1,6 @@
 <div class="modal-container" [ngClass]="{'show': !modalService.isClosing(), 'hide': modalService.isClosing()}">
     <div class="close-button" (click)="close()">
-<!--        <button IconSource="@GetCloseIconSource(instance)" OnClick="Close"></button>-->
+        <img src="assets/icons/shared/cross.svg" alt="Закрити">
     </div>
 
     <div #content></div>

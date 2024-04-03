@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Wishlist.Auth;
 using Wishlist.Data;
+using Wishlist.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,9 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("WishlistDB")));
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddShared();
+builder.Services.AddAuth(builder.Configuration);
+builder.Services.AddData(builder.Configuration);
 
 var app = builder.Build();
 
@@ -19,6 +22,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.UseCors(options => options
+        .AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowAnyHeader());
 }
 
 app.UseHttpsRedirection();

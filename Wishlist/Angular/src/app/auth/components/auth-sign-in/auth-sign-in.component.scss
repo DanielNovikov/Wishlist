@@ -1,0 +1,30 @@
+@import '../../../shared/styles/styles';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+}
+
+input {
+  @include input();
+}
+
+.input-container, .input-container > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.submit-button-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 13px;
+}
+
+.auth-choice {
+  display: flex;
+  gap: 5px;
+}

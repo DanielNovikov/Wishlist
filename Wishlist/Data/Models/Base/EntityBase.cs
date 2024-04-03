@@ -1,4 +1,4 @@
-﻿namespace Wishlist.Data.Models;
+﻿namespace Wishlist.Data.Models.Base;
 
 public abstract class EntityBase
 {

@@ -10,6 +10,7 @@ body {
   --secondary-font-color: #9B96DB;
   
   --animation-transition: 0s;
+  --animation-fast-transition: 0s;
 }
 
 div.light-theme {
@@ -24,4 +25,5 @@ div.dark-theme {
 
 div.initialized {
   --animation-transition: 0.2s;
+  --animation-fast-transition: 0.12s;
 }

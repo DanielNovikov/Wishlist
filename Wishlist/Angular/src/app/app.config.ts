@@ -5,6 +5,9 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideServiceWorker } from '@angular/service-worker';
 import {ThemeService} from "./advert/services/theme.service";
+import {provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
+import {AuthService} from "./auth/services/auth.service";
+import {authInterceptor} from "./shared/interceptors/auth.interceptor";
 
 export function initializeTheme(themeService: ThemeService) {
     return () => new Promise<void>((resolve) => {
@@ -13,9 +16,14 @@ export function initializeTheme(themeService: ThemeService) {
     });
 }
 
+export function initializeCurrentUser(authService: AuthService) {
+    return () => authService.loadCurrentUser();
+}
+
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes),
+        provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
         provideClientHydration(),
         provideServiceWorker('ngsw-worker.js', {
             enabled: !isDevMode(),
@@ -27,6 +35,13 @@ export const appConfig: ApplicationConfig = {
             deps: [ThemeService],
             multi: true
         },
-        ThemeService
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initializeCurrentUser,
+            deps: [AuthService],
+            multi: true
+        },
+        ThemeService,
+        AuthService
     ]
 };
