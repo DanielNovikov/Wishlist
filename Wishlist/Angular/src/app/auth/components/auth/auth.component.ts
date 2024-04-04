@@ -24,7 +24,7 @@ import {Router} from "@angular/router";
   styleUrl: './auth.component.scss'
 })
 export class AuthComponent extends ModalEmpty {
-    protected authType: WritableSignal<'sign-in' | 'sign-up'> = signal('sign-up');
+    protected authType: WritableSignal<'sign-in' | 'sign-up'> = signal('sign-in');
     
     constructor(private router: Router) {
         super();

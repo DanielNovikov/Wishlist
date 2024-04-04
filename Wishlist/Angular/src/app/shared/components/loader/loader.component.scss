@@ -1,0 +1,62 @@
+@import "../../styles/styles";
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2000;
+  cursor: wait;
+  
+  opacity: 0;
+  visibility: hidden;
+  background: var(--overlay-background-color);
+}
+
+.overlay.visible {
+  animation: overlayShow var(--animation-fast-transition) forwards;
+}
+
+.overlay.hidden {
+  animation: overlayHide var(--animation-fast-transition) forwards;
+}
+
+@keyframes overlayShow {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes overlayHide {
+  from {
+    visibility: visible;
+    opacity: 1;
+  }
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.gradient {
+  background: linear-gradient(to right, #EFA3FF, #AA8BFF, #87A6FF, #AA8BFF, #EFA3FF);
+  width: 100%;
+  background-size: 200% auto;
+  background-position: 0 100%;
+  animation: gradient 1s infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  height: 3px;
+}
+
+
+@keyframes gradient {
+  0%   { background-position: 0 0; }
+  100% { background-position: -200% 0; }
+}

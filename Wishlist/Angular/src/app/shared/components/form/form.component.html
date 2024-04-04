@@ -1,1 +1,13 @@
-<p>form works!</p>
+<form class="form" [formGroup]="formGroup">
+    <app-text [text]="title" type="h2" textAlign="center"></app-text>
+    
+    <ng-content select="[header]"></ng-content>
+
+    <ng-content></ng-content>
+    
+    <div class="submit-button-container">
+        <app-text-error *ngIf="submitFailureMessage() !== ''" [text]="submitFailureMessage()" textAlign="center"></app-text-error>
+        
+        <app-gradient-button [text]="submitButtonText" (click)="onSubmitClicked()"></app-gradient-button>
+    </div>
+</form>

@@ -19,6 +19,7 @@ export class AdvertBannerComponent implements OnDestroy {
   private openModalSubscription: Subscription | undefined;
   
   constructor(private modalService: ModalService, private authService: AuthService, private router: Router) {
+    setTimeout(() => this.open(), 1000);
   }
   
   open() {

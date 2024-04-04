@@ -4,11 +4,13 @@ import {GradientButtonComponent} from "../../../shared/components/gradient-butto
 import {NgIf} from "@angular/common";
 import {TextComponent} from "../../../shared/components/text/text.component";
 import {TextErrorComponent} from "../../../shared/components/text-error/text-error.component";
-import {Subscription} from "rxjs";
+import {finalize, Subscription} from "rxjs";
 import {AuthApiService} from "../../services/auth-api.service";
 import {AuthSignInByEmailRequest} from "../../models/auth-sign-in-by-email-request";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import {FormComponent} from "../../../shared/components/form/form.component";
+import {LoaderService} from "../../../shared/services/loader.service";
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -19,13 +21,14 @@ import {Router} from "@angular/router";
         NgIf,
         ReactiveFormsModule,
         TextComponent,
-        TextErrorComponent
+        TextErrorComponent,
+        FormComponent
     ],
   templateUrl: './auth-sign-in.component.html',
   styleUrl: './auth-sign-in.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthSignInComponent implements OnDestroy {
+export class AuthSignInComponent {
     @Output() onSignUpClicked: EventEmitter<void> = new EventEmitter<void>();
     @Output() onAuthenticated: EventEmitter<void> = new EventEmitter<void>();
     
@@ -37,30 +40,21 @@ export class AuthSignInComponent implements OnDestroy {
     get email() { return this.authForm.get('email'); }
     get password() { return this.authForm.get('password'); }
 
-    private valueChangesSubscription: Subscription | undefined;
-    constructor(private authService: AuthService) {
-        this.valueChangesSubscription = this.authForm.valueChanges.subscribe(() => {
-            this.submitFailureMessage.set('');
-        });
-    }
+    constructor(private authService: AuthService, private loaderService: LoaderService) {}
 
-    ngOnDestroy(): void {
-        this.valueChangesSubscription?.unsubscribe();
-    }
-
-    submitAttempted = signal(false);
     submitFailureMessage = signal('');
     onSubmit() {
-        this.submitAttempted.set(true);
-        if (this.authForm.valid) {
-            const request = this.authForm.value as AuthSignInByEmailRequest;
-            this.authService.signInByEmail(request).subscribe(success => {
+        this.loaderService.show();
+        
+        const request = this.authForm.value as AuthSignInByEmailRequest;
+        this.authService.signInByEmail(request)
+            .pipe(finalize(() => this.loaderService.hide()))
+            .subscribe(success => {
                 if (!success) {
                     this.submitFailureMessage.set('Невірна електронна пошта або пароль');
                 } else {
                     this.onAuthenticated.emit();
                 }
             });
-        }
     }
 }

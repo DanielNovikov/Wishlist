@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+  position: relative;
+}
+
+.submit-button-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 13px;
+}

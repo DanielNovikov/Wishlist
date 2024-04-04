@@ -16,11 +16,13 @@ body {
 div.light-theme {
   --primary-background-color: white;
   --secondary-background-color: rgb(249, 249, 249);
+  --overlay-background-color: rgba(0, 0, 0, 0.2);
 }
 
 div.dark-theme {  
   --primary-background-color: #1A1729;
   --secondary-background-color: #211E32;
+  --overlay-background-color: rgba(0, 0, 0, 0.4);
 }
 
 div.initialized {

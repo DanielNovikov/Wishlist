@@ -52,7 +52,7 @@ $fast-animation-delay: 0.17s;
       padding: 25px 0;
     }
 
-    animation: modalShowMobileBottom $animation-delay forwards;
+    animation: modalShowMobileBottom var(--animation-transition) forwards;
     @keyframes modalShowMobileBottom {
       from {
         transform: translateY(100%);
@@ -63,7 +63,7 @@ $fast-animation-delay: 0.17s;
     }
 
     &.hide {
-      animation: modalHideMobileBottom $animation-delay forwards;
+      animation: modalHideMobileBottom var(--animation-transition) forwards;
       @keyframes modalHideMobileBottom {
         from {
           transform: translateY(0);
@@ -113,7 +113,7 @@ $fast-animation-delay: 0.17s;
 
   opacity: 0;
   visibility: hidden;
-  background: rgba(0, 0, 0, .35);
+  background: var(--overlay-background-color);
 }
 
 .modal-overlay.show {
