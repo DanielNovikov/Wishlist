@@ -1,18 +1,18 @@
 import {Component} from '@angular/core';
 import {NgClass} from "@angular/common";
-import {Theme} from "../../models/theme";
-import {ThemeService} from "../../services/theme.service";
+import {ThemeService} from "../../../advert/services/theme.service";
+import { Theme } from '../../../advert/models/theme';
 
 @Component({
-  selector: 'app-advert-header',
+  selector: 'app-header',
   standalone: true,
   imports: [
     NgClass    
   ],
-  templateUrl: './advert-header.component.html',
-  styleUrl: './advert-header.component.scss'
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss'
 })
-export class AdvertHeaderComponent {
+export class HeaderComponent {
 
   constructor(public themeService: ThemeService) {}
 

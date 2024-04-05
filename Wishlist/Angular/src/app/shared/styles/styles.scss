@@ -13,3 +13,15 @@
     outline: none;
   }
 }
+
+@mixin content-padding {
+  margin: 0 20px;
+
+  @include tablet() {
+    margin: 0 50px;
+  }
+
+  @include pc() {
+    margin: 0 60px;
+  }
+}

@@ -1,4 +1,4 @@
-@import "../../styles/advert-styles";
+@import "../../styles/styles";
 
 :host {
   display: flex;
@@ -13,10 +13,10 @@
 }
 
 .header-logo {
-  height: 50px;
+  height: 45px;
   
   @include not-mobile() {
-    height: 90px;
+    height: 70px;
   }
 }
 

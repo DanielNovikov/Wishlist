@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import {AdvertHeaderComponent} from "../advert-header/advert-header.component";
 import {AdvertBannerComponent} from "../advert-banner/advert-banner.component";
 import {AdvertInfoBlocksComponent} from "../advert-info-blocks/advert-info-blocks.component";
 import {AdvertStepsComponent} from "../advert-steps/advert-steps.component";
 import {AdvertCloudsComponent} from "../advert-clouds/advert-clouds.component";
 import {AdvertFooterComponent} from "../advert-footer/advert-footer.component";
+import {HeaderComponent} from "../../../shared/components/header/header.component";
 
 @Component({
   selector: 'app-advert',
   standalone: true,
   imports: [
-    AdvertHeaderComponent,
+    HeaderComponent,
     AdvertBannerComponent,
     AdvertInfoBlocksComponent,
     AdvertStepsComponent,

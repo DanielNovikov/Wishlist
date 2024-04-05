@@ -31,6 +31,7 @@ public static class DependencyInjectionInitializer
             }).Services
             .AddTransient<IAuthByEmailService, AuthByEmailService>()
             .AddTransient<IAuthCurrentUserService, AuthCurrentUserService>()
+            .AddTransient<IAuthByTelegramService, AuthByTelegramService>()
             .AddTransient<IAuthTokenGenerationService, AuthTokenGenerationService>();
     }
 }

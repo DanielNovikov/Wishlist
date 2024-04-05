@@ -37,6 +37,6 @@ export class AuthComponent extends ModalEmpty {
     
     onAuthenticated() {
         this.close();
-        this.router.navigate(['home']);
+        this.router.navigate(['wishlist']);
     }
 }
