@@ -6,6 +6,7 @@ import {map, Observable, of} from "rxjs";
 import {AuthResponse} from "../models/auth-response";
 import {AuthSignUpByEmailRequest} from "../models/auth-sign-up-by-email-request";
 import {isPlatformBrowser} from "@angular/common";
+import {AuthSignInByTelegramRequest} from "../models/auth-sign-in-by-telegram-request";
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,11 @@ export class AuthService {
   signUpByEmail(request: AuthSignUpByEmailRequest) : Observable<boolean> {
     return this.authApiService.signUpByEmail(request).pipe(
       map(response => this.authenticate(response)));
+  }
+  
+  signInByTelegram(request: AuthSignInByTelegramRequest) : Observable<boolean> {
+    return this.authApiService.signInByTelegram(request).pipe(
+        map(response => this.authenticate(response)));
   }
   
   private authenticate(response: AuthResponse | null) : boolean {

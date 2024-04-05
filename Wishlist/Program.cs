@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddShared();
+builder.Services.AddShared(builder.Configuration);
 builder.Services.AddAuth(builder.Configuration);
 builder.Services.AddData(builder.Configuration);
 

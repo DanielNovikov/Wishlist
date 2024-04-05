@@ -9,7 +9,7 @@
     </div>
 
     <div class="input-container">
-        <input placeholder="Електронна пошта" formControlName="email" type="email">
+        <input class="text-input" placeholder="Електронна пошта" formControlName="email" type="email">
         <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
             <app-text-error *ngIf="email?.errors?.['required']" text="Електронна пошта має бути заповнена."></app-text-error>
             <app-text-error *ngIf="email?.errors?.['maxlength']" text="Електронна пошта не може бути довше 100 символів."></app-text-error>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="input-container">
-        <input placeholder="Пароль" formControlName="password" type="password">
+        <input class="text-input" placeholder="Пароль" formControlName="password" type="password">
         <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
             <app-text-error *ngIf="password?.errors?.['required']" text="Пароль має бути заповнений."></app-text-error>
             <app-text-error *ngIf="password?.errors?.['maxlength']" text="Парот не може бути довше 50 символів."></app-text-error>

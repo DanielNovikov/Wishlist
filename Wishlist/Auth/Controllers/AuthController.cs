@@ -9,7 +9,8 @@ namespace Wishlist.Auth.Controllers;
 [ApiController]
 public class AuthController(
     IAuthByEmailService authByEmailService,
-    IAuthCurrentUserService currentUserService) 
+    IAuthCurrentUserService currentUserService,
+    IAuthByTelegramService authByTelegramService) 
     : ControllerBase
 {
     [HttpGet("current-user")]
@@ -41,6 +42,16 @@ public class AuthController(
         if (!request.IsValid()) return BadRequest();
 
         var response = await authByEmailService.SignUp(request);
+        if (response == null) return BadRequest();
+
+        return Ok(response);
+    }
+
+    [HttpGet("telegram")]
+    [AllowAnonymous]
+    public async Task<IActionResult> SignInByTelegram([FromBody] AuthSignInByTelegramRequest request)
+    {
+        var response = await authByTelegramService.SignIn(request);
         if (response == null) return BadRequest();
 
         return Ok(response);

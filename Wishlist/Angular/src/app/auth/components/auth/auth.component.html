@@ -4,11 +4,4 @@
     <app-auth-sign-up (onSignInClicked)="onAuthTypeChanged('sign-in')" (onAuthenticated)="onAuthenticated()"></app-auth-sign-up>
 }
     
-<div class="external">
-    <app-text text="Увійти за допомогою" type="h5"></app-text>
-    
-    <div class="external-buttons">
-        <img src="assets/icons/auth/telegram.png" alt="Google">
-        <img src="assets/icons/auth/google.svg" alt="Telegram">
-    </div>
-</div>
+<app-auth-external></app-auth-external>

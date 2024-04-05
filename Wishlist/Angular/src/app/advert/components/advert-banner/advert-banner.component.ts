@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ModalService} from "../../../shared/services/modal.service";
 import {GradientButtonComponent} from "../../../shared/components/gradient-button/gradient-button.component";
 import {AuthComponent} from "../../../auth/components/auth/auth.component";
@@ -19,7 +19,7 @@ export class AdvertBannerComponent implements OnDestroy {
   private openModalSubscription: Subscription | undefined;
   
   constructor(private modalService: ModalService, private authService: AuthService, private router: Router) {
-    setTimeout(() => this.open(), 1000);
+    setTimeout(() => this.open(), 0);
   }
   
   open() {

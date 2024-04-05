@@ -1,0 +1,9 @@
+<app-text text="Увійти за допомогою" type="h5"></app-text>
+
+<div class="external-buttons">
+    @if (!deviceService.isIos()) {
+        <app-auth-external-telegram></app-auth-external-telegram>
+    }
+    
+    <img src="assets/icons/auth/google.svg" alt="Google">
+</div>

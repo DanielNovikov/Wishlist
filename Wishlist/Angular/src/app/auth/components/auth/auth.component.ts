@@ -11,14 +11,15 @@ import {Subscription} from "rxjs";
 import {AuthSignInComponent} from "../auth-sign-in/auth-sign-in.component";
 import {AuthSignUpComponent} from "../auth-sign-up/auth-sign-up.component";
 import {Router} from "@angular/router";
+import {AuthExternalComponent} from "../auth-external/auth-external.component";
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
     imports: [
-        TextComponent,
         AuthSignInComponent,
-        AuthSignUpComponent
+        AuthSignUpComponent,
+        AuthExternalComponent
     ],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'

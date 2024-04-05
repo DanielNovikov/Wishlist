@@ -1,6 +1,6 @@
 @import "./fonts";
 
-@mixin input() {
+.text-input {
   background-color: var(--secondary-background-color);
   outline: none;
   padding: 12px 14px;
@@ -23,4 +23,10 @@
   &:-ms-input-placeholder { @include font-color-secondary(); }
   &::-ms-input-placeholder { @include font-color-secondary(); }
   &::placeholder { @include font-color-secondary(); }
+}
+
+.input-container, .input-container > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

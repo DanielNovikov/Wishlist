@@ -1,16 +1,5 @@
 @import '../../../shared/styles/styles';
 
-input {
-  @include input();
-}
-
-.input-container, .input-container > div {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-
 .auth-choice {
   display: flex;
   gap: 5px;
