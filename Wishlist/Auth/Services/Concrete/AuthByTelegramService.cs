@@ -12,7 +12,7 @@ namespace Wishlist.Auth.Services.Concrete;
 
 public class AuthByTelegramService(
     IOptions<TelegramLogOptions> options,
-    IRepository<User> userRepository,
+    IRepository<UserEntity> userRepository,
     IAuthTokenGenerationService authTokenGenerationService) 
     : IAuthByTelegramService
 {
@@ -29,7 +29,7 @@ public class AuthByTelegramService(
         
         if (user == null)
         {
-            user = new User
+            user = new UserEntity
             {
                 Source = UserSource.Telegram,
                 ExternalId = request.Id,

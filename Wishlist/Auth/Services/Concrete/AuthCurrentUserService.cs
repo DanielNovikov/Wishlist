@@ -6,11 +6,11 @@ using Wishlist.Data.Repositories.Abstract;
 namespace Wishlist.Auth.Services.Concrete;
 
 public class AuthCurrentUserService(
-    IRepository<User> userRepository,
+    IRepository<UserEntity> userRepository,
     IHttpContextAccessor contextAccessor) 
     : IAuthCurrentUserService
 {
-    public async ValueTask<User?> Get()
+    public async ValueTask<UserEntity?> Get()
     {
         var userIdClaim = contextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId))

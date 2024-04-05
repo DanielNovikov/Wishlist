@@ -8,7 +8,7 @@ using Wishlist.Data.Repositories.Abstract;
 namespace Wishlist.Auth.Services.Concrete;
 
 public class AuthByEmailService(
-    IRepository<User> userRepository, 
+    IRepository<UserEntity> userRepository, 
     IAuthTokenGenerationService authTokenGenerationService) 
     : IAuthByEmailService
 {
@@ -30,7 +30,7 @@ public class AuthByEmailService(
 
         if (user != null) return null;
 
-        user = new User
+        user = new UserEntity
         {
             Source = UserSource.Email,
             Name = request.Name!,

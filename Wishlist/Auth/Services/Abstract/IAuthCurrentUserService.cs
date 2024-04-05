@@ -4,5 +4,5 @@ namespace Wishlist.Auth.Services.Abstract;
 
 public interface IAuthCurrentUserService
 {
-    ValueTask<User?> Get();
+    ValueTask<UserEntity?> Get();
 }

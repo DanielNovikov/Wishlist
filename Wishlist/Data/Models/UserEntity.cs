@@ -4,7 +4,7 @@ using Wishlist.Data.Models.Enums;
 
 namespace Wishlist.Data.Models;
 
-public class User : EntityBase
+public class UserEntity : EntityBase
 {
     [MaxLength(50)]
     public string Name { get; set; } = default!;

@@ -3,7 +3,7 @@ using Wishlist.Data.Models.Enums;
 
 namespace Wishlist.Data.Models;
 
-public class UserListItem : EntityBase
+public class WishlistItemEntity : EntityBase
 {
     public required string Title { get; set; }
     
@@ -16,5 +16,8 @@ public class UserListItem : EntityBase
     public WishlistItemPriority Priority { get; set; }
     
     public int? ImageId { get; set; }
-    public Image? Image { get; set; }
+    public ImageEntity? Image { get; set; }
+    
+    public int WishlistId { get; set; }
+    public WishlistEntity Wishlist { get; set; } = default!;
 }

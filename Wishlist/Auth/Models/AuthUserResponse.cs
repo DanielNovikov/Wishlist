@@ -6,8 +6,8 @@ public record AuthUserResponse(int Id, string Name);
 
 public static class AuthUserResponseExtensions
 {
-    public static AuthUserResponse ToResponse(this User user)
+    public static AuthUserResponse ToResponse(this UserEntity userEntity)
     {
-        return new AuthUserResponse(user.Id, user.Name);
+        return new AuthUserResponse(userEntity.Id, userEntity.Name);
     }
 }

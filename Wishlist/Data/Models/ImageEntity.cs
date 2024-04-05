@@ -2,7 +2,7 @@
 
 namespace Wishlist.Data.Models;
 
-public class Image : EntityBase
+public class ImageEntity : EntityBase
 {
     public required string Path { get; set; }
 }

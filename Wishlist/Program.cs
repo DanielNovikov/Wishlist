@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Wishlist.Auth;
 using Wishlist.Data;
 using Wishlist.Shared;
+using Wishlist.Wishlist;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddShared(builder.Configuration);
 builder.Services.AddAuth(builder.Configuration);
 builder.Services.AddData(builder.Configuration);
+builder.Services.AddWishlist();
 
 var app = builder.Build();
 

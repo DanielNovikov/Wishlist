@@ -13,27 +13,27 @@ import {AuthSignInByTelegramRequest} from "../models/auth-sign-in-by-telegram-re
 })
 export class AuthApiService {
 
-  private baseUrl: string = environment.apiUrl + 'auth/';
+  private baseUrl: string = environment.apiUrl + 'auth';
   
   constructor(private httpClient: HttpClient) { }
 
   getCurrentUser() : Observable<AuthUserResponse | null> {
-    return this.httpClient.get<AuthUserResponse>(this.baseUrl + 'current-user')
+    return this.httpClient.get<AuthUserResponse>(this.baseUrl + '/current-user')
         .pipe(catchError(error => of(null)));
   }
   
   signInByEmail(request: AuthSignInByEmailRequest) : Observable<AuthResponse | null> {
-    return this.httpClient.post<AuthResponse>(this.baseUrl + 'email/sign-in', request)
+    return this.httpClient.post<AuthResponse>(this.baseUrl + '/email/sign-in', request)
         .pipe(catchError(error => of(null)));
   }
 
   signUpByEmail(request: AuthSignUpByEmailRequest) : Observable<AuthResponse | null> {
-    return this.httpClient.post<AuthResponse>(this.baseUrl + 'email/sign-up', request)
+    return this.httpClient.post<AuthResponse>(this.baseUrl + '/email/sign-up', request)
         .pipe(catchError(error => of(null)));
   }
   
   signInByTelegram(request: AuthSignInByTelegramRequest) : Observable<AuthResponse | null> {
-    return this.httpClient.post<AuthResponse>(this.baseUrl + 'telegram', request)
+    return this.httpClient.post<AuthResponse>(this.baseUrl + '/telegram', request)
         .pipe(catchError(error => of(null)));
   }
 }

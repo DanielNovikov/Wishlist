@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Wishlist.Data;
@@ -11,9 +12,11 @@ using Wishlist.Data;
 namespace Wishlist.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240405122900_AlterUserListsTableRenameWishlistsTable")]
+    partial class AlterUserListsTableRenameWishlistsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Wishlist.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Wishlist.Data.Models.ImageEntity", b =>
+            modelBuilder.Entity("Wishlist.Data.Models.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +45,7 @@ namespace Wishlist.Data.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("Wishlist.Data.Models.UserEntity", b =>
+            modelBuilder.Entity("Wishlist.Data.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,7 +81,7 @@ namespace Wishlist.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Wishlist.Data.Models.WishlistEntity", b =>
+            modelBuilder.Entity("Wishlist.Data.Models.Wishlist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,7 +107,7 @@ namespace Wishlist.Data.Migrations
                     b.ToTable("Wishlists");
                 });
 
-            modelBuilder.Entity("Wishlist.Data.Models.WishlistItemEntity", b =>
+            modelBuilder.Entity("Wishlist.Data.Models.WishlistItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -134,7 +137,7 @@ namespace Wishlist.Data.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("text");
 
-                    b.Property<int>("WishlistId")
+                    b.Property<int?>("WishlistId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -146,9 +149,9 @@ namespace Wishlist.Data.Migrations
                     b.ToTable("WishlistItems");
                 });
 
-            modelBuilder.Entity("Wishlist.Data.Models.WishlistEntity", b =>
+            modelBuilder.Entity("Wishlist.Data.Models.Wishlist", b =>
                 {
-                    b.HasOne("Wishlist.Data.Models.UserEntity", "User")
+                    b.HasOne("Wishlist.Data.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -157,24 +160,20 @@ namespace Wishlist.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Wishlist.Data.Models.WishlistItemEntity", b =>
+            modelBuilder.Entity("Wishlist.Data.Models.WishlistItem", b =>
                 {
-                    b.HasOne("Wishlist.Data.Models.ImageEntity", "Image")
+                    b.HasOne("Wishlist.Data.Models.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
 
-                    b.HasOne("Wishlist.Data.Models.WishlistEntity", "Wishlist")
+                    b.HasOne("Wishlist.Data.Models.Wishlist", null)
                         .WithMany("Items")
-                        .HasForeignKey("WishlistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WishlistId");
 
                     b.Navigation("Image");
-
-                    b.Navigation("Wishlist");
                 });
 
-            modelBuilder.Entity("Wishlist.Data.Models.WishlistEntity", b =>
+            modelBuilder.Entity("Wishlist.Data.Models.Wishlist", b =>
                 {
                     b.Navigation("Items");
                 });

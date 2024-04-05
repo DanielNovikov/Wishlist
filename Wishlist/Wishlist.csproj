@@ -30,10 +30,11 @@
       <Folder Include="Angular\src\app\auth\models\" />
       <Folder Include="Angular\src\app\auth\services\" />
       <Folder Include="Angular\src\app\home\components\ideas\" />
-      <Folder Include="Angular\src\app\home\components\wishlist\" />
       <Folder Include="Angular\src\app\shared\guards\" />
       <Folder Include="Angular\src\app\shared\models\" />
       <Folder Include="Angular\src\app\shared\services\" />
+      <Folder Include="Angular\src\app\wishlist\components\" />
+      <Folder Include="Angular\src\app\wishlist\models\" />
       <Folder Include="Angular\src\assets\" />
     </ItemGroup>
 
