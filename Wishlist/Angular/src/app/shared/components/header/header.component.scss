@@ -12,6 +12,18 @@
   }
 }
 
+.header-main {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  
+  @include mobile() {
+    app-text {
+      display: none;
+    }
+  }
+}
+
 .header-logo {
   height: 45px;
   

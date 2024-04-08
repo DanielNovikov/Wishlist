@@ -15,7 +15,7 @@ public class WishlistController(
     public async Task<IActionResult> Get()
     {
         var response = await wishlistService.Get();
-        if (response == null) return BadRequest();
+        if (response == null) return NotFound();
         
         return Ok(response);
     }

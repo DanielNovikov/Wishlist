@@ -4,8 +4,10 @@
     'initialized': isInitialized()}">
     
     <router-outlet />
-    
-    <div #modalContainer></div>
+
+    @defer(when isInitialized()) {
+        <app-modal></app-modal>
+    }
     
     <app-loader></app-loader>
 </div>

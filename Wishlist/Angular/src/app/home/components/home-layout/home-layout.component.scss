@@ -14,10 +14,6 @@
   }
 }
 
-.content {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 50px;
-  
+.content {  
   @include content-padding();
 }

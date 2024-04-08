@@ -14,7 +14,6 @@ $fast-animation-delay: 0.17s;
   position: absolute;
   right: 5px;
   top: 5px;
-  z-index: 2000;
 
   height: 27px;
   padding: 10px;
@@ -43,6 +42,7 @@ $fast-animation-delay: 0.17s;
     max-height: 90vh;
     max-height: 90dvh;
     padding: 25px 20px;
+    transform: translateY(100%);
 
     &.default {
       padding: 25px 15px;
@@ -52,25 +52,19 @@ $fast-animation-delay: 0.17s;
       padding: 25px 0;
     }
 
-    animation: modalShowMobileBottom var(--animation-transition) forwards;
-    @keyframes modalShowMobileBottom {
-      from {
-        transform: translateY(100%);
-      }
-      to {
-        transform: translateY(0);
+    &.show {
+      animation: modalShowMobileBottom var(--animation-transition) forwards;
+      @keyframes modalShowMobileBottom {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
       }
     }
 
     &.hide {
       animation: modalHideMobileBottom var(--animation-transition) forwards;
       @keyframes modalHideMobileBottom {
-        from {
-          transform: translateY(0);
-        }
-        to {
-          transform: translateY(100%);
-        }
+        from { transform: translateY(0); }
+        to { transform: translateY(100%); }
       }
     }
   }
@@ -87,11 +81,14 @@ $fast-animation-delay: 0.17s;
     width: 300px;
     border-radius: 8px;
 
-    animation: modalShowPcDefault $animation-delay forwards;
-    @keyframes modalShowPcDefault {
-      from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    &.show {
+      animation: modalShowPcDefault $animation-delay forwards;
+      @keyframes modalShowPcDefault {
+        from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      }
     }
+      
 
     &.hide {
       animation: modalHidePcDefault $animation-delay forwards;
@@ -144,4 +141,8 @@ $fast-animation-delay: 0.17s;
     visibility: hidden;
     opacity: 0;
   }
+}
+
+.hidden {
+  visibility: hidden;
 }

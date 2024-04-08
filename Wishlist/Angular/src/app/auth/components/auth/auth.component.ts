@@ -26,17 +26,12 @@ import {AuthExternalComponent} from "../auth-external/auth-external.component";
 })
 export class AuthComponent extends ModalEmpty {
     protected authType: WritableSignal<'sign-in' | 'sign-up'> = signal('sign-in');
-    
-    constructor(private router: Router) {
-        super();
-    }
-    
+        
     onAuthTypeChanged(authType: 'sign-in' | 'sign-up') {
         this.authType.set(authType);
     }
     
     onAuthenticated() {
         this.close();
-        this.router.navigate(['wishlist']);
     }
 }

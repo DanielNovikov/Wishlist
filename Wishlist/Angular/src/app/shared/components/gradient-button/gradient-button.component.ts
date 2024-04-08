@@ -12,7 +12,7 @@ import {NgClass} from "@angular/common";
 })
 export class GradientButtonComponent {
   @Input() text!: string;
-  @Input() size: 'normal' | 'big' = 'normal';
+  @Input() size: 'normal' | 'big' | 'huge' = 'normal';
   @Input() fullWidth: boolean = false;
   
   @Output() onClick: EventEmitter<void> = new EventEmitter<void>();

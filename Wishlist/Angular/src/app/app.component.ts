@@ -5,28 +5,25 @@ import {ThemeService} from "./advert/services/theme.service";
 import {NgClass} from "@angular/common";
 import {Theme} from "./advert/models/theme";
 import {LoaderComponent} from "./shared/components/loader/loader.component";
+import {ModalComponent} from "./shared/components/modal/modal.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgClass, LoaderComponent],
+    imports: [RouterOutlet, NgClass, LoaderComponent, ModalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements AfterViewInit {
-  @ViewChild('modalContainer', { read: ViewContainerRef }) container!: ViewContainerRef;
   title = 'Angular';
 
   isInitialized: WritableSignal<boolean> = signal(false);
   
   constructor(
-      private modalService: ModalService,
       protected themeService: ThemeService) {
   }
 
-  ngAfterViewInit(): void {
-    this.modalService.initializeContainer(this.container);
-    
+  ngAfterViewInit(): void {    
     setTimeout(() => {
       this.isInitialized.set(true);
     }, 200);

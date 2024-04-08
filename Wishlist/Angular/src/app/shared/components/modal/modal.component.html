@@ -1,4 +1,4 @@
-<div class="modal-container" [ngClass]="{'show': !modalService.isClosing(), 'hide': modalService.isClosing()}">
+<div class="modal-container" [ngClass]="{'show': modalService.isVisible(), 'hide': modalService.isVisible() === false, 'hidden': modalService.isVisible() === undefined}">
     <div class="close-button" (click)="close()">
         <img src="assets/icons/shared/cross.svg" alt="Закрити">
     </div>
@@ -6,4 +6,4 @@
     <div #content></div>
 </div>
 
-<div class="modal-overlay show" (click)="close()" [ngClass]="{'show': !modalService.isClosing(), 'hide': modalService.isClosing()}"></div>
+<div class="modal-overlay show" (click)="close()" [ngClass]="{'show': modalService.isVisible(), 'hide': modalService.isVisible() === false}"></div>

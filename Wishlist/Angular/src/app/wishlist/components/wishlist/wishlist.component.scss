@@ -1,0 +1,29 @@
+//:host {
+//  display: grid;
+//  grid-template-columns: repeat(6, minmax(0, 1fr));
+//  gap: 30px;
+//  width: 100%;
+//}
+//
+//.item-container {
+//  display: flex;
+//  flex-direction: column;
+//  gap: 12px;
+//}
+//
+//.item-image-wrapper {
+//  background: var(--secondary-background-color);
+//  width: 100%;
+//  padding-bottom: 100%;
+//  position: relative;
+//  border-radius: 20px;
+//}
+//
+//.item-image-container {
+//  position: absolute; 
+//  width: 100%;
+//  height: 100%;
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;  
+//}

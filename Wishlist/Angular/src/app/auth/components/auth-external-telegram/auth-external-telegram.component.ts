@@ -1,7 +1,8 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {AuthSignInByTelegramRequest} from "../../models/auth-sign-in-by-telegram-request";
 import {DeviceService} from "../../../shared/services/device.service";
+import {DOCUMENT} from "@angular/common";
 
 interface Window {
   Telegram: any; // You can replace 'any' with a more specific type if you have the Telegram type definition
@@ -19,7 +20,10 @@ export class AuthExternalTelegramComponent implements AfterViewInit {
 
   @Output() onAuthenticated: EventEmitter<void> = new EventEmitter<void>();
   
-  constructor(private authService: AuthService, private deviceService: DeviceService) {
+  constructor(
+      private authService: AuthService,
+      private deviceService: DeviceService,
+      @Inject(DOCUMENT) private document: Document) {
   }
   
   ngAfterViewInit(): void {
@@ -58,7 +62,7 @@ export class AuthExternalTelegramComponent implements AfterViewInit {
   }
   
   initializeTelegramLogin() {
-    const script = document.createElement('script')
+    const script = this.document.createElement('script')
     script.async = true;
     script.src = 'https://telegram.org/js/telegram-widget.js?3';
     script.setAttribute('data-telegram-login', 'my_wishlist_ua_bot');
@@ -67,7 +71,7 @@ export class AuthExternalTelegramComponent implements AfterViewInit {
     script.setAttribute('data-request-access', 'write');
     script.setAttribute('class', 'telegram-login-widget');
 
-    document.getElementsByClassName("telegram-login-placeholder")[0].append(script);
+    this.document.getElementsByClassName("telegram-login-placeholder")[0].append(script);
   }
   
 }

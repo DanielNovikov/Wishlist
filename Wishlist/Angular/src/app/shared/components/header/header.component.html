@@ -1,4 +1,10 @@
-<img class="header-logo" src="assets/icons/advert/logo.svg" alt="Логотип">
+<div class="header-main">
+    <img class="header-logo" src="assets/icons/advert/logo.svg" alt="Логотип">
+    
+    @if (title) {
+        <app-text [text]="title" type="h1"></app-text>
+    }
+</div>
 
 <div class="header-actions">
     <img class="header-account" src="assets/icons/advert/account.svg" alt="Аккаунт">

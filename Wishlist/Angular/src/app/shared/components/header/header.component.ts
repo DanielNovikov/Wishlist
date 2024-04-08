@@ -1,19 +1,23 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgClass} from "@angular/common";
 import {ThemeService} from "../../../advert/services/theme.service";
 import { Theme } from '../../../advert/models/theme';
+import {TextComponent} from "../text/text.component";
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
-    NgClass    
+    NgClass,
+    TextComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
 
+  @Input() title: string | undefined;
+  
   constructor(public themeService: ThemeService) {}
 
   toggleTheme(): void {    
