@@ -11,7 +11,7 @@ export class LoaderService {
   
   timeout: NodeJS.Timeout | undefined;
   public show() {
-      this.timeout = setTimeout(() => this.isVisible.set(true), 100);
+    this.timeout = setTimeout(() => this.isVisible.set(true), 100);
   }
   
   public hide() {

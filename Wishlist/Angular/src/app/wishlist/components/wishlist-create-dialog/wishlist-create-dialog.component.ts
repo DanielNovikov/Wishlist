@@ -33,17 +33,13 @@ export class WishlistCreateDialogComponent extends ModalBase {
   get name() { return this.form.get('name'); }
   
   constructor(
-      private wishlistApiService: WishlistApiService,
-      private loaderService: LoaderService) {
+      private wishlistApiService: WishlistApiService) {
     super();
   }
 
   onSubmit() {
-    this.loaderService.show();
-
     const request = this.form.value as WishlistCreateRequest;
     this.wishlistApiService.create(request)
-      .pipe(finalize(() => this.loaderService.hide()))
       .subscribe(response => {
         this.output(response);
       });

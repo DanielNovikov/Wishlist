@@ -7,7 +7,7 @@ import { provideServiceWorker } from '@angular/service-worker';
 import {ThemeService} from "./advert/services/theme.service";
 import {provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
 import {AuthService} from "./auth/services/auth.service";
-import {authInterceptor} from "./shared/interceptors/auth.interceptor";
+import {authInterceptor} from "./shared/services/interceptors/auth.interceptor";
 
 export function initializeTheme(themeService: ThemeService) {
     return () => new Promise<void>((resolve) => {

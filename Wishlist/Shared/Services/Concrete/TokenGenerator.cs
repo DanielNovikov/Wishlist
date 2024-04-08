@@ -5,6 +5,7 @@ namespace Wishlist.Shared.Services.Concrete;
 public class TokenGenerator : ITokenGenerator
 {
     private static readonly Random Random = new ();
+    
     public string GenerateString()
     {
         const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

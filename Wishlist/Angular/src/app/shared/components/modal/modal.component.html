@@ -8,5 +8,5 @@
         <ng-container *ngComponentOutlet="instance.componentType; inputs: instance.parameters.getInputs()"></ng-container>
     </div>
 
-    <div class="modal-overlay show" (click)="close(instance)" [ngClass]="{'show': instance.isVisible(), 'hide': !instance.isVisible()}"></div>
+    <div class="modal-overlay" (click)="close(instance)" [ngClass]="{'show': instance.isVisible(), 'hide': !instance.isVisible()}"></div>
 }

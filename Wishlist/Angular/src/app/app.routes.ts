@@ -5,6 +5,6 @@ import {WishlistComponent} from "./wishlist/components/wishlist/wishlist.compone
 
 export const routes: Routes = [
     { path: '', component: AdvertComponent },
-    { path: '', component: HomeLayoutComponent, children: [
-        { path: 'wishlist', component: WishlistComponent }]}
+    { path: 'wishlist', component: HomeLayoutComponent, children: [
+        { path: '', component: WishlistComponent }]}
 ];

@@ -40,15 +40,12 @@ export class AuthSignInComponent {
     get email() { return this.authForm.get('email'); }
     get password() { return this.authForm.get('password'); }
 
-    constructor(private authService: AuthService, private loaderService: LoaderService) {}
+    constructor(private authService: AuthService) {}
 
     submitFailureMessage = signal('');
-    onSubmit() {
-        this.loaderService.show();
-        
+    onSubmit() {        
         const request = this.authForm.value as AuthSignInByEmailRequest;
         this.authService.signInByEmail(request)
-            .pipe(finalize(() => this.loaderService.hide()))
             .subscribe(success => {
                 if (!success) {
                     this.submitFailureMessage.set('Невірна електронна пошта або пароль');

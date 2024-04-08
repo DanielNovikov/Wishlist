@@ -22,7 +22,7 @@ export class ModalService {
       parameters: parameters,
       isVisible: signal(true)
     } as ModalInstance;
-
+    
     this.instances.update(arr => {
       arr.push(instance);
       return arr;

@@ -42,21 +42,18 @@ export class AuthSignUpComponent {
     get email() { return this.authForm.get('email'); }
     get password() { return this.authForm.get('password'); }
 
-    constructor(private authService: AuthService, private loaderService: LoaderService) { }
+    constructor(private authService: AuthService) { }
 
     submitFailureMessage = signal('');
-    onSubmit() {
-        this.loaderService.show();
-        
+    onSubmit() {        
         const request = this.authForm.value as AuthSignUpByEmailRequest;
         this.authService.signUpByEmail(request)
-            .pipe(finalize(() => this.loaderService.hide()))
             .subscribe(success => {
-            if (!success) {
-                this.submitFailureMessage.set('Користувач з такою електронною адресою вже зареєстрований');
-            } else {
-                this.onAuthenticated.emit();
-            }
-        });
+                if (!success) {
+                    this.submitFailureMessage.set('Користувач з такою електронною адресою вже зареєстрований');
+                } else {
+                    this.onAuthenticated.emit();
+                }
+            });
     }
 }
