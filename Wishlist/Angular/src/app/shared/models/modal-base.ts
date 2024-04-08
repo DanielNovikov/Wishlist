@@ -1,9 +1,10 @@
 import {Directive, EventEmitter, Input, Output} from "@angular/core";
 import {Subject} from "rxjs";
 import {ModalOutput} from "./modal-output";
+import { Destroyable } from "./destroyable";
 
 @Directive()
-export abstract class ModalBase {
+export abstract class ModalBase extends Destroyable {
     
     @Input() onCallback!: Subject<ModalOutput>;
     protected output(result: any) {

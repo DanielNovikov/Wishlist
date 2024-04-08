@@ -3,10 +3,8 @@ import {AuthService} from "../../services/auth.service";
 import {AuthSignInByTelegramRequest} from "../../models/auth-sign-in-by-telegram-request";
 import {DeviceService} from "../../../shared/services/device.service";
 import {DOCUMENT} from "@angular/common";
-
-interface Window {
-  Telegram: any; // You can replace 'any' with a more specific type if you have the Telegram type definition
-}
+import {Destroyable} from "../../../shared/models/destroyable";
+import {takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-auth-external-telegram',
@@ -16,7 +14,7 @@ interface Window {
   styleUrl: './auth-external-telegram.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthExternalTelegramComponent implements AfterViewInit {
+export class AuthExternalTelegramComponent extends Destroyable implements AfterViewInit {
 
   @Output() onAuthenticated: EventEmitter<void> = new EventEmitter<void>();
   
@@ -24,6 +22,7 @@ export class AuthExternalTelegramComponent implements AfterViewInit {
       private authService: AuthService,
       private deviceService: DeviceService,
       @Inject(DOCUMENT) private document: Document) {
+    super();
   }
   
   ngAfterViewInit(): void {
@@ -53,12 +52,13 @@ export class AuthExternalTelegramComponent implements AfterViewInit {
           lastName: data["last_name"]
         }
 
-        this.authService.signInByTelegram(request).subscribe(success => {
-          if (success){
-            this.onAuthenticated.emit();
-          }
-        })
-      })
+        this.authService.signInByTelegram(request)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(success => {
+            if (success){
+              this.onAuthenticated.emit();
+            }})
+          });
   }
   
   initializeTelegramLogin() {

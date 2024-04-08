@@ -13,29 +13,29 @@ export class ModalService {
   instances: WritableSignal<ModalInstance[]> = signal<ModalInstance[]>([]);
     
   public open<T extends ModalBase>(componentType: Type<T>, input: any = undefined) : Observable<ModalOutput> {
-    
+
     let parameters = new ModalInstanceParameters();
     parameters.input = input;
-    
+
     let instance = {
       componentType: componentType,
       parameters: parameters,
       isVisible: signal(true)
     } as ModalInstance;
-    
+
     this.instances.update(arr => {
       arr.push(instance);
       return arr;
     });
-    
+
     return parameters.onCallback.asObservable().pipe(
         finalize(() => this.close(instance))
     );
   }
-  
-  public close(instance: ModalInstance) {    
+
+  public close(instance: ModalInstance) {
     instance.isVisible.set(false);
-    
+
     setTimeout(() => {
       this.instances.update(arr => arr.filter(x => x != instance));
     }, 300);

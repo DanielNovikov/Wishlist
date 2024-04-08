@@ -4,13 +4,14 @@ import {GradientButtonComponent} from "../../../shared/components/gradient-butto
 import {NgIf} from "@angular/common";
 import {TextComponent} from "../../../shared/components/text/text.component";
 import {TextErrorComponent} from "../../../shared/components/text-error/text-error.component";
-import {finalize, Subscription} from "rxjs";
+import {finalize, Subject, Subscription, takeUntil} from "rxjs";
 import {AuthApiService} from "../../services/auth-api.service";
 import {AuthSignInByEmailRequest} from "../../models/auth-sign-in-by-email-request";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {FormComponent} from "../../../shared/components/form/form.component";
 import {LoaderService} from "../../../shared/services/loader.service";
+import {Destroyable} from "../../../shared/models/destroyable";
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -28,7 +29,8 @@ import {LoaderService} from "../../../shared/services/loader.service";
   styleUrl: './auth-sign-in.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthSignInComponent {
+export class AuthSignInComponent extends Destroyable {
+    
     @Output() onSignUpClicked: EventEmitter<void> = new EventEmitter<void>();
     @Output() onAuthenticated: EventEmitter<void> = new EventEmitter<void>();
     
@@ -40,12 +42,15 @@ export class AuthSignInComponent {
     get email() { return this.authForm.get('email'); }
     get password() { return this.authForm.get('password'); }
 
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService) {
+        super();
+    }
 
     submitFailureMessage = signal('');
     onSubmit() {        
         const request = this.authForm.value as AuthSignInByEmailRequest;
         this.authService.signInByEmail(request)
+            .pipe(takeUntil(this.destroy$))
             .subscribe(success => {
                 if (!success) {
                     this.submitFailureMessage.set('Невірна електронна пошта або пароль');
