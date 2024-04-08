@@ -1,32 +1,51 @@
-import {ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {GradientButtonComponent} from "../../../shared/components/gradient-button/gradient-button.component";
-import {ModalService} from "../../../shared/services/modal.service";
-import {TestDialogComponent} from "../test-dialog/test-dialog.component";
 import {ModalBase} from "../../../shared/models/modal-base";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {finalize} from "rxjs";
+import {WishlistApiService} from "../../services/wishlist-api.service";
+import {LoaderService} from "../../../shared/services/loader.service";
+import {WishlistCreateRequest} from "../../models/wishlist-create-request";
+import {FormComponent} from "../../../shared/components/form/form.component";
+import {NgIf} from "@angular/common";
+import {TextErrorComponent} from "../../../shared/components/text-error/text-error.component";
 
 @Component({
   selector: 'app-wishlist-create-dialog',
   standalone: true,
   imports: [
-    GradientButtonComponent
+    GradientButtonComponent,
+    FormComponent,
+    NgIf,
+    ReactiveFormsModule,
+    TextErrorComponent
   ],
   templateUrl: './wishlist-create-dialog.component.html',
   styleUrl: './wishlist-create-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WishlistCreateDialogComponent extends ModalBase implements OnDestroy {
+export class WishlistCreateDialogComponent extends ModalBase {
 
-  constructor(private modalService: ModalService) {
+  form = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.maxLength(100)])
+  });
+  
+  get name() { return this.form.get('name'); }
+  
+  constructor(
+      private wishlistApiService: WishlistApiService,
+      private loaderService: LoaderService) {
     super();
   }
 
-  ngOnDestroy(): void {
-    console.log('destroying wishlist');
+  onSubmit() {
+    this.loaderService.show();
+
+    const request = this.form.value as WishlistCreateRequest;
+    this.wishlistApiService.create(request)
+      .pipe(finalize(() => this.loaderService.hide()))
+      .subscribe(response => {
+        this.output(response);
+      });
   }
-  
-  openCreateModal() {
-    this.modalService.open(TestDialogComponent).subscribe(() => {
-    });
-  }
-  
 }

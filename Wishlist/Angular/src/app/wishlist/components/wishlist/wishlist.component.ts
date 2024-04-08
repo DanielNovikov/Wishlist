@@ -43,4 +43,9 @@ export class WishlistComponent {
         });
     }
   }
+  
+  onWishlistCreated(wishlist: WishlistResponse) {
+    console.log(wishlist);
+    this.wishlist.set(wishlist);
+  }
 }

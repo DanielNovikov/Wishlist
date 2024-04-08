@@ -39,6 +39,7 @@ public class WishlistService(
             Name = request.Name,
             UserId = currentUser.Id
         };
+        await wishlistRepository.Add(wishlist);
 
         return wishlist.ToResponse();
     }

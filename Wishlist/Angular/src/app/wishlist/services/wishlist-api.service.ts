@@ -20,6 +20,6 @@ export class WishlistApiService {
   }
   
   create(request: WishlistCreateRequest) : Observable<WishlistResponse> {
-    return this.httpClient.get<WishlistResponse>(this.baseUrl);
+    return this.httpClient.post<WishlistResponse>(this.baseUrl, request);
   }
 }

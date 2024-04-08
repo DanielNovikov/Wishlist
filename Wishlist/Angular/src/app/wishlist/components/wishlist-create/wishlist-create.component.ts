@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import {TextComponent} from "../../../shared/components/text/text.component";
 import {GradientButtonComponent} from "../../../shared/components/gradient-button/gradient-button.component";
 import {AuthService} from "../../../auth/services/auth.service";
@@ -7,6 +7,7 @@ import {AuthComponent} from "../../../auth/components/auth/auth.component";
 import {ModalService} from "../../../shared/services/modal.service";
 import {Subscription} from "rxjs";
 import {WishlistCreateDialogComponent} from "../wishlist-create-dialog/wishlist-create-dialog.component";
+import {WishlistResponse} from "../../models/wishlist-response";
 
 @Component({
   selector: 'app-wishlist-create',
@@ -21,9 +22,10 @@ import {WishlistCreateDialogComponent} from "../wishlist-create-dialog/wishlist-
 })
 export class WishlistCreateComponent implements OnDestroy {
 
+  @Output() onCreated: EventEmitter<WishlistResponse> = new EventEmitter<WishlistResponse>();
+  
   constructor(
       private authService: AuthService,
-      private wishlistApiService: WishlistApiService,
       private modalService: ModalService) {
   }
 
@@ -42,7 +44,10 @@ export class WishlistCreateComponent implements OnDestroy {
   }
   
   openCreateModal() {
-    this.modalService.open(WishlistCreateDialogComponent).subscribe(() => {
+    this.modalService.open(WishlistCreateDialogComponent).subscribe(output => {
+      if (output.hasResult) {
+        this.onCreated.emit(output.result);
+      }
     });
   }
 

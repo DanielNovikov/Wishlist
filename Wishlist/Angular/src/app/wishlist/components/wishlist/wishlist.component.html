@@ -13,8 +13,8 @@
 @if (isLoaded()) {
     
     @if (wishlist() === null) {
-        <app-wishlist-create></app-wishlist-create>
+        <app-wishlist-create (onCreated)="onWishlistCreated($event)"></app-wishlist-create>
     } @else {
-        
+        {{ wishlist()?.name }}
     }
 }
