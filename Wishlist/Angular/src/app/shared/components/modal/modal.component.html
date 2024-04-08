@@ -1,9 +1,12 @@
-<div class="modal-container" [ngClass]="{'show': modalService.isVisible(), 'hide': modalService.isVisible() === false, 'hidden': modalService.isVisible() === undefined}">
-    <div class="close-button" (click)="close()">
-        <img src="assets/icons/shared/cross.svg" alt="Закрити">
+
+@for (instance of modalService.instances(); track instance) {
+    <div class="modal-container" [ngClass]="{'show': instance.isVisible(), 'hide': !instance.isVisible()}">
+        <div class="close-button" (click)="close(instance)">
+            <img src="assets/icons/shared/cross.svg" alt="Закрити">
+        </div>
+
+        <ng-container *ngComponentOutlet="instance.componentType; inputs: instance.parameters.getInputs()"></ng-container>
     </div>
 
-    <div #content></div>
-</div>
-
-<div class="modal-overlay show" (click)="close()" [ngClass]="{'show': modalService.isVisible(), 'hide': modalService.isVisible() === false}"></div>
+    <div class="modal-overlay show" (click)="close(instance)" [ngClass]="{'show': instance.isVisible(), 'hide': !instance.isVisible()}"></div>
+}

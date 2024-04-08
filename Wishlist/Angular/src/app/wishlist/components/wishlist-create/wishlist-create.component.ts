@@ -31,8 +31,8 @@ export class WishlistCreateComponent implements OnDestroy {
   
   create() {
     if (!this.authService.isAuthorized()) {
-      this.openModalSubscription = this.modalService.open(AuthComponent).subscribe(() => {
-        if (this.authService.isAuthorized()) {
+      this.openModalSubscription = this.modalService.open(AuthComponent).subscribe((output) => {
+        if (output.hasResult) {
           this.openCreateModal();
         }
       });

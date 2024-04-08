@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
-import {ModalEmpty} from "../../../shared/models/modal-empty";
 import {GradientButtonComponent} from "../../../shared/components/gradient-button/gradient-button.component";
 import {ModalService} from "../../../shared/services/modal.service";
 import {TestDialogComponent} from "../test-dialog/test-dialog.component";
+import {ModalBase} from "../../../shared/models/modal-base";
 
 @Component({
   selector: 'app-wishlist-create-dialog',
@@ -14,7 +14,7 @@ import {TestDialogComponent} from "../test-dialog/test-dialog.component";
   styleUrl: './wishlist-create-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WishlistCreateDialogComponent extends ModalEmpty implements OnDestroy {
+export class WishlistCreateDialogComponent extends ModalBase implements OnDestroy {
 
   constructor(private modalService: ModalService) {
     super();

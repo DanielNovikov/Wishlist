@@ -1,50 +1,43 @@
-import {ComponentRef, Injectable, signal, Type, ViewContainerRef, WritableSignal} from '@angular/core';
-import {ModalComponent} from "../components/modal/modal.component";
-import {Observable, Subject, Subscription} from "rxjs";
-import {ModalEmpty} from "../models/modal-empty";
+import {Injectable, signal, Type, ViewContainerRef, WritableSignal} from '@angular/core';
+import {finalize, Observable} from "rxjs";
 import {ModalBase} from "../models/modal-base";
+import {ModalInstance} from "../models/modal-instance";
+import {ModalInstanceParameters} from "../models/modal-instance-parameters";
+import {ModalOutput} from "../models/modal-output";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
-  private container!: ViewContainerRef;
   
-  private componentSubscriber: Subject<void> | undefined;
-  private contentRef: ComponentRef<ModalBase> | undefined; 
-  private contentRefSubscription$: Subscription | undefined;
-  
-  public isVisible: WritableSignal<boolean | undefined> = signal(undefined);
-  
-  initializeContainer(container: ViewContainerRef) {
-    this.container = container;
+  instances: WritableSignal<ModalInstance[]> = signal<ModalInstance[]>([]);
+    
+  public open<T extends ModalBase>(componentType: Type<T>, input: any = undefined) : Observable<ModalOutput> {
+    
+    let parameters = new ModalInstanceParameters();
+    parameters.input = input;
+    
+    let instance = {
+      componentType: componentType,
+      parameters: parameters,
+      isVisible: signal(true)
+    } as ModalInstance;
+
+    this.instances.update(arr => {
+      arr.push(instance);
+      return arr;
+    });
+    
+    return parameters.onCallback.asObservable().pipe(
+        finalize(() => this.close(instance))
+    );
   }
-
-  open<T extends ModalEmpty>(componentType: Type<T>) : Observable<void> {    
-    if (this.componentSubscriber) {
-      this.container.clear();
-    }
-    
-    this.contentRef = this.container.createComponent(componentType);
-    this.contentRefSubscription$ = this.contentRef.instance.onClose.subscribe(() => this.componentSubscriber?.next());
-
-    this.isVisible.set(true);
-    
-    this.componentSubscriber = new Subject<any>();
-    return this.componentSubscriber.asObservable();
-  }
-
-  close() {
-    this.componentSubscriber?.complete();
-    this.componentSubscriber = undefined;
-    
-    this.contentRefSubscription$?.unsubscribe();
-    this.contentRefSubscription$ = undefined;
-    
-    this.isVisible.set(false);
+  
+  public close(instance: ModalInstance) {    
+    instance.isVisible.set(false);
     
     setTimeout(() => {
-      this.container.clear();
+      this.instances.update(arr => arr.filter(x => x != instance));
     }, 300);
   }
 }

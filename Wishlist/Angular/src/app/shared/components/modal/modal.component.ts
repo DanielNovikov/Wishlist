@@ -7,29 +7,27 @@ import {
   AfterViewInit, OnInit
 } from '@angular/core';
 import {ModalBase} from "../../models/modal-base";
-import {NgClass} from "@angular/common";
+import {NgClass, NgComponentOutlet} from "@angular/common";
 import {ModalService} from "../../services/modal.service";
+import {ModalInstance} from "../../models/modal-instance";
+import {ModalOutput} from "../../models/modal-output";
 
 @Component({
   selector: 'app-modal',
   standalone: true,
   imports: [
-    NgClass
+    NgClass,
+    NgComponentOutlet
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss'
 })
-export class ModalComponent implements AfterViewInit {
-  @ViewChild('content', { read: ViewContainerRef }) public content!: ViewContainerRef;
-  
+export class ModalComponent{  
   constructor(protected modalService: ModalService) {
   }
   
-  ngAfterViewInit() {
-    this.modalService.initializeContainer(this.content);
-  }
-  
-  close() {
-    this.modalService.close();
+  close(instance: ModalInstance) {
+    instance.parameters.onCallback.next(new ModalOutput());
+    instance.parameters.onCallback.complete();
   }
 }
