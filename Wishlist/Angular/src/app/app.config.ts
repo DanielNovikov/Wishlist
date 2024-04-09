@@ -6,19 +6,11 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideServiceWorker } from '@angular/service-worker';
 import {ThemeService} from "./advert/services/theme.service";
 import {provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
-import {AuthService} from "./auth/services/auth.service";
-import {authInterceptor} from "./shared/services/interceptors/auth.interceptor";
+import { CurrentUserService } from "./shared/current-user/services/current-user.service";
+import { authInterceptor } from "./shared/core/services/interceptors/auth.interceptor";
+import { AuthAccessTokenService } from "./shared/auth/services/auth-access-token.service";
+import { of } from "rxjs";
 
-export function initializeTheme(themeService: ThemeService) {
-    return () => new Promise<void>((resolve) => {
-        themeService.initialize();
-        resolve();
-    });
-}
-
-export function initializeCurrentUser(authService: AuthService) {
-    return () => authService.loadCurrentUser();
-}
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -31,17 +23,26 @@ export const appConfig: ApplicationConfig = {
         }),
         {
             provide: APP_INITIALIZER,
-            useFactory: initializeTheme,
+            useFactory: (themeService: ThemeService) => {
+                return () => themeService.initialize()
+            },
             deps: [ThemeService],
             multi: true
         },
         {
             provide: APP_INITIALIZER,
-            useFactory: initializeCurrentUser,
-            deps: [AuthService],
+            useFactory: (currentUserService: CurrentUserService, authAccessTokenService: AuthAccessTokenService) => {
+                return () => {
+                    const accessToken = authAccessTokenService.init();
+                    if (accessToken) {
+                        return currentUserService.load();
+                    } else {
+                        return of();
+                    }
+                };
+            },
+            deps: [CurrentUserService, AuthAccessTokenService],
             multi: true
-        },
-        ThemeService,
-        AuthService
+        }
     ]
 };

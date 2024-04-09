@@ -1,15 +1,13 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, Output } from '@angular/core';
-import { TextComponent } from "../../../shared/components/text/text.component";
-import { GradientButtonComponent } from "../../../shared/components/gradient-button/gradient-button.component";
-import { AuthService } from "../../../auth/services/auth.service";
+import { GradientButtonComponent } from "../../../shared/core/components/gradient-button/gradient-button.component";
 import { WishlistApiService } from "../../services/wishlist-api.service";
-import { AuthComponent } from "../../../auth/components/auth/auth.component";
-import { ModalService } from "../../../shared/services/modal.service";
 import { Subscription, takeUntil } from "rxjs";
 import { WishlistCreateDialogComponent } from "../wishlist-create-dialog/wishlist-create-dialog.component";
 import { WishlistResponse } from "../../models/wishlist-response";
-import { Destroyable } from "../../../shared/models/destroyable";
-import { AuthDialogService } from "../../../auth/services/auth-dialog.service";
+import { Destroyable } from "../../../shared/core/models/destroyable";
+import { TextComponent } from "../../../shared/core/components/text/text.component";
+import { ModalService } from "../../../shared/modal/services/modal.service";
+import { AuthDialogService } from "../../../shared/auth/services/auth-dialog.service";
 
 @Component({
     selector: 'app-wishlist-create',

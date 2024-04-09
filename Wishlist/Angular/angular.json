@@ -47,6 +47,9 @@
             "styles": [
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/css"]
+            },
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,
@@ -77,8 +80,8 @@
               "sourceMap": true,
               "fileReplacements": [
                 {
-                  "replace": "src/app/shared/environments/environment.ts",
-                  "with": "src/app/shared/environments/environment.development.ts"
+                  "replace": "src/app/shared/core/environments/environment.ts",
+                  "with": "src/app/shared/core/environments/environment.development.ts"
                 }
               ]
             }

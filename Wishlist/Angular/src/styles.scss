@@ -1,31 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@import "css/fonts";
+@import "css/inputs";
+@import "css/medias";
+@import "css/transitions";
+@import "css/variables";
+@import "css/utils";
 
 body {
   margin: 0;
   padding: 0;
 }
 
-:root {
-  --primary-font-color: #7972DD;
-  --secondary-font-color: #9B96DB;
-  
-  --animation-transition: 0s;
-  --animation-fast-transition: 0s;
-}
-
-div.light-theme {
-  --primary-background-color: rgb(249, 249, 249);
-  --secondary-background-color: white;
-  --overlay-background-color: rgba(0, 0, 0, 0.2);
-}
-
-div.dark-theme {  
-  --primary-background-color: #1A1729;
-  --secondary-background-color: #211E32;
-  --overlay-background-color: rgba(0, 0, 0, 0.4);
-}
-
-div.initialized {
-  --animation-transition: 0.2s;
-  --animation-fast-transition: 0.12s;
-}

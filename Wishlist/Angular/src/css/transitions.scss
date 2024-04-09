@@ -1,0 +1,7 @@
+@mixin transition {
+  transition: var(--animation-transition) all;
+}
+
+@mixin fast-transition {
+  transition: var(--animation-fast-transition) all;
+}

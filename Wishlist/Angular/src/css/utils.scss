@@ -1,0 +1,26 @@
+@import "./medias";
+
+@mixin disable-selection {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    outline: none;
+
+    &:focus, &:active {
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
+    }
+}
+
+@mixin content-padding {
+    margin: 0 20px;
+
+    @include tablet() {
+        margin: 0 50px;
+    }
+
+    @include pc() {
+        margin: 0 60px;
+    }
+}

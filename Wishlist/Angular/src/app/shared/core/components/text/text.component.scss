@@ -1,0 +1,135 @@
+@import "fonts";
+
+* {
+  margin: 0;
+}
+
+.underline {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+// FONT FAMILIES
+
+.font-family-primary {
+  @include font-family-primary();
+}
+
+.font-family-secondary {
+  @include font-family-secondary();
+}
+
+// SIZES
+
+.huge {
+  @include font-size-huge();
+}
+
+.big {
+  @include font-size-big();
+}
+
+.normal {
+  @include font-size-normal();
+}
+
+.small {
+  @include font-size-small();
+}
+
+.very-small {
+  @include font-size-very-small();
+}
+
+.tiny {
+  @include font-size-tiny();
+}
+
+// TEXT ALIGNS
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+
+// FONT WEIGHTS
+
+.light {
+  font-weight: 300;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.semi-bold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+// FONT COLORS
+
+.primary {
+  @include font-color-primary();
+}
+
+.white {
+  color: white;
+}
+
+.error {
+  color: #ff4d4d;
+}
+
+.secondary {
+  @include font-color-secondary();
+}
+
+// LINE HEIGHTS
+
+.line-height-default {
+  line-height: unset;
+}
+
+.line-height-big {
+  line-height: 1.55;
+}
+
+// SHARED
+
+.in-one-line {
+  @include in-one-line();
+}
+
+.break {
+  word-break: break-word;
+}
+
+// URL
+
+//p.primary > ::deep a, h1.primary > ::deep a, h2.primary > ::deep a, h3.primary > ::deep a, h4.primary > ::deep a, h5.primary > ::deep a, h6.primary > ::deep a, span.primary > ::deep a {
+//  //color: $font-color;
+//}
+//
+//p.white > ::deep a, h1.white > ::deep a, h2.white > ::deep a, h3.white > ::deep a, h4.white > ::deep a, h5.white > ::deep a, h6.white > ::deep a, span.white > ::deep a {
+//  color: white;
+//}
+//
+//p > ::deep a, h1 > ::deep a, h2 > ::deep a, h3 > ::deep a, h4 > ::deep a, h5 > ::deep a, h6 > ::deep a, span > ::deep a {
+//  //@include button-animation();
+//}

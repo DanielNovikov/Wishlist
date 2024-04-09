@@ -1,0 +1,100 @@
+@import "utils";
+@import "medias";
+@import "transitions";
+
+:host {
+  display: flex;
+  justify-content: space-between;
+  
+  @include content-padding();
+
+  margin-top: 20px !important;
+  @include not-mobile() {
+    margin-top: 30px !important;
+  }
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  
+  @include mobile() {
+    app-text {
+      display: none;
+    }
+  }
+}
+
+.header-logo {
+  height: 45px;
+  
+  @include not-mobile() {
+    height: 70px;
+  }
+}
+
+.header-actions  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  
+  @include tablet() {
+    gap: 45px;
+  }
+  
+  @include pc() {
+    gap: 60px;
+  }
+}
+
+.header-account {
+  cursor: pointer;
+  height: 38px;
+  
+  @include not-mobile() {
+    height: 45px;
+  }
+}
+
+.header-theme-selector {
+  display: flex;
+  justify-content: space-between;
+  background: var(--secondary-background-color);
+  border-radius: 30px;
+  padding: 5px;
+  align-items: center;
+  gap: 8px;
+  height: 27px;
+  
+  @include pc() {
+    height: 30px;
+  }
+}
+
+.header-theme-selector img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.header-theme-selector div {
+  width: 27px;
+  height: 27px;
+  padding: 2px;
+  border-radius: 30px;
+  
+  @include transition();
+
+  @include pc() {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.header-active-theme {
+  border-radius: 30px;
+  background: #E5DEFF;
+}

@@ -1,7 +1,11 @@
-@if (isLoaded()) {
-    @if (wishlist() === null) {
-        <app-wishlist-create (onCreated)="onWishlistCreated($event)"></app-wishlist-create>
-    } @else {
-        {{ wishlist()?.name }}
+<app-header title="Wishlist"></app-header>
+
+<div class="content">
+    @if (isLoaded()) {
+        @if (wishlist() === null) {
+            <app-wishlist-create (onCreated)="onWishlistCreated($event)"></app-wishlist-create>
+        } @else {
+            {{ wishlist()?.name }}
+        }
     }
-}
+</div>

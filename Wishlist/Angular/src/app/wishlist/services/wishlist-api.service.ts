@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {catchError, Observable, of} from "rxjs";
 import {WishlistResponse} from "../models/wishlist-response";
 import {WishlistCreateRequest} from "../models/wishlist-create-request";
-import {environment} from "../../shared/environments/environment";
+import {environment} from "../../shared/core/environments/environment";
 
 @Injectable({
   providedIn: 'root'

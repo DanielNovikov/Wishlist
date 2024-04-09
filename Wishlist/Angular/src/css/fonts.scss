@@ -1,0 +1,144 @@
+@import "./medias";
+
+@mixin font-family-primary {
+  font-family: var(--primary-font-family);
+}
+
+@mixin font-family-secondary {
+  font-family: var(--secondary-font-family);
+}
+
+@mixin font-color-primary {
+  color: var(--primary-font-color);
+}
+
+@mixin font-color-secondary {
+  color: var(--secondary-font-color);
+} 
+
+@mixin font-light {
+  font-weight: 300;
+}
+
+@mixin font-regular {
+  font-weight: 400;
+}
+
+@mixin font-medium {
+  font-weight: 500;
+}
+
+@mixin font-semi-bold {
+  font-weight: 600;
+}
+
+@mixin font-bold {
+  font-weight: 700;
+}
+
+@mixin font-size-huge {
+  @include small-mobile() {
+    font-size: 19px;
+  }
+
+  @include big-mobile() {
+    font-size: 23px;
+  }
+
+  @include tablet() {
+    font-size: 22px;
+  }
+
+  @include pc() {
+    font-size: 25px;
+  }
+}
+
+@mixin font-size-big {
+  @include small-mobile() {
+    font-size: 17px;
+  }
+
+  @include big-mobile() {
+    font-size: 20px;
+  }
+
+  @include tablet() {
+    font-size: 18.5px;
+  }
+
+  @include pc() {
+    font-size: 20px;
+  }
+}
+
+@mixin font-size-normal {
+  @include small-mobile() {
+    font-size: 15px;
+  }
+
+  @include big-mobile() {
+    font-size: 18px;
+  }
+
+  @include tablet() {
+    font-size: 16.5px;
+  }
+
+  @include pc() {
+    font-size: 17px;
+  }
+}
+
+@mixin font-size-small {
+  @include small-mobile() {
+    font-size: 14px;
+  }
+
+  @include big-mobile() {
+    font-size: 16px;
+  }
+
+  @include tablet() {
+    font-size: 14.5px;
+  }
+
+  @include pc() {
+    font-size: 15px;
+  }
+}
+
+@mixin font-size-very-small {
+  @include small-mobile() {
+    font-size: 12px;
+  }
+
+  @include big-mobile() {
+    font-size: 14px;
+  }
+
+  @include not-mobile() {
+    font-size: 12px;
+  }
+}
+
+@mixin font-size-tiny {
+  @include small-mobile() {
+    font-size: 10px;
+  }
+
+  @include big-mobile() {
+    font-size: 11px;
+  }
+
+  @include not-mobile() {
+    font-size: 10px;
+  }
+}
+
+@mixin in-one-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}

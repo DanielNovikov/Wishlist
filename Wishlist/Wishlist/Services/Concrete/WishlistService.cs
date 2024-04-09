@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Wishlist.Auth.Services.Abstract;
 using Wishlist.Data.Models;
 using Wishlist.Data.Repositories.Abstract;
+using Wishlist.Shared.CurrentUser.Services.Abstract;
 using Wishlist.Wishlist.Models;
 using Wishlist.Wishlist.Services.Abstract;
 
 namespace Wishlist.Wishlist.Services.Concrete;
 
 public class WishlistService(
-    IAuthCurrentUserService currentUserService,
+    ICurrentUserService currentUserService,
     IRepository<WishlistEntity> wishlistRepository)
     : IWishlistService
 {

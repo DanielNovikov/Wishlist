@@ -1,4 +1,6 @@
-@import "../../../shared/styles/styles";
+@import "medias";
+@import "utils";
+@import "transitions";
 
 :host {
   display: flex;
@@ -26,7 +28,7 @@
   align-items: center;
   text-align: center;
   cursor: pointer;
-  box-shadow: 1px 1px 1px 0 $box-shadow-color;
+  box-shadow: 1px 1px 1px 0 var(--box-shadow-color);
   
   @include transition();
     
@@ -76,7 +78,7 @@
 
 .info-block-header {
   color: var(--primary-font-color);
-  font-family: $primary-font-family;
+  font-family: var(--primary-font-family);
   font-size: 25px;
   font-style: normal;
   font-weight: 600;
@@ -90,7 +92,7 @@
 
 .info-block-description {
   color: var(--secondary-font-color);
-  font-family: $primary-font-family;
+  font-family: var(--primary-font-family);
   font-size: 20px;
   font-style: normal;
   font-weight: 400;

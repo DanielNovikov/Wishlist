@@ -1,19 +1,24 @@
 import { ChangeDetectionStrategy, Component, effect, signal, WritableSignal } from '@angular/core';
-import { GradientButtonComponent } from "../../../shared/components/gradient-button/gradient-button.component";
-import { DeviceService } from "../../../shared/services/device.service";
+import { GradientButtonComponent } from "../../../shared/core/components/gradient-button/gradient-button.component";
+import { DeviceService } from "../../../shared/core/services/device.service";
 import { WishlistResponse } from "../../models/wishlist-response";
 import { WishlistApiService } from "../../services/wishlist-api.service";
 import { finalize, takeUntil } from "rxjs";
 import { WishlistCreateComponent } from "../wishlist-create/wishlist-create.component";
-import { AuthService } from "../../../auth/services/auth.service";
-import { Destroyable } from "../../../shared/models/destroyable";
+import { Destroyable } from "../../../shared/core/models/destroyable";
+import { CurrentUserService } from "../../../shared/current-user/services/current-user.service";
+import { HeaderComponent } from "../../../shared/core/components/header/header.component";
+import { RouterOutlet } from "@angular/router";
 
 @Component({
     selector: 'app-wishlist',
     standalone: true,
     imports: [
         GradientButtonComponent,
-        WishlistCreateComponent
+        WishlistCreateComponent,
+        HeaderComponent,
+        RouterOutlet,
+        HeaderComponent
     ],
     templateUrl: './wishlist.component.html',
     styleUrl: './wishlist.component.scss',
@@ -27,12 +32,12 @@ export class WishlistComponent extends Destroyable {
     constructor(
         private deviceService: DeviceService,
         private wishlistApiService: WishlistApiService,
-        private authService: AuthService) {
+        private currentUserService: CurrentUserService) {
         super();
 
         if (this.deviceService.isBrowser()) {
             effect(() => {
-                if (!this.authService.isAuthorized()) {
+                if (!this.currentUserService.isAuthorized()) {
                     this.isLoaded.set(true);
                     return;
                 }

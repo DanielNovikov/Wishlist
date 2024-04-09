@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {GradientButtonComponent} from "../../../shared/components/gradient-button/gradient-button.component";
+import {GradientButtonComponent} from "../../../shared/core/components/gradient-button/gradient-button.component";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 

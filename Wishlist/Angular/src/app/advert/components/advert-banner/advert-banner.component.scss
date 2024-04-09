@@ -1,4 +1,5 @@
-@import "../../../shared/styles/styles";
+@import "medias";
+@import "utils";
 
 .container-mobile {
   display: flex;
@@ -32,7 +33,7 @@
 
 .banner-info-header {
   color: var(--primary-font-color);
-  font-family: $secondary-font-family;
+  font-family: var(--secondary-font-family);
   font-style: normal;
   font-weight: 400;
   margin: 0;
@@ -51,7 +52,7 @@
   }  
 
   span {
-    font-family: $primary-font-family;
+    font-family: var(--primary-font-family);
     font-weight: 500;
     font-size: 30px;
     
@@ -67,7 +68,7 @@
 
 .banner-info-description {
   color: var(--secondary-font-color);
-  font-family: $primary-font-family;
+  font-family: var(--primary-font-family);
   font-size: 25px;
   font-style: normal;
   font-weight: 400;
@@ -77,7 +78,7 @@
 
 .banner-info-description-logo {
   color: var(--primary-font-color);
-  font-family: $secondary-font-family;
+  font-family: var(--secondary-font-family);
   font-size: 25px;
   font-style: normal;
   font-weight: 600;
