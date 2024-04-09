@@ -9,6 +9,7 @@ import { Subscription, takeUntil } from "rxjs";
 import { WishlistCreateDialogComponent } from "../wishlist-create-dialog/wishlist-create-dialog.component";
 import { WishlistResponse } from "../../models/wishlist-response";
 import { Destroyable } from "../../../shared/models/destroyable";
+import { AuthDialogService } from "../../../auth/services/auth-dialog.service";
 
 @Component({
     selector: 'app-wishlist-create',
@@ -26,30 +27,25 @@ export class WishlistCreateComponent extends Destroyable {
     @Output() onCreated: EventEmitter<WishlistResponse> = new EventEmitter<WishlistResponse>();
 
     constructor(
-        private authService: AuthService,
+        private authDialogService: AuthDialogService,
         private modalService: ModalService,
         private wishlistApiService: WishlistApiService) {
         super();
     }
 
     create() {
-        if (this.authService.isAuthorized()) {
-            this.openCreateModal();
-            return;
-        }
-
-        this.modalService.open(AuthComponent).subscribe((output) => {
-            if (!output.hasResult) return;
-
+        this.authDialogService.executeIfAuthenticated((wasAuthorized) => {
+            if (wasAuthorized) {
+                this.openCreateModal();
+                return;
+            }
+                
             this.wishlistApiService.get()
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(response => {
-                    if (response) {
-                        this.onCreated.emit(response);
-                        return;
+                    if (!response) {
+                        this.openCreateModal();
                     }
-    
-                    this.openCreateModal();
                 });
         });
     }

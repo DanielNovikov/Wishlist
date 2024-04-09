@@ -48,6 +48,7 @@
 }
 
 .header-account {
+  cursor: pointer;
   height: 38px;
   
   @include not-mobile() {

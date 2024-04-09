@@ -7,12 +7,14 @@ import { AuthResponse } from "../models/auth-response";
 import { AuthSignUpByEmailRequest } from "../models/auth-sign-up-by-email-request";
 import { isPlatformBrowser } from "@angular/common";
 import { AuthSignInByTelegramRequest } from "../models/auth-sign-in-by-telegram-request";
+import { DeviceService } from "../../shared/services/device.service";
+import { ModalService } from "../../shared/services/modal.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    constructor(private authApiService: AuthApiService, @Inject(PLATFORM_ID) private platformId: Object) {
+    constructor(private authApiService: AuthApiService, private deviceService: DeviceService) {
     }
 
     public currentUser: WritableSignal<AuthUserResponse | null> = signal(null);
@@ -20,7 +22,7 @@ export class AuthService {
     public accessToken: WritableSignal<string | null> = signal(null);
 
     loadCurrentUser(): Observable<any> {
-        if (isPlatformBrowser(this.platformId)) {
+        if (this.deviceService.isBrowser()) {
             const accessToken = localStorage['accessToken']
             if (accessToken) {
                 this.accessToken.set(accessToken);

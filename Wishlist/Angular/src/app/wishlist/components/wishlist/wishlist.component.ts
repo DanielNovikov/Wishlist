@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, signal, WritableSignal } from '@angular/core';
 import { GradientButtonComponent } from "../../../shared/components/gradient-button/gradient-button.component";
 import { DeviceService } from "../../../shared/services/device.service";
 import { WishlistResponse } from "../../models/wishlist-response";
@@ -29,22 +29,22 @@ export class WishlistComponent extends Destroyable {
         private wishlistApiService: WishlistApiService,
         private authService: AuthService) {
         super();
-    }
 
-    ngOnInit() {
         if (this.deviceService.isBrowser()) {
-            if (!this.authService.isAuthorized()) {
-                this.isLoaded.set(true);
-                return;
-            }
-
-            this.wishlistApiService.get()
-                .pipe(
-                    finalize(() => this.isLoaded.set(true)),
-                    takeUntil(this.destroy$))
-                .subscribe(response => {
-                    this.wishlist.set(response);
-                });
+            effect(() => {
+                if (!this.authService.isAuthorized()) {
+                    this.isLoaded.set(true);
+                    return;
+                }
+                
+                this.wishlistApiService.get()
+                    .pipe(
+                        finalize(() => this.isLoaded.set(true)),
+                        takeUntil(this.destroy$))
+                    .subscribe(response => {
+                        this.wishlist.set(response);
+                    });
+            }, {allowSignalWrites: true});
         }
     }
 
