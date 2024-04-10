@@ -1,4 +1,6 @@
 ﻿using Wishlist.Shared.Core.Models.Options;
+using Wishlist.Shared.Core.Services.Abstract;
+using Wishlist.Shared.Core.Services.Concrete;
 using Wishlist.Shared.CurrentUser.Services.Abstract;
 using Wishlist.Shared.CurrentUser.Services.Concrete;
 
@@ -10,6 +12,7 @@ public static class DependencyInjectionInitializer
     {
         return services
             .Configure<TelegramLogOptions>(configuration.GetSection(nameof(TelegramLogOptions)))
+            .AddTransient<IUserService, UserService>()
             .AddTransient<ICurrentUserService, CurrentUserService>();
     }
 }

@@ -1,7 +1,7 @@
 import { UserSource } from "./enums/user-source";
 
-export class CurrentUserEditResponse {
+export class CurrentUserEditRequest {
     public name!: string;
-    public source!: UserSource;
     public email: string | undefined;
+    public password: string | undefined;
 }

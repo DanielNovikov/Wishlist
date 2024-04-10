@@ -28,4 +28,19 @@ public class CurrentUserController(ICurrentUserService currentUserService) : Con
 
         return Ok(user.ToEditResponse());
     }
+
+    [HttpPost("edit")]
+    [Authorize]
+    public async Task<IActionResult> Edit([FromBody] CurrentUserEditRequest request)
+    {
+        var user = await currentUserService.Get();
+        if (user == null) return Unauthorized();
+
+        if (!request.IsValid(user)) return BadRequest();
+
+        user = await currentUserService.Edit(user, request);
+        if (user == null) return BadRequest();
+        
+        return Ok(user.ToResponse());
+    }
 }

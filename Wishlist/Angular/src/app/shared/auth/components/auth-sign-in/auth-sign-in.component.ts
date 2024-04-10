@@ -11,6 +11,8 @@ import { TextComponent } from "../../../core/components/text/text.component";
 import { TextErrorComponent } from "../../../core/components/text-error/text-error.component";
 import { FormComponent } from "../../../core/components/form/form.component";
 import { Destroyable } from "../../../core/models/destroyable";
+import { emailValidator } from "../../../core/services/validators/email-validator";
+import { passwordValidator } from "../../../core/services/validators/password-validator";
 @Component({
   selector: 'app-auth-sign-in',
   standalone: true,
@@ -33,8 +35,8 @@ export class AuthSignInComponent extends Destroyable {
     @Output() onAuthenticated: EventEmitter<void> = new EventEmitter<void>();
     
     authForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.maxLength(100), Validators.email]),
-        password: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+        email: new FormControl('', [emailValidator()]),
+        password: new FormControl('', [passwordValidator()]),
     });
 
     get email() { return this.authForm.get('email'); }
@@ -51,7 +53,7 @@ export class AuthSignInComponent extends Destroyable {
             .pipe(takeUntil(this.destroy$))
             .subscribe(success => {
                 if (!success) {
-                    this.submitFailureMessage.set('Невірна електронна пошта або пароль');
+                    this.submitFailureMessage.set('Користувач з такою електронною адресою вже зареєстрований');
                 } else {
                     this.onAuthenticated.emit();
                 }

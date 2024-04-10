@@ -29,10 +29,11 @@
       <Folder Include="Angular\src\app\advert\services\" />
       <Folder Include="Angular\src\app\auth\services\" />
       <Folder Include="Angular\src\app\shared\core\components\" />
+      <Folder Include="Angular\src\app\shared\core\services\validators\" />
+      <Folder Include="Angular\src\app\shared\current-user\components\" />
       <Folder Include="Angular\src\app\shared\modal\components\" />
       <Folder Include="Angular\src\app\wishlist\models\" />
       <Folder Include="Angular\src\assets\" />
-      <Folder Include="Shared\Core\Models\" />
       <Folder Include="Shared\CurrentUser\" />
     </ItemGroup>
 

@@ -4,7 +4,7 @@ import {ModalInstanceParameters} from "./modal-instance-parameters";
 
 export class ModalInstance {
     
-    componentType!: Type<ModalBase>;
+    componentType!: Type<ModalBase<any>>;
     parameters!: ModalInstanceParameters;
     isVisible!: WritableSignal<boolean>;
 }

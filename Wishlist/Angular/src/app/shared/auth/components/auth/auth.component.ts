@@ -16,7 +16,7 @@ import { ModalBase } from "../../../modal/models/modal-base";
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
-export class AuthComponent extends ModalBase {
+export class AuthComponent extends ModalBase<any> {
     protected authType: WritableSignal<'sign-in' | 'sign-up'> = signal('sign-in');
         
     onAuthTypeChanged(authType: 'sign-in' | 'sign-up') {

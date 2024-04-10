@@ -23,7 +23,7 @@ import { ModalBase } from "../../../shared/modal/models/modal-base";
     styleUrl: './wishlist-create-dialog.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WishlistCreateDialogComponent extends ModalBase {
+export class WishlistCreateDialogComponent extends ModalBase<any> {
 
     form = new FormGroup({
         name: new FormControl('', [Validators.required, Validators.maxLength(100)])

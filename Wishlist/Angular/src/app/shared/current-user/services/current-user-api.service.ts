@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { catchError, Observable, of } from "rxjs";
 import { CurrentUserResponse } from "../models/current-user-response";
 import { CurrentUserEditResponse } from "../models/current-user-edit-response";
+import { CurrentUserEditRequest } from "../models/current-user-edit-request";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ export class CurrentUserApiService {
   
   getEdit(): Observable<CurrentUserEditResponse | null> {
     return this.httpClient.get<CurrentUserEditResponse>(this.baseUrl + '/edit')
+        .pipe(catchError(error => of(null)));
+  } 
+  
+  edit(request: CurrentUserEditRequest): Observable<CurrentUserResponse | null> {
+    return this.httpClient.post<CurrentUserEditResponse>(this.baseUrl + '/edit', request)
         .pipe(catchError(error => of(null)));
   } 
 }

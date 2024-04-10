@@ -7,7 +7,7 @@
 </div>
 
 <div class="header-actions">
-    <img class="header-account" src="assets/icons/advert/account.svg" alt="Аккаунт">
+    <img class="header-account" src="assets/icons/advert/account.svg" alt="Аккаунт" (click)="openCurrentUserEditModal()">
 
     <div class="header-theme-selector" (click)="toggleTheme()">
         <div [ngClass]="{'header-active-theme': themeService.Value() === Theme.Light }">

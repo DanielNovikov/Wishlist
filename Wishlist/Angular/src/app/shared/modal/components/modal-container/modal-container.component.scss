@@ -17,6 +17,8 @@ $fast-animation-delay: 0.17s;
 
   height: 27px;
   padding: 10px;
+  cursor: pointer;
+  z-index: 1;
 
   @include not-mobile() {
     right: 5px;
@@ -25,7 +27,6 @@ $fast-animation-delay: 0.17s;
   
   img {
     height: 100%;
-    cursor: pointer;
   }
 }
 

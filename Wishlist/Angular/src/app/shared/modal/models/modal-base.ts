@@ -4,7 +4,7 @@ import {ModalOutput} from "./modal-output";
 import { Destroyable } from "../../core/models/destroyable";
 
 @Directive()
-export abstract class ModalBase extends Destroyable {
+export abstract class ModalBase<TInput> extends Destroyable {
     
     @Input() onCallback!: Subject<ModalOutput>;
     protected output(result: any) {
@@ -18,5 +18,5 @@ export abstract class ModalBase extends Destroyable {
         this.onCallback.complete();
     }
     
-    @Input() input: any | undefined;
+    @Input() input: TInput | undefined;
 }

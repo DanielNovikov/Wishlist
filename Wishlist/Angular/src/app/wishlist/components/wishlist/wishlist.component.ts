@@ -17,8 +17,7 @@ import { RouterOutlet } from "@angular/router";
         GradientButtonComponent,
         WishlistCreateComponent,
         HeaderComponent,
-        RouterOutlet,
-        HeaderComponent
+        RouterOutlet
     ],
     templateUrl: './wishlist.component.html',
     styleUrl: './wishlist.component.scss',

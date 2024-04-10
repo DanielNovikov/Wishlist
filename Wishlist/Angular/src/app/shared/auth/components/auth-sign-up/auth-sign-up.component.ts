@@ -9,6 +9,9 @@ import { TextErrorComponent } from "../../../core/components/text-error/text-err
 import { FormComponent } from "../../../core/components/form/form.component";
 import { Destroyable } from "../../../core/models/destroyable";
 import { GradientButtonComponent } from "../../../core/components/gradient-button/gradient-button.component";
+import { emailValidator } from "../../../core/services/validators/email-validator";
+import { nameValidator } from "../../../core/services/validators/name-validator";
+import { passwordValidator } from "../../../core/services/validators/password-validator";
 
 @Component({
   selector: 'app-auth-sign-up',
@@ -31,9 +34,9 @@ export class AuthSignUpComponent extends Destroyable {
     @Output() onAuthenticated: EventEmitter<void> = new EventEmitter<void>();
 
     authForm = new FormGroup({
-        name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-        email: new FormControl('', [Validators.required, Validators.maxLength(100), Validators.email]),
-        password: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+        name: new FormControl('', [nameValidator()]),
+        email: new FormControl('', [emailValidator()]),
+        password: new FormControl('', [passwordValidator()]),
     });
 
     get name() { return this.authForm.get('name'); }
