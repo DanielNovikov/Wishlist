@@ -19,6 +19,11 @@ export class WishlistApiService {
       .pipe(catchError(error => of(null)));
   }
   
+  getById(id: number) : Observable<WishlistResponse | null> {
+    return this.httpClient.get<WishlistResponse>(this.baseUrl + `/${id}`)
+        .pipe(catchError(error => of(null)));
+  }
+  
   create(request: WishlistCreateRequest) : Observable<WishlistResponse> {
     return this.httpClient.post<WishlistResponse>(this.baseUrl, request);
   }

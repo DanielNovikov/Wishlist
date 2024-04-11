@@ -1,0 +1,16 @@
+@import "transitions";
+@import "utils";
+
+:host {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 50px;
+    background: var(--primary-background-color);
+    min-height: 100vh;
+
+    @include transition();
+}
+
+.content {
+    @include content-padding();
+}

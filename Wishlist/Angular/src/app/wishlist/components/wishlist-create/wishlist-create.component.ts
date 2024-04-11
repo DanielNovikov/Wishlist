@@ -1,13 +1,24 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component, effect,
+    EventEmitter,
+    OnDestroy,
+    Output,
+    signal,
+    WritableSignal
+} from '@angular/core';
 import { GradientButtonComponent } from "../../../shared/core/components/gradient-button/gradient-button.component";
 import { WishlistApiService } from "../../services/wishlist-api.service";
-import { Subscription, takeUntil } from "rxjs";
+import { finalize, Subscription, takeUntil } from "rxjs";
 import { WishlistCreateDialogComponent } from "../wishlist-create-dialog/wishlist-create-dialog.component";
 import { WishlistResponse } from "../../models/wishlist-response";
 import { Destroyable } from "../../../shared/core/models/destroyable";
 import { TextComponent } from "../../../shared/core/components/text/text.component";
 import { ModalService } from "../../../shared/modal/services/modal.service";
 import { AuthDialogService } from "../../../shared/auth/services/auth-dialog.service";
+import { DeviceService } from "../../../shared/core/services/device.service";
+import { CurrentUserService } from "../../../shared/current-user/services/current-user.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-wishlist-create',
@@ -22,13 +33,36 @@ import { AuthDialogService } from "../../../shared/auth/services/auth-dialog.ser
 })
 export class WishlistCreateComponent extends Destroyable {
 
-    @Output() onCreated: EventEmitter<WishlistResponse> = new EventEmitter<WishlistResponse>();
-
+    protected isLoaded: WritableSignal<boolean> = signal(false);
+    
     constructor(
         private authDialogService: AuthDialogService,
         private modalService: ModalService,
-        private wishlistApiService: WishlistApiService) {
+        private wishlistApiService: WishlistApiService,
+        private deviceService: DeviceService,
+        private currentUserService: CurrentUserService,
+        private router: Router) {
         super();
+
+        if (this.deviceService.isBrowser()) {
+            effect(() => {
+                if (!this.currentUserService.isAuthorized()) {
+                    this.isLoaded.set(true);
+                    return;
+                }
+
+                this.wishlistApiService.get()
+                    .pipe(takeUntil(this.destroy$))
+                    .subscribe(response => {
+                        if (response) {
+                            this.navigateToWishlist(response);
+                            return;
+                        }
+
+                        this.isLoaded.set(true);
+                    });
+            }, {allowSignalWrites: true});
+        }
     }
 
     create() {
@@ -51,8 +85,12 @@ export class WishlistCreateComponent extends Destroyable {
     openCreateModal() {
         this.modalService.open(WishlistCreateDialogComponent).subscribe(output => {
             if (output.hasResult) {
-                this.onCreated.emit(output.result);
+                this.navigateToWishlist(output.result);
             }
         });
+    }
+
+    navigateToWishlist(response: WishlistResponse) {
+        this.router.navigate(["/wishlist/" + response.id])
     }
 }

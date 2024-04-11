@@ -24,6 +24,15 @@ public class WishlistService(
         return wishlist?.ToResponse();
     }
 
+    public async Task<WishlistResponse?> GetById(int id)
+    {
+        var wishlist = await wishlistRepository.Query(query => query
+            .Include(x => x.Items)
+            .FirstOrDefaultAsync(x => x.Id == id));
+
+        return wishlist?.ToResponse();
+    }
+
     public async Task<WishlistResponse> Create(WishlistCreateRequest request)
     {
         var currentUser = await currentUserService.Get();

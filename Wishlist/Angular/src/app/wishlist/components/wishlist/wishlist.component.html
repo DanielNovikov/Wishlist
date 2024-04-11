@@ -1,11 +1,8 @@
-<app-header title="Wishlist"></app-header>
+@if (wishlist()) {
+    <div class="header">
+        <app-text [text]="wishlist()?.name!" type="h1"></app-text>
+        
+        <img src="assets/icons/wishlist/share.svg" alt="Поділитися" class="share-button" (click)="onShareClicked()"/>
+    </div>
+}
 
-<div class="content">
-    @if (isLoaded()) {
-        @if (wishlist() === null) {
-            <app-wishlist-create (onCreated)="onWishlistCreated($event)"></app-wishlist-create>
-        } @else {
-            {{ wishlist()?.name }}
-        }
-    }
-</div>

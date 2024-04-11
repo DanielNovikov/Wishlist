@@ -19,6 +19,16 @@ public class WishlistController(
         
         return Ok(response);
     }
+    
+    [HttpGet("{id:int}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var response = await wishlistService.GetById(id);
+        if (response == null) return NotFound();
+        
+        return Ok(response);
+    }
 
     [HttpPost]
     [Authorize]

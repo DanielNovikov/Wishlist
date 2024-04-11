@@ -1,58 +1,59 @@
-import { ChangeDetectionStrategy, Component, effect, signal, WritableSignal } from '@angular/core';
-import { GradientButtonComponent } from "../../../shared/core/components/gradient-button/gradient-button.component";
+import { ChangeDetectionStrategy, Component, Input, signal, WritableSignal } from '@angular/core';
 import { DeviceService } from "../../../shared/core/services/device.service";
-import { WishlistResponse } from "../../models/wishlist-response";
 import { WishlistApiService } from "../../services/wishlist-api.service";
-import { finalize, takeUntil } from "rxjs";
-import { WishlistCreateComponent } from "../wishlist-create/wishlist-create.component";
+import { Router } from "@angular/router";
 import { Destroyable } from "../../../shared/core/models/destroyable";
-import { CurrentUserService } from "../../../shared/current-user/services/current-user.service";
-import { HeaderComponent } from "../../../shared/core/components/header/header.component";
-import { RouterOutlet } from "@angular/router";
+import { takeUntil } from "rxjs";
+import { WishlistResponse } from "../../models/wishlist-response";
+import { TextComponent } from "../../../shared/core/components/text/text.component";
 
 @Component({
-    selector: 'app-wishlist',
+    selector: 'app-wishlist-user',
     standalone: true,
     imports: [
-        GradientButtonComponent,
-        WishlistCreateComponent,
-        HeaderComponent,
-        RouterOutlet
+        TextComponent
     ],
     templateUrl: './wishlist.component.html',
     styleUrl: './wishlist.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WishlistComponent extends Destroyable {
-
-    protected isLoaded: WritableSignal<boolean> = signal(false);
-    protected wishlist: WritableSignal<WishlistResponse | null> = signal(null);
-
-    constructor(
-        private deviceService: DeviceService,
-        private wishlistApiService: WishlistApiService,
-        private currentUserService: CurrentUserService) {
-        super();
-
-        if (this.deviceService.isBrowser()) {
-            effect(() => {
-                if (!this.currentUserService.isAuthorized()) {
-                    this.isLoaded.set(true);
+    
+    @Input()
+    set wishlistId(wishlistIdStr: string) {
+        const wishlistId = parseInt(wishlistIdStr);
+        if (isNaN(wishlistId)) {
+            this.router.navigate(['/']);
+            return;
+        }
+        
+        this.wishlistApiService.getById(wishlistId)
+            .pipe((takeUntil(this.destroy$)))
+            .subscribe(response => {
+                if (!response) {
+                    this.router.navigate(['/']);
                     return;
                 }
                 
-                this.wishlistApiService.get()
-                    .pipe(
-                        finalize(() => this.isLoaded.set(true)),
-                        takeUntil(this.destroy$))
-                    .subscribe(response => {
-                        this.wishlist.set(response);
-                    });
-            }, {allowSignalWrites: true});
-        }
+                this.wishlist.set(response);
+            });
+    }
+    
+    wishlist: WritableSignal<WishlistResponse | null> = signal(null);
+    
+    constructor(
+        private wishlistApiService: WishlistApiService,
+        private router: Router) {
+        
+        super();
     }
 
-    onWishlistCreated(wishlist: WishlistResponse) {
-        this.wishlist.set(wishlist);
+    async onShareClicked() {
+        if (navigator && this.wishlist()) {
+            await navigator.share({
+                text: `"${this.wishlist()!.name}" - список побажань`,
+                url: location.href
+            })
+        }
     }
 }

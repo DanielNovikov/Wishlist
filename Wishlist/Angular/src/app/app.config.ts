@@ -1,5 +1,5 @@
 import {APP_INITIALIZER, ApplicationConfig, isDevMode} from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -14,7 +14,7 @@ import { of } from "rxjs";
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideRouter(routes),
+        provideRouter(routes, withComponentInputBinding()),
         provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
         provideClientHydration(),
         provideServiceWorker('ngsw-worker.js', {

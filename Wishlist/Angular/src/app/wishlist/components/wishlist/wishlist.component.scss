@@ -1,20 +1,9 @@
-@import "transitions";
-@import "utils";
-
-:host {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    gap: 50px;
-    background: var(--primary-background-color);
-    min-height: 100vh;
-
-    @include transition();
-
-    @include not-mobile() {
-        //gap: 500px;
-    }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.content {
-    @include content-padding();
+.share-button {
+    cursor: pointer;
 }
