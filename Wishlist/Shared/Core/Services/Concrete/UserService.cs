@@ -13,4 +13,18 @@ public class UserService(IRepository<UserEntity> userRepository) : IUserService
         
         return await userRepository.Query(query => query.AnyAsync(x => x.Email == email));
     }
+
+    public async Task<UserEntity?> GetById(int id)
+    {
+        return await userRepository.Query(query => query
+            .Include(x => x.Avatar)
+            .FirstOrDefaultAsync(x => x.Id == id));
+    }
+
+    public async Task<UserEntity?> GetByEmailAndPassword(string email, string password)
+    {
+        return await userRepository.Query(query => query
+            .Include(x => x.Avatar)
+            .FirstOrDefaultAsync(x => x.Email == email && x.Password == password));
+    }
 }

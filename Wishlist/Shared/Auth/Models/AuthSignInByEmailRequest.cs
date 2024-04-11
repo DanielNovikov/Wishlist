@@ -4,7 +4,7 @@ using Wishlist.Shared.Core.Utilities;
 
 namespace Wishlist.Shared.Auth.Models;
 
-public record AuthSignInByEmailRequest(string? Email, string? Password)
+public record AuthSignInByEmailRequest(string Email, string Password)
 {
     
     public virtual bool IsValid()

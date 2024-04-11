@@ -3,6 +3,20 @@
               [formGroup]="this.form" (onSubmit)="onSubmit()" [submitFailureMessage]="submitFailureMessage">
 
         <div class="input-container">
+            <input id="file-picker" (change)="onAvatarSelected($event)" type="file" accept="image/png, image/jpeg, image/webp, image/heic" style="display: none">
+            
+            <label for="file-picker" class="avatar-picker">
+                <div class="avatar-wrapper">
+                    @if (selectedAvatar()) {
+                        <img [src]="selectedAvatar()!" class="avatar" alt="Аватар"/>
+                    } @else {
+                        <img src="assets/icons/advert/account.svg" class="avatar-placeholder" alt="Аватар"/>
+                    }
+                </div>
+            </label>
+        </div>
+        
+        <div class="input-container">
             <input class="text-input" placeholder="Ім'я" formControlName="name">
             <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
                 <app-text-error *ngIf="name?.errors?.['required']" text="Ім'я має бути заповнене."></app-text-error>

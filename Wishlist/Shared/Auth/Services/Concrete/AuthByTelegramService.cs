@@ -23,6 +23,7 @@ public class AuthByTelegramService(
         if (loginWidget.CheckAuthorization(request.Query) != Authorization.Valid) return null;
 
         var user = await userRepository.Query(query => query
+            .Include(x => x.Avatar)
             .FirstOrDefaultAsync(x => x.ExternalId == request.Id && x.Source == UserSource.Telegram));
 
         var name = $"{request.FirstName} {request.LastName}";

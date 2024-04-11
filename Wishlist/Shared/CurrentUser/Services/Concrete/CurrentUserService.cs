@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 using Wishlist.Data.Models;
 using Wishlist.Data.Models.Enums;
 using Wishlist.Data.Repositories.Abstract;
@@ -20,7 +21,7 @@ public class CurrentUserService(
         if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId))
             return null;
 
-        return await userRepository.GetById(userId);
+        return await userService.GetById(userId);
     }
 
     public async Task<UserEntity?> Edit(UserEntity user, CurrentUserEditRequest request)
@@ -38,6 +39,21 @@ public class CurrentUserService(
             
             if (!string.IsNullOrEmpty(request.Password))
                 user.Password = request.Password;
+        }
+
+        if (!string.IsNullOrEmpty(request.AvatarPath))
+        {
+            if (string.IsNullOrEmpty(user.Avatar?.Path))
+            {
+                user.Avatar = new ImageEntity
+                {
+                    Path = request.AvatarPath
+                };
+            }
+            else
+            {
+                user.Avatar.Path = request.AvatarPath;
+            }
         }
 
         await userRepository.Update(user);

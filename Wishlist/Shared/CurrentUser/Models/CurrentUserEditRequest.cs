@@ -4,11 +4,12 @@ using Wishlist.Shared.Core.Utilities;
 
 namespace Wishlist.Shared.CurrentUser.Models;
 
-public record CurrentUserEditRequest(string Name, string? Email, string? Password)
+public record CurrentUserEditRequest(string Name, string? Email, string? Password, string? AvatarPath)
 {
     public bool IsValid(UserEntity user)
     {
-        var isValid = ValidationUtilities.IsNameValid(Name);
+        var isValid = ValidationUtilities.IsNameValid(Name) && 
+                      (string.IsNullOrEmpty(AvatarPath) || AvatarPath.Length <= 200);
 
         if (user.Source == UserSource.Email)
         {

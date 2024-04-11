@@ -4,6 +4,7 @@ import {TextComponent} from "../text/text.component";
 import { ThemeService } from "../../../../advert/services/theme.service";
 import { Theme } from '../../../../advert/models/theme';
 import { CurrentUserEditService } from "../../../current-user/services/current-user-edit.service";
+import { CurrentUserService } from "../../../current-user/services/current-user.service";
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,10 @@ export class HeaderComponent {
 
   @Input() title: string | undefined;
   
-  constructor(public themeService: ThemeService, private currentUserEditService: CurrentUserEditService ) {}
+  constructor(
+      public themeService: ThemeService,
+      public currentUserService: CurrentUserService,
+      private currentUserEditService: CurrentUserEditService ) {}
 
   toggleTheme(): void {    
     this.themeService.toggle();

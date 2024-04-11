@@ -52,9 +52,13 @@
 .header-account {
   cursor: pointer;
   height: 38px;
+  width: 38px;
+  object-fit: cover;
+  border-radius: 100px;
   
   @include not-mobile() {
     height: 45px;
+    width: 45px;
   }
 }
 

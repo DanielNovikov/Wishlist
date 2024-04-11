@@ -24,7 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Angular\" />
       <Folder Include="Angular\src\app\advert\models\" />
       <Folder Include="Angular\src\app\advert\services\" />
       <Folder Include="Angular\src\app\auth\services\" />
@@ -35,6 +34,7 @@
       <Folder Include="Angular\src\app\wishlist\models\" />
       <Folder Include="Angular\src\assets\" />
       <Folder Include="Shared\CurrentUser\" />
+      <Folder Include="wwwroot\uploaded\" />
     </ItemGroup>
 
 </Project>

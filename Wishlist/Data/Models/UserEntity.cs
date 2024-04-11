@@ -19,4 +19,7 @@ public class UserEntity : EntityBase
     
     [MaxLength(50)]
     public string? Password { get; set; }
+    
+    public int? AvatarId { get; set; }
+    public ImageEntity? Avatar { get; set; }
 }
