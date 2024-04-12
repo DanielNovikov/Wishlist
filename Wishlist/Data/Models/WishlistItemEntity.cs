@@ -1,14 +1,18 @@
-﻿using Wishlist.Data.Models.Base;
+﻿using System.ComponentModel.DataAnnotations;
+using Wishlist.Data.Models.Base;
 using Wishlist.Data.Models.Enums;
 
 namespace Wishlist.Data.Models;
 
 public class WishlistItemEntity : EntityBase
 {
+    [MaxLength(100)]
     public required string Title { get; set; }
     
+    [MaxLength(500)]
     public string? Description { get; set; }
     
+    [MaxLength(300)]
     public string? Url { get; set; }
     
     public int? Price { get; set; }

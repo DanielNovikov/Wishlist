@@ -34,6 +34,8 @@ public class WishlistController(
     [Authorize]
     public async Task<IActionResult> Create([FromBody] WishlistCreateRequest request)
     {
+        if (!request.IsValid()) return BadRequest();
+        
         var response = await wishlistService.Create(request);
         return Ok(response);
     }

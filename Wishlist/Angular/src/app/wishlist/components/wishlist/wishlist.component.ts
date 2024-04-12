@@ -6,12 +6,14 @@ import { Destroyable } from "../../../shared/core/models/destroyable";
 import { takeUntil } from "rxjs";
 import { WishlistResponse } from "../../models/wishlist-response";
 import { TextComponent } from "../../../shared/core/components/text/text.component";
+import { WishlistItemsComponent } from "../wishlist-items/wishlist-items.component";
 
 @Component({
     selector: 'app-wishlist-user',
     standalone: true,
     imports: [
-        TextComponent
+        TextComponent,
+        WishlistItemsComponent
     ],
     templateUrl: './wishlist.component.html',
     styleUrl: './wishlist.component.scss',

@@ -7,6 +7,6 @@ public record AuthSignUpByEmailRequest(string? Name, string? Email, string? Pass
 {
     public override bool IsValid()
     {
-        return base.IsValid() && ValidationUtilities.IsNameValid(Name);
+        return base.IsValid() && UserValidationUtilities.IsNameValid(Name);
     }
 };

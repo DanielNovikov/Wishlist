@@ -2,10 +2,10 @@
 
 namespace Wishlist.Wishlist.Models;
 
-public record WishlistCreateRequest(string Name)
+public record WishlistItemScrapRequest(string Url)
 {
     public bool IsValid()
     {
-        return WishlistValidationUtilities.IsNameValid(Name);
+        return WishlistValidationUtilities.IsUrlValid(Url);
     }
-};
+}

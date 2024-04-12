@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AngleSharp" Version="1.1.2" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
@@ -26,7 +27,6 @@
     <ItemGroup>
       <Folder Include="Angular\src\app\advert\models\" />
       <Folder Include="Angular\src\app\advert\services\" />
-      <Folder Include="Angular\src\app\auth\services\" />
       <Folder Include="Angular\src\app\shared\core\components\" />
       <Folder Include="Angular\src\app\shared\core\services\validators\" />
       <Folder Include="Angular\src\app\shared\current-user\components\" />

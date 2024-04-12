@@ -8,15 +8,15 @@ public record CurrentUserEditRequest(string Name, string? Email, string? Passwor
 {
     public bool IsValid(UserEntity user)
     {
-        var isValid = ValidationUtilities.IsNameValid(Name) && 
+        var isValid = UserValidationUtilities.IsNameValid(Name) && 
                       (string.IsNullOrEmpty(AvatarPath) || AvatarPath.Length <= 200);
 
         if (user.Source == UserSource.Email)
         {
-            isValid = isValid && ValidationUtilities.IsEmailValid(Email);
+            isValid = isValid && UserValidationUtilities.IsEmailValid(Email);
 
             if (!string.IsNullOrEmpty(Password))
-                isValid = isValid && ValidationUtilities.IsPasswordValid(Password);
+                isValid = isValid && UserValidationUtilities.IsPasswordValid(Password);
         }
 
         return isValid;

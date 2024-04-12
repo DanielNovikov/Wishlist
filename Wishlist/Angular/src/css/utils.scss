@@ -24,3 +24,30 @@
         margin: 0 60px;
     }
 }
+
+@mixin button-animation {
+    cursor: pointer;
+    transition: var(--animation-transition) opacity;
+    @include disable-selection();
+
+    @include not-mobile {
+        &:hover {
+            opacity: 0.8;
+        }
+
+        &:active {
+            opacity: 0.9;
+        }
+    }
+
+    @include mobile {
+        &:active {
+            opacity: 0.8;
+        }
+    }
+
+    &:focus, &:active {
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+}
