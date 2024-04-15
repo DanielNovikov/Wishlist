@@ -11,8 +11,10 @@ import { emailValidator } from "../../../core/services/validators/email-validato
 import { passwordValidator } from "../../../core/services/validators/password-validator";
 import { CurrentUserEditRequest } from "../../models/current-user-edit-request";
 import { CurrentUserApiService } from "../../services/current-user-api.service";
-import { takeUntil } from "rxjs";
+import { switchMap, takeUntil } from "rxjs";
 import { FileApiService } from "../../../core/services/file-api.service";
+import { ImageBrowsingService } from "../../../core/services/image-browsing.service";
+import { InputImageComponent } from "../../../core/components/input-image/input-image.component";
 
 @Component({
     selector: 'app-current-user-edit-modal',
@@ -22,7 +24,8 @@ import { FileApiService } from "../../../core/services/file-api.service";
         NgIf,
         ReactiveFormsModule,
         TextErrorComponent,
-        NgOptimizedImage
+        NgOptimizedImage,
+        InputImageComponent
     ],
     templateUrl: './current-user-edit-modal.component.html',
     styleUrl: './current-user-edit-modal.component.scss',
@@ -33,7 +36,10 @@ export class CurrentUserEditModalComponent extends ModalBase<CurrentUserEditResp
     form: FormGroup | undefined;
     submitFailureMessage = signal('');
     
-    constructor(private currentUserApiService: CurrentUserApiService, private fileApiService: FileApiService) {
+    constructor(
+        private currentUserApiService: CurrentUserApiService,
+        private fileApiService: FileApiService,
+        private imageBrowsingService: ImageBrowsingService) {
         super();
     }
 
@@ -48,7 +54,7 @@ export class CurrentUserEditModalComponent extends ModalBase<CurrentUserEditResp
         }
         
         if (this.input?.avatarPath) 
-            this.selectedAvatar.set(this.input.avatarPath);
+            this.avatarSrc.set(this.input.avatarPath);
         
         this.form = new FormGroup(controls);
     }
@@ -56,22 +62,23 @@ export class CurrentUserEditModalComponent extends ModalBase<CurrentUserEditResp
     get name() { return this.form?.get('name'); }
     get email() { return this.form?.get('email'); }
     get password() { return this.form?.get('password'); }
-    selectedAvatar: WritableSignal<string | undefined> = signal(undefined);
+    avatarSrc: WritableSignal<string | undefined> = signal(undefined);
     
-    onAvatarSelected(event: any) {
-        const input = event.target as HTMLInputElement;
-        if (!input.files?.length) return;
-
-        this.fileApiService.upload(input.files[0])
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(path => {
-                if (path) this.selectedAvatar.set(path);
+    selectAvatar() {
+        this.imageBrowsingService.browse()
+            .pipe(
+                takeUntil(this.destroy$),
+                switchMap(file => this.fileApiService.upload(file)),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(src => {
+                if (src) this.avatarSrc.set(src);
             })
     }
     
     onSubmit() {
         const request = this.form!.value as CurrentUserEditRequest;
-        request.avatarPath = this.selectedAvatar();
+        request.avatarPath = this.avatarSrc();
         
         this.currentUserApiService.edit(request)
             .pipe(takeUntil(this.destroy$))

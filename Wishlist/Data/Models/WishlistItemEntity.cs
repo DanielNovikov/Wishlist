@@ -6,7 +6,7 @@ namespace Wishlist.Data.Models;
 
 public class WishlistItemEntity : EntityBase
 {
-    [MaxLength(100)]
+    [MaxLength(300)]
     public required string Title { get; set; }
     
     [MaxLength(500)]

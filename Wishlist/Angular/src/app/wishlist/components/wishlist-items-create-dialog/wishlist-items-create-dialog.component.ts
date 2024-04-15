@@ -26,7 +26,7 @@ import { WishlistItemScrapRequest } from "../../models/wishlist-item-scrap-reque
 })
 export class WishlistItemsCreateDialogComponent extends ModalBase<any> implements OnInit {
     form = new FormGroup({
-        title: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+        title: new FormControl('', [Validators.required, Validators.maxLength(300)]),
         description: new FormControl('', [Validators.maxLength(500)]),
         link: new FormControl('', [urlValidator()])
     });

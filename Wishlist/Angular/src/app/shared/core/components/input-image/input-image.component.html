@@ -1,0 +1,9 @@
+<div class="input-container">
+    <div class="avatar-wrapper" (click)="selectAvatar()">
+        @if (avatarSrc()) {
+            <img [src]="avatarSrc()!" class="avatar" alt="Аватар"/>
+        } @else {
+            <img src="assets/icons/advert/account.svg" class="avatar-placeholder" alt="Аватар"/>
+        }
+    </div>
+</div>
