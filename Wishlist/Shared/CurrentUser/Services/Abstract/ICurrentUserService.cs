@@ -5,7 +5,9 @@ namespace Wishlist.Shared.CurrentUser.Services.Abstract;
 
 public interface ICurrentUserService
 {
-    ValueTask<UserEntity?> Get();
+    ValueTask<UserEntity?> TryGet();
+    
+    ValueTask<UserEntity> Get();
 
-    Task<UserEntity?> Edit(UserEntity user, CurrentUserEditRequest request);
+    Task<UserEntity?> Edit(CurrentUserEditRequest request);
 }

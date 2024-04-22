@@ -27,7 +27,7 @@
 
 @mixin button-animation {
     cursor: pointer;
-    transition: var(--animation-transition) opacity;
+    transition: var(--animation-fast-transition) opacity;
     @include disable-selection();
 
     @include not-mobile {

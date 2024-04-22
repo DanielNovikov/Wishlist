@@ -2,6 +2,10 @@
           [formGroup]="form" (onSubmit)="onSubmit()">
 
     <div class="input-container">
+        <app-input-image type="photo" [imageSrc]="imageSrc"></app-input-image>
+    </div>
+    
+    <div class="input-container">
         <input class="text-input" placeholder="Посилання..." formControlName="link">
         <div *ngIf="link?.invalid && (link?.dirty || link?.touched)">
             <app-text-error *ngIf="link?.errors?.['maxlength']" text="Назве не може бути довше 300 символів."></app-text-error>
@@ -18,9 +22,12 @@
     </div>
     
     <div class="input-container">
+        <input class="text-input" placeholder="Ціна..." formControlName="price" type="number">
+    </div>
+    
+    <div class="input-container">
         <input class="text-input" placeholder="Опис..." formControlName="description">
         <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
-            <app-text-error *ngIf="description?.errors?.['required']" text="Опис має бути заповнений."></app-text-error>
             <app-text-error *ngIf="description?.errors?.['maxlength']" text="Опис не може бути довше 500 символів."></app-text-error>
         </div>
     </div>

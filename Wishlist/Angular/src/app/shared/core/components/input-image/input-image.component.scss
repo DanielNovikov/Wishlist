@@ -1,23 +1,47 @@
-.avatar-wrapper {
+:host {
+    align-self: center;
+}
+
+.image-wrapper {
     background: var(--secondary-background-color);
-    border-radius: 100px;
     cursor: pointer;
     overflow: hidden;
-    align-self: center;
 
     img {
         display: block;
     }
 }
 
-.avatar {
-    width: 80px;
-    height: 80px;
+.image {
     object-fit: cover;
 }
 
-.avatar-placeholder {
-    width: 50px;
-    height: 50px;
-    padding: 10px;
+.image-wrapper.avatar {
+    border-radius: 100px;
+
+    .image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .image-placeholder {
+        width: 50px;
+        height: 50px;
+        padding: 10px;
+    }
+}
+
+.image-wrapper.photo {
+    border-radius: 10px;
+    
+    .image {
+        width: 90px;
+        height: 90px;
+    }
+
+    .image-placeholder {
+        width: 40px;
+        height: 40px;
+        padding: 20px;
+    }
 }

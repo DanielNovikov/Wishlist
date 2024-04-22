@@ -1,4 +1,5 @@
 @import "medias";
+@import "utils";
 
 $animation-delay: 0.23s;
 $fast-animation-delay: 0.17s;
@@ -19,6 +20,8 @@ $fast-animation-delay: 0.17s;
   padding: 10px;
   cursor: pointer;
   z-index: 1;
+  
+  @include button-animation();
 
   @include not-mobile() {
     right: 5px;

@@ -14,8 +14,6 @@ public class CurrentUserController(ICurrentUserService currentUserService) : Con
     public async Task<IActionResult> Get()
     {
         var user = await currentUserService.Get();
-        if (user == null) return Unauthorized();
-
         return Ok(user.ToResponse());
     }
     
@@ -24,8 +22,6 @@ public class CurrentUserController(ICurrentUserService currentUserService) : Con
     public async Task<IActionResult> GetForEdit()
     {
         var user = await currentUserService.Get();
-        if (user == null) return Unauthorized();
-
         return Ok(user.ToEditResponse());
     }
 
@@ -34,11 +30,9 @@ public class CurrentUserController(ICurrentUserService currentUserService) : Con
     public async Task<IActionResult> Edit([FromBody] CurrentUserEditRequest request)
     {
         var user = await currentUserService.Get();
-        if (user == null) return Unauthorized();
-
         if (!request.IsValid(user)) return BadRequest();
 
-        user = await currentUserService.Edit(user, request);
+        user = await currentUserService.Edit(request);
         if (user == null) return BadRequest();
         
         return Ok(user.ToResponse());

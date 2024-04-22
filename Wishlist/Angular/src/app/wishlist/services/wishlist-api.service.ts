@@ -4,6 +4,7 @@ import {catchError, Observable, of} from "rxjs";
 import {WishlistResponse} from "../models/wishlist-response";
 import {WishlistCreateRequest} from "../models/wishlist-create-request";
 import {environment} from "../../shared/core/environments/environment";
+import {WishlistItemResponse} from "../models/wishlist-item-response";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ export class WishlistApiService {
   getById(id: number) : Observable<WishlistResponse | null> {
     return this.httpClient.get<WishlistResponse>(this.baseUrl + `/${id}`)
         .pipe(catchError(error => of(null)));
+  }
+  
+  getItemsById(id: number) : Observable<WishlistItemResponse[]> {
+    return this.httpClient.get<WishlistItemResponse[]>(this.baseUrl + `/${id}/items`)
+        .pipe(catchError(error => of([])));
   }
   
   create(request: WishlistCreateRequest) : Observable<WishlistResponse> {

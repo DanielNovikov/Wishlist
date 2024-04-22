@@ -15,7 +15,7 @@ public class CurrentUserService(
     IUserService userService) 
     : ICurrentUserService
 {
-    public async ValueTask<UserEntity?> Get()
+    public async ValueTask<UserEntity?> TryGet()
     {
         var userIdClaim = contextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId))
@@ -24,39 +24,46 @@ public class CurrentUserService(
         return await userService.GetById(userId);
     }
 
-    public async Task<UserEntity?> Edit(UserEntity user, CurrentUserEditRequest request)
+    public async ValueTask<UserEntity> Get()
     {
-        if (user.Source == UserSource.Email && user.Email != request.Email)
+        return await TryGet() ?? throw new InvalidOperationException("User couldn't be found");
+    }
+
+    public async Task<UserEntity?> Edit(CurrentUserEditRequest request)
+    {
+        var currentUser = await Get();
+        
+        if (currentUser.Source == UserSource.Email && currentUser.Email != request.Email)
         {
             var exists = await userService.ExistsByEmail(request.Email);
             if (exists) return null;
         }
         
-        user.Name = request.Name;
-        if (user.Source == UserSource.Email)
+        currentUser.Name = request.Name;
+        if (currentUser.Source == UserSource.Email)
         {
-            user.Email = request.Email;
+            currentUser.Email = request.Email;
             
             if (!string.IsNullOrEmpty(request.Password))
-                user.Password = request.Password;
+                currentUser.Password = request.Password;
         }
 
         if (!string.IsNullOrEmpty(request.AvatarPath))
         {
-            if (string.IsNullOrEmpty(user.Avatar?.Path))
+            if (string.IsNullOrEmpty(currentUser.Avatar?.Path))
             {
-                user.Avatar = new ImageEntity
+                currentUser.Avatar = new ImageEntity
                 {
                     Path = request.AvatarPath
                 };
             }
             else
             {
-                user.Avatar.Path = request.AvatarPath;
+                currentUser.Avatar.Path = request.AvatarPath;
             }
         }
 
-        await userRepository.Update(user);
-        return user;
+        await userRepository.Update(currentUser);
+        return currentUser;
     }
 }

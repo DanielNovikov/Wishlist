@@ -1,9 +1,7 @@
-<div class="input-container">
-    <div class="avatar-wrapper" (click)="selectAvatar()">
-        @if (avatarSrc()) {
-            <img [src]="avatarSrc()!" class="avatar" alt="Аватар"/>
-        } @else {
-            <img src="assets/icons/advert/account.svg" class="avatar-placeholder" alt="Аватар"/>
-        }
-    </div>
+<div class="image-wrapper" [class]="type" (click)="selectImage()">
+    @if (imageSrc()) {
+        <img [src]="imageSrc()!" class="image" alt="Фото"/>
+    } @else {
+        <img [src]="type === 'avatar' ? 'assets/icons/advert/account.svg' : 'assets/icons/wishlist/create-placeholder.svg'" class="image-placeholder" alt="Фото"/>
+    }
 </div>

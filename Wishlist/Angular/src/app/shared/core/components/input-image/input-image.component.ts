@@ -14,21 +14,21 @@ import { Destroyable } from "../../models/destroyable";
 })
 export class InputImageComponent extends Destroyable {
 
-    @Input({required: true}) avatarSrc!: WritableSignal<string | undefined>;
+    @Input({required: true}) imageSrc!: WritableSignal<string | undefined>;
+    @Input({required: true}) type!: 'avatar' | 'photo';
 
     constructor(private fileApiService: FileApiService, private imageBrowsingService: ImageBrowsingService) {
         super();
     }
 
-    selectAvatar() {
+    selectImage() {
         this.imageBrowsingService.browse()
             .pipe(
                 takeUntil(this.destroy$),
-                switchMap(file => this.fileApiService.upload(file)),
-                takeUntil(this.destroy$),
+                switchMap(file => this.fileApiService.upload(file))
             )
             .subscribe(src => {
-                if (src) this.avatarSrc.set(src);
+                if (src) this.imageSrc.set(src);
             })
     }
 }

@@ -10,6 +10,7 @@ public static class DependencyInjectionInitializer
     {
         return services
             .AddTransient<IWishlistService, WishlistService>()
+            .AddTransient<IWishlistItemService, WishlistItemService>()
             .AddTransient<IWishlistItemScrapService, WishlistItemScrapService>()
             .AddHttpClient<IHtmlLoadService, HtmlLoadService>().Services
             .AddHttpClient<IImageLoadService, ImageLoadService>().Services

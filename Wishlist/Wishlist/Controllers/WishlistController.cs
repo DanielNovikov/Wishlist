@@ -14,10 +14,10 @@ public class WishlistController(
     [Authorize]
     public async Task<IActionResult> Get()
     {
-        var response = await wishlistService.Get();
+        var response = await wishlistService.TryGetCurrent();
         if (response == null) return NotFound();
         
-        return Ok(response);
+        return Ok(response.ToResponse());
     }
     
     [HttpGet("{id:int}")]
@@ -27,7 +27,15 @@ public class WishlistController(
         var response = await wishlistService.GetById(id);
         if (response == null) return NotFound();
         
-        return Ok(response);
+        return Ok(response.ToResponse());
+    }
+
+    [HttpGet("{id:int}/items")]
+    [AllowAnonymous]
+    public async Task<WishlistItemResponse[]> GetItemsById(int id)
+    {
+        var response = await wishlistService.GetItemsById(id);
+        return response.Select(x => x.ToResponse()).ToArray();
     }
 
     [HttpPost]
@@ -37,6 +45,6 @@ public class WishlistController(
         if (!request.IsValid()) return BadRequest();
         
         var response = await wishlistService.Create(request);
-        return Ok(response);
+        return Ok(response.ToResponse());
     }
 }

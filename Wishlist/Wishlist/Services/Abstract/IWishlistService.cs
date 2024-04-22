@@ -1,12 +1,17 @@
-﻿using Wishlist.Wishlist.Models;
+﻿using Wishlist.Data.Models;
+using Wishlist.Wishlist.Models;
 
 namespace Wishlist.Wishlist.Services.Abstract;
 
 public interface IWishlistService
 {
-    Task<WishlistResponse?> Get();
+    Task<WishlistEntity?> TryGetCurrent();
     
-    Task<WishlistResponse?> GetById(int id);
+    Task<WishlistEntity> GetCurrent();
+    
+    Task<WishlistEntity?> GetById(int id);
+    
+    Task<List<WishlistItemEntity>> GetItemsById(int id);
 
-    Task<WishlistResponse> Create(WishlistCreateRequest request);
+    Task<WishlistEntity> Create(WishlistCreateRequest request);
 }

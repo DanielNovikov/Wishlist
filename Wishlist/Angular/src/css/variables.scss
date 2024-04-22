@@ -1,7 +1,4 @@
 :root {
-    --primary-font-color: #7972DD;
-    --secondary-font-color: #9B96DB;
-    
     --primary-font-family: Montserrat, serif;
     --secondary-font-family: Sniglet, serif;
     
@@ -12,12 +9,18 @@
 }
 
 div.light-theme {
+    --primary-font-color: #7972DD;
+    --secondary-font-color: #9B96DB;
+    
     --primary-background-color: rgb(249, 249, 249);
     --secondary-background-color: white;
     --overlay-background-color: rgba(0, 0, 0, 0.2);
 }
 
 div.dark-theme {
+    --primary-font-color: #CBC4E7;
+    --secondary-font-color: #9B96DB;
+    
     --primary-background-color: #1A1729;
     --secondary-background-color: #211E32;
     --overlay-background-color: rgba(0, 0, 0, 0.4);

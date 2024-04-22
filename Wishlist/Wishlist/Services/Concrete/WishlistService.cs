@@ -12,31 +12,41 @@ public class WishlistService(
     IRepository<WishlistEntity> wishlistRepository)
     : IWishlistService
 {
-    public async Task<WishlistResponse?> Get()
+    public async Task<WishlistEntity?> TryGetCurrent()
     {
-        var currentUser = await currentUserService.Get();
+        var currentUser = await currentUserService.TryGet();
         if (currentUser == null) return null;
 
-        var wishlist = await wishlistRepository.Query(query => query
+        return await wishlistRepository.Query(query => query
             .Include(x => x.Items)
             .FirstOrDefaultAsync(x => x.UserId == currentUser.Id));
-
-        return wishlist?.ToResponse();
     }
 
-    public async Task<WishlistResponse?> GetById(int id)
+    public async Task<WishlistEntity> GetCurrent()
     {
-        var wishlist = await wishlistRepository.Query(query => query
+        return await TryGetCurrent() ?? throw new InvalidOperationException("Wishlist couldn't be found");
+    }
+
+    public async Task<WishlistEntity?> GetById(int id)
+    {
+        return await wishlistRepository.Query(query => query
             .Include(x => x.Items)
             .FirstOrDefaultAsync(x => x.Id == id));
-
-        return wishlist?.ToResponse();
     }
 
-    public async Task<WishlistResponse> Create(WishlistCreateRequest request)
+    public async Task<List<WishlistItemEntity>> GetItemsById(int id)
+    {
+        return await wishlistRepository.Query(query => query
+            .Include(x => x.Items)
+            .ThenInclude(x => x.Image)
+            .Where(x => x.Id == id)
+            .SelectMany(x => x.Items)
+            .ToListAsync());
+    }
+
+    public async Task<WishlistEntity> Create(WishlistCreateRequest request)
     {
         var currentUser = await currentUserService.Get();
-        if (currentUser == null) throw new InvalidOperationException();
         
         var wishlist = await wishlistRepository.Query(query => query
             .FirstOrDefaultAsync(x => x.UserId == currentUser.Id));
@@ -50,6 +60,6 @@ public class WishlistService(
         };
         await wishlistRepository.Add(wishlist);
 
-        return wishlist.ToResponse();
+        return wishlist;
     }
 }

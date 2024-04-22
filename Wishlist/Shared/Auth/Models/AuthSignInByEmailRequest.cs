@@ -9,6 +9,6 @@ public record AuthSignInByEmailRequest(string Email, string Password)
     
     public virtual bool IsValid()
     {
-        return UserValidationUtilities.IsEmailValid(Email) && UserValidationUtilities.IsPasswordValid(Password);
+        return CoreValidationUtilities.IsEmailValid(Email) && CoreValidationUtilities.IsPasswordValid(Password);
     }
 };

@@ -2,7 +2,7 @@
 
 namespace Wishlist.Shared.Core.Utilities;
 
-public class UserValidationUtilities
+public class CoreValidationUtilities
 {
     private const string EmailPattern = @"^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|)$";
     
@@ -14,4 +14,7 @@ public class UserValidationUtilities
 
     public static readonly Func<string?, bool> IsPasswordValid =
         password => !string.IsNullOrEmpty(password) && password.Length <= 50;
+
+    public static readonly Func<string, bool> IsPathValid =
+        path => path.Length <= 200;
 }
