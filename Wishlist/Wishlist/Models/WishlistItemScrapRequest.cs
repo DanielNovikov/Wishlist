@@ -1,4 +1,4 @@
-﻿using Wishlist.Wishlist.Utilities;
+﻿using Wishlist.Shared.Core.Utilities;
 
 namespace Wishlist.Wishlist.Models;
 
@@ -6,6 +6,6 @@ public record WishlistItemScrapRequest(string Url)
 {
     public bool IsValid()
     {
-        return WishlistValidationUtilities.IsUrlValid(Url);
+        return CoreValidationUtilities.IsUrlValid(Url);
     }
 }

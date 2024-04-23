@@ -1,5 +1,7 @@
-﻿using Wishlist.Data.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Wishlist.Data.Models;
 using Wishlist.Data.Repositories.Abstract;
+using Wishlist.Shared.Core.Services.Abstract;
 using Wishlist.Shared.CurrentUser.Services.Abstract;
 using Wishlist.Wishlist.Models;
 using Wishlist.Wishlist.Services.Abstract;
@@ -8,7 +10,8 @@ namespace Wishlist.Wishlist.Services.Concrete;
 
 public class WishlistItemService(
     IWishlistService wishlistService,
-    IRepository<WishlistItemEntity> repository) 
+    IRepository<WishlistItemEntity> repository,
+    IImageService imageService) 
     : IWishlistItemService
 {
     public async Task Create(WishlistItemCreateRequest request)
@@ -26,13 +29,41 @@ public class WishlistItemService(
 
         if (!string.IsNullOrEmpty(request.ImageSrc))
         {
-            entity.Image = new ImageEntity
-            {
-                Path = request.ImageSrc
-            };
+            var image = await imageService.Create(request.ImageSrc);
+            entity.ImageId = image.Id;
         }
 
         await repository.Add(entity);
+    }
+
+    public async Task Update(int id, WishlistItemUpdateRequest request)
+    {
+        var entity = await repository.GetById(id);
+        if (entity == null) return;
+        
+        var wishlist = await wishlistService.GetCurrent();
+        if (entity.WishlistId != wishlist.Id) return;
+
+        entity.Title = request.Title;
+        entity.Description = request.Description;
+        entity.Price = request.Price;
+        entity.Url = request.Url;
+
+        // Deleting existing image entity
+        if (entity.ImageId.HasValue)
+        {
+            await imageService.Delete(entity.ImageId.Value);
+            entity.ImageId = null;
+        }
+        
+        // Creating new image entity if request has image path 
+        if (!string.IsNullOrWhiteSpace(request.ImageSrc))
+        {
+            var image = await imageService.Create(request.ImageSrc);
+            entity.ImageId = image.Id;
+        }
+
+        await repository.Update(entity);
     }
 
     public async Task Delete(int id)

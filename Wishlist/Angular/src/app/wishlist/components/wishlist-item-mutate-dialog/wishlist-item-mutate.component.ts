@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal, WritableSignal } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    OnChanges,
+    OnInit,
+    signal,
+    SimpleChanges,
+    WritableSignal
+} from '@angular/core';
 import { ModalBase } from "../../../shared/modal/models/modal-base";
 import { TextComponent } from "../../../shared/core/components/text/text.component";
 import { FormComponent } from "../../../shared/core/components/form/form.component";
@@ -11,6 +19,9 @@ import { WishlistItemApiService } from "../../services/wishlist-item-api.service
 import { WishlistItemScrapRequest } from "../../models/wishlist-item-scrap-request";
 import {InputImageComponent} from "../../../shared/core/components/input-image/input-image.component";
 import {WishlistItemCreateRequest} from "../../models/wishlist-item-create-request";
+import {WishlistItemResponse} from "../../models/wishlist-item-response";
+import {WishlistItemUpdateRequest} from "../../models/wishlist-item-update-request";
+import {WishlistItemMutateRequest} from "../../models/base/wishlist-item-mutate-request";
 
 @Component({
     selector: 'app-wishlist-items-create-dialog',
@@ -23,13 +34,13 @@ import {WishlistItemCreateRequest} from "../../models/wishlist-item-create-reque
         TextErrorComponent,
         InputImageComponent
     ],
-    templateUrl: './wishlist-item-create-dialog.component.html',
-    styleUrl: './wishlist-item-create-dialog.component.scss',
+    templateUrl: './wishlist-item-mutate.component.html',
+    styleUrl: './wishlist-item-mutate.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WishlistItemCreateDialogComponent extends ModalBase<any> implements OnInit {
+export class WishlistItemMutateComponent extends ModalBase<WishlistItemResponse> implements OnInit, OnChanges {
     form = new FormGroup({
-        link: new FormControl('', [urlValidator()]),
+        url: new FormControl('', [urlValidator()]),
         title: new FormControl('', [Validators.required, Validators.maxLength(300)]),
         description: new FormControl('', [Validators.maxLength(500)]),
         price: new FormControl<number | undefined>(undefined)
@@ -37,20 +48,30 @@ export class WishlistItemCreateDialogComponent extends ModalBase<any> implements
 
     get title() { return this.form.get('title'); }
     get description() { return this.form.get('description'); }
-    get link() { return this.form.get('link'); }
+    get url() { return this.form.get('url'); }
     get price() { return this.form.get('price'); }
 
     constructor(private wishlistItemApiService: WishlistItemApiService) {
         super();
     }
 
+    ngOnChanges(changes: SimpleChanges): void {
+        if (this.input) {
+            this.form.patchValue(this.input);
+            
+            if (this.input.imageSrc) {
+                this.imageSrc.set(this.input.imageSrc);
+            }
+        }
+    }
+
     imageSrc: WritableSignal<string | undefined> = signal(undefined);
-    ngOnInit(): void {
-        this.link?.valueChanges
+    ngOnInit(): void {        
+        this.url?.valueChanges
             .pipe(
                 takeUntil(this.destroy$),
                 switchMap(url => {
-                    if (this.link?.invalid || !this.link?.value) return EMPTY;
+                    if (this.url?.invalid || !this.url?.value) return EMPTY;
                     
                     let request = { url: url } as WishlistItemScrapRequest;
                     return this.wishlistItemApiService.scrap(request);
@@ -70,15 +91,25 @@ export class WishlistItemCreateDialogComponent extends ModalBase<any> implements
     }
 
     onSubmit() {
-        let request = this.form.value as WishlistItemCreateRequest;
+        let request = this.form.value as WishlistItemMutateRequest;
         request.imageSrc = this.imageSrc();
         
-        this.wishlistItemApiService.create(request)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(result => {
-                if (result) {
-                    this.output(true);
-                }
-            });
+        if (this.input) {
+            this.wishlistItemApiService.update(this.input.id, request)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(result => {
+                    if (result) {
+                        this.output(true);
+                    }
+                });
+        } else {
+            this.wishlistItemApiService.create(request)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(result => {
+                    if (result) {
+                        this.output(true);
+                    }
+                });
+        }
     }
 }

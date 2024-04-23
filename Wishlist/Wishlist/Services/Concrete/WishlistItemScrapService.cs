@@ -9,7 +9,7 @@ namespace Wishlist.Wishlist.Services.Concrete;
 public class WishlistItemScrapService(
     IHtmlLoadService htmlLoadService,
     IImageLoadService imageLoadService,
-    IFIleService fIleService) 
+    IFileUploadService fileUploadService) 
     : IWishlistItemScrapService
 {
     public async Task<WishlistItemScrapResponse?> Scrap(WishlistItemScrapRequest request)
@@ -25,7 +25,7 @@ public class WishlistItemScrapService(
         {
             var image = await imageLoadService.Load(imageUrl);
             if (image != null)
-                imagePath = await fIleService.Upload(image, imageUrl);
+                imagePath = await fileUploadService.Upload(image, imageUrl);
         }
 
         return new WishlistItemScrapResponse(title, imagePath);

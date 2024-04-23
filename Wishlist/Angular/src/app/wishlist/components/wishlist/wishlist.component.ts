@@ -9,7 +9,7 @@ import { TextComponent } from "../../../shared/core/components/text/text.compone
 import { WishlistItemsComponent } from "../wishlist-items/wishlist-items.component";
 
 @Component({
-    selector: 'app-wishlist-user',
+    selector: 'app-wishlist',
     standalone: true,
     imports: [
         TextComponent,

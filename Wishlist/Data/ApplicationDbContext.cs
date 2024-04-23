@@ -17,7 +17,17 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
-    
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder
+            .Entity<WishlistItemEntity>()
+            .HasOne(x => x.Image)
+            .WithMany()
+            .HasForeignKey(x => x.ImageId)
+            .OnDelete(DeleteBehavior.SetNull);
+    }
+
 #if DEBUG
     // used for migration generating
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

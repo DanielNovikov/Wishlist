@@ -6,6 +6,8 @@ namespace Wishlist.Wishlist.Services.Abstract;
 public interface IWishlistItemService
 {
     Task Create(WishlistItemCreateRequest request);
+    
+    Task Update(int id, WishlistItemUpdateRequest request);
 
     Task Delete(int id);
 }

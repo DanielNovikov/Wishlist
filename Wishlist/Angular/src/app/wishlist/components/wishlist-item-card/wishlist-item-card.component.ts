@@ -6,6 +6,7 @@ import {Destroyable} from "../../../shared/core/models/destroyable";
 import {takeUntil} from "rxjs";
 import {ModalService} from "../../../shared/modal/services/modal.service";
 import {WishlistItemDeleteDialogComponent} from "../wishlist-item-delete-dialog/wishlist-item-delete-dialog.component";
+import {WishlistItemMutateComponent} from "../wishlist-item-mutate-dialog/wishlist-item-mutate.component";
 
 @Component({
     selector: 'app-wishlist-item-card',
@@ -21,7 +22,7 @@ export class WishlistItemCardComponent extends Destroyable {
     
     @Input({required: true}) item!: WishlistItemResponse;
     @Input({required: true}) isEditingAllowed!: Signal<boolean>;
-    @Output() onDeleted: EventEmitter<void> = new EventEmitter<void>();
+    @Output() onChanged: EventEmitter<void> = new EventEmitter<void>();
     
     constructor(private wishlistItemApiService: WishlistItemApiService, private modalService: ModalService) {
         super();
@@ -33,9 +34,19 @@ export class WishlistItemCardComponent extends Destroyable {
                 this.wishlistItemApiService.delete(this.item.id)
                     .pipe(takeUntil(this.destroy$))
                     .subscribe(() => {
-                        this.onDeleted.emit();
+                        this.onChanged.emit();
                     });
             }
         })
+    }
+    
+    onItemClicked() {
+        if (this.isEditingAllowed()) {
+            this.modalService.open(WishlistItemMutateComponent, this.item).subscribe(result => {
+                if (result.hasResult) {
+                    this.onChanged.emit();
+                }
+            });
+        }
     }
 }

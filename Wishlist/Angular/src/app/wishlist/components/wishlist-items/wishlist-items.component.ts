@@ -12,8 +12,8 @@ import {WishlistResponse} from "../../models/wishlist-response";
 import {GradientButtonComponent} from "../../../shared/core/components/gradient-button/gradient-button.component";
 import {ModalService} from "../../../shared/modal/services/modal.service";
 import {
-    WishlistItemCreateDialogComponent
-} from "../wishlist-item-create-dialog/wishlist-item-create-dialog.component";
+    WishlistItemMutateComponent
+} from "../wishlist-item-mutate-dialog/wishlist-item-mutate.component";
 import {WishlistItemResponse} from "../../models/wishlist-item-response";
 import {WishlistApiService} from "../../services/wishlist-api.service";
 import {Destroyable} from "../../../shared/core/models/destroyable";

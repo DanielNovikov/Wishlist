@@ -12,8 +12,9 @@ public static class DependencyInjectionInitializer
     {
         return services
             .Configure<TelegramLogOptions>(configuration.GetSection(nameof(TelegramLogOptions)))
-            .AddTransient<IFIleService, FIleService>()
+            .AddTransient<IFileUploadService, FileUploadService>()
             .AddTransient<IUserService, UserService>()
+            .AddTransient<IImageService, ImageService>()
             .AddTransient<ICurrentUserService, CurrentUserService>();
     }
 }

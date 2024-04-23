@@ -41,6 +41,7 @@ public class WishlistService(
             .ThenInclude(x => x.Image)
             .Where(x => x.Id == id)
             .SelectMany(x => x.Items)
+            .OrderBy(x => x.Created)
             .ToListAsync());
     }
 

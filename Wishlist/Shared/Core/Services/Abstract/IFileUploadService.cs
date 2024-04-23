@@ -1,6 +1,6 @@
 ﻿namespace Wishlist.Shared.Core.Services.Abstract;
 
-public interface IFIleService
+public interface IFileUploadService
 {
     Task<string> Upload(IFormFile file);
 

@@ -1,5 +1,5 @@
 <div class="item">
-    <div class="item-image-wrapper">
+    <div class="item-image-wrapper" (click)="onItemClicked()">
         @if (item.imageSrc) {
             <div class="item-image">
                 <img [src]="item.imageSrc" alt="Картинка"/>
@@ -11,17 +11,17 @@
         }
     </div>
     
-    @if (isEditingAllowed()) {
-        <div class="item-remove-button" (click)="onDeleteClicked()">
-            <img src="assets/icons/shared/cross-filled.svg" alt="Видалити"/>
-        </div>
-    }
-    
-    <div class="item-information">
+    <div class="item-information" (click)="onItemClicked()">
         <app-text type="h3" [text]="item.title" [inOneLine]="true"></app-text>
 
         @if (item.price) {
             <app-text type="h3" [text]="item.price.toString() + ' грн.'" fontWeight="medium"></app-text>
         }
     </div>
+
+    @if (isEditingAllowed()) {
+        <div class="item-remove-button" (click)="onDeleteClicked()">
+            <img src="assets/icons/shared/cross-filled.svg" alt="Видалити"/>
+        </div>
+    }
 </div>

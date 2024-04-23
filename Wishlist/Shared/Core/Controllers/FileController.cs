@@ -5,11 +5,11 @@ namespace Wishlist.Shared.Core.Controllers;
 
 [ApiController]
 [Route("api/file")]
-public class FileController(IFIleService fIleService) : ControllerBase
+public class FileController(IFileUploadService fileUploadService) : ControllerBase
 {
     [HttpPost("upload")]
     public async Task<string> Upload(IFormFile file)
     {
-        return await fIleService.Upload(file);
+        return await fileUploadService.Upload(file);
     }
 }

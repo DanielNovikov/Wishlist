@@ -2,7 +2,7 @@
 
 namespace Wishlist.Shared.Core.Services.Concrete;
 
-public class FIleService : IFIleService
+public class FileUploadService : IFileUploadService
 {
     public async Task<string> Upload(IFormFile file)
     {

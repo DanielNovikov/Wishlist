@@ -6,6 +6,7 @@ import {WishlistResponse} from "../models/wishlist-response";
 import {WishlistItemScrapRequest} from "../models/wishlist-item-scrap-request";
 import {WishlistItemScrapResponse} from "../models/wishlist-item-scrap-response";
 import {WishlistItemCreateRequest} from "../models/wishlist-item-create-request";
+import {WishlistItemUpdateRequest} from "../models/wishlist-item-update-request";
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +20,11 @@ export class WishlistItemApiService {
 
     create(request: WishlistItemCreateRequest): Observable<boolean> {
         return this.httpClient.post<boolean>(this.baseUrl + '/', request)
+            .pipe(catchError(error => of(false)));
+    }
+
+    update(id: number, request: WishlistItemUpdateRequest): Observable<boolean> {
+        return this.httpClient.put<boolean>(this.baseUrl + `/${id}`, request)
             .pipe(catchError(error => of(false)));
     }
 

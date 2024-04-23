@@ -11,7 +11,7 @@
   
   @include font-size-small();
   @include font-family-primary();
-  @include font-color-secondary();
+  @include font-color-primary();
   @include fast-transition();
 
   &:focus {

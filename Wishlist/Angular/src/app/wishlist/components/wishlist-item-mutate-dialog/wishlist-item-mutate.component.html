@@ -1,4 +1,5 @@
-<app-form title="Побажання" submitButtonText="СТВОРИТИ"
+<app-form title="Побажання" 
+          [submitButtonText]="this.input ? 'РЕДАГУВАТИ' : 'СТВОРИТИ'"
           [formGroup]="form" (onSubmit)="onSubmit()">
 
     <div class="input-container">
@@ -6,10 +7,10 @@
     </div>
     
     <div class="input-container">
-        <input class="text-input" placeholder="Посилання..." formControlName="link">
-        <div *ngIf="link?.invalid && (link?.dirty || link?.touched)">
-            <app-text-error *ngIf="link?.errors?.['maxlength']" text="Назве не може бути довше 300 символів."></app-text-error>
-            <app-text-error *ngIf="link?.errors?.['url']" text="Введіть коректне посилання."></app-text-error>
+        <input class="text-input" placeholder="Посилання..." formControlName="url">
+        <div *ngIf="url?.invalid && (url?.dirty || url?.touched)">
+            <app-text-error *ngIf="url?.errors?.['maxlength']" text="Назве не може бути довше 300 символів."></app-text-error>
+            <app-text-error *ngIf="url?.errors?.['url']" text="Введіть коректне посилання."></app-text-error>
         </div>
     </div>
     

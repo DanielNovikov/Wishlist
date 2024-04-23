@@ -6,6 +6,10 @@
   position: relative;
 }
 
+.item-image-wrapper {
+  @include button-animation();
+}
+
 .item-image {
   position: absolute;
   width: 100%;
@@ -13,7 +17,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  @include button-animation();
 
   img {
     display: block;
@@ -33,17 +36,17 @@
 .item-remove-button {
   position: absolute;
   cursor: pointer;
-  padding: 10px;
+  padding: 10px 0 10px 10px;
 
   width: 28px;
   height: 28px;
-  right: -24px;
+  right: -14px;
   top: -24px;
   
   @include not-mobile() {
     width: 30px;
     height: 30px;
-    right: -25px;
+    right: -15px;
     top: -25px;
   }
   

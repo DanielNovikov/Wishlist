@@ -20,6 +20,16 @@ public class WishlistItemController(
         await wishlistItemService.Create(request);
         return Ok(true);
     }
+    
+    [HttpPut("{id:int}")]
+    [Authorize]
+    public async Task<IActionResult> Update(int id, [FromBody] WishlistItemUpdateRequest request)
+    {
+        if (!request.IsValid()) return BadRequest();
+
+        await wishlistItemService.Update(id, request);
+        return Ok(true);
+    }
 
     [HttpDelete("{id:int}")]
     [Authorize]

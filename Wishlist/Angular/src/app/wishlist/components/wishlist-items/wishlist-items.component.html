@@ -1,8 +1,8 @@
 @if (isEditingAllowed()) {
-    <app-wishlist-item-create (onCreated)="reload()"></app-wishlist-item-create>
+    <app-wishlist-item-create-card (onCreated)="reload()"></app-wishlist-item-create-card>
 }
 
 @for (item of items(); track item) {
-    <app-wishlist-item-card [item]="item" [isEditingAllowed]="isEditingAllowed" (onDeleted)="reload()"></app-wishlist-item-card>
+    <app-wishlist-item-card [item]="item" [isEditingAllowed]="isEditingAllowed" (onChanged)="reload()"></app-wishlist-item-card>
 }
 
