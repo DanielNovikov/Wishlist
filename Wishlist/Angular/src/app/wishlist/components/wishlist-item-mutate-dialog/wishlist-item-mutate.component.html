@@ -9,16 +9,16 @@
     <div class="input-container">
         <input class="text-input" placeholder="Посилання..." formControlName="url">
         <div *ngIf="url?.invalid && (url?.dirty || url?.touched)">
-            <app-text-error *ngIf="url?.errors?.['maxlength']" text="Назве не може бути довше 300 символів."></app-text-error>
-            <app-text-error *ngIf="url?.errors?.['url']" text="Введіть коректне посилання."></app-text-error>
+            <app-text-error *ngIf="url?.errors?.['maxlength']">Назве не може бути довше 300 символів.</app-text-error>
+            <app-text-error *ngIf="url?.errors?.['url']">Введіть коректне посилання.</app-text-error>
         </div>
     </div>
     
     <div class="input-container">
         <input class="text-input" placeholder="Назва..." formControlName="title">
         <div *ngIf="title?.invalid && (title?.dirty || title?.touched)">
-            <app-text-error *ngIf="title?.errors?.['required']" text="Назва має бути заповнена."></app-text-error>
-            <app-text-error *ngIf="title?.errors?.['maxlength']" text="Назве не може бути довше 100 символів."></app-text-error>
+            <app-text-error *ngIf="title?.errors?.['required']">Назва має бути заповнена.</app-text-error>
+            <app-text-error *ngIf="title?.errors?.['maxlength']">Назве не може бути довше 100 символів.</app-text-error>
         </div>
     </div>
     
@@ -29,7 +29,7 @@
     <div class="input-container">
         <input class="text-input" placeholder="Опис..." formControlName="description">
         <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
-            <app-text-error *ngIf="description?.errors?.['maxlength']" text="Опис не може бути довше 500 символів."></app-text-error>
+            <app-text-error *ngIf="description?.errors?.['maxlength']">Опис не може бути довше 500 символів.</app-text-error>
         </div>
     </div>
     

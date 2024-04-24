@@ -4,24 +4,24 @@
           (onSubmit)="onSubmit()">
 
     <div class="auth-choice" header>
-        <app-text text="Ще не маєте акаунту?" type="h4"></app-text>
-        <app-text text="Реєстрація" [underline]="true" type="h4" fontWeight="medium" (click)="onSignUpClicked.emit()"></app-text>
+        <app-text type="h4">Ще не маєте акаунту?</app-text>
+        <app-text [underline]="true" type="h4" fontWeight="medium" (click)="onSignUpClicked.emit()">Реєстрація</app-text>
     </div>
 
     <div class="input-container">
         <input class="text-input" placeholder="Електронна пошта..." formControlName="email" type="email">
         <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-            <app-text-error *ngIf="email?.errors?.['required']" text="Електронна пошта має бути заповнена."></app-text-error>
-            <app-text-error *ngIf="email?.errors?.['maxlength']" text="Електронна пошта не може бути довше 100 символів."></app-text-error>
-            <app-text-error *ngIf="email?.errors?.['email']" text="Невірний формат електронної пошти."></app-text-error>
+            <app-text-error *ngIf="email?.errors?.['required']">Електронна пошта має бути заповнена.</app-text-error>
+            <app-text-error *ngIf="email?.errors?.['maxlength']">Електронна пошта не може бути довше 100 символів.</app-text-error>
+            <app-text-error *ngIf="email?.errors?.['email']">Невірний формат електронної пошти.</app-text-error>
         </div>
     </div>
 
     <div class="input-container">
         <input class="text-input" placeholder="Пароль..." formControlName="password" type="password">
         <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-            <app-text-error *ngIf="password?.errors?.['required']" text="Пароль має бути заповнений."></app-text-error>
-            <app-text-error *ngIf="password?.errors?.['maxlength']" text="Парот не може бути довше 50 символів."></app-text-error>
+            <app-text-error *ngIf="password?.errors?.['required']">Пароль має бути заповнений.</app-text-error>
+            <app-text-error *ngIf="password?.errors?.['maxlength']">Пароль не може бути довше 50 символів.</app-text-error>
         </div>
     </div>
 

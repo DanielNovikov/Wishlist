@@ -1,6 +1,6 @@
 @if (wishlist()) {
     <div class="header">
-        <app-text [text]="wishlist()?.name!" type="h1"></app-text>
+        <app-text type="h1">{{wishlist()?.name}}</app-text>
         
         <img src="assets/icons/wishlist/share.svg" alt="Поділитися" class="share-button" (click)="onShareClicked()"/>
     </div>

@@ -4,8 +4,8 @@
     <div class="input-container">
         <input class="text-input" placeholder="Назва..." formControlName="name">
         <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
-            <app-text-error *ngIf="name?.errors?.['required']" text="Назва має бути заповнена."></app-text-error>
-            <app-text-error *ngIf="name?.errors?.['maxlength']" text="Назве не може бути довше 100 символів."></app-text-error>
+            <app-text-error *ngIf="name?.errors?.['required']">Назва має бути заповнена.</app-text-error>
+            <app-text-error *ngIf="name?.errors?.['maxlength']">Назве не може бути довше 100 символів.</app-text-error>
         </div>
     </div>
     

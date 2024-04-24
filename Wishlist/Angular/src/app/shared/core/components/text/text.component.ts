@@ -1,19 +1,21 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {NgClass, NgIf} from "@angular/common";
+import {NgClass, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet} from "@angular/common";
 
 @Component({
   selector: 'app-text',
   standalone: true,
   imports: [
     NgClass,
-    NgIf
+    NgIf,
+    NgSwitch,
+    NgSwitchCase,
+    NgTemplateOutlet
   ],
   templateUrl: './text.component.html',
   styleUrl: './text.component.scss'
 })
 export class TextComponent implements OnChanges {
 
-  @Input() text: string = '';
   @Input() fontWeight?: 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold';
   @Input() fontFamily: 'primary' | 'secondary' = 'primary';
   @Input() fontSize?: 'tiny' | 'very-small' | 'small' | 'normal' | 'big' | 'huge';

@@ -15,7 +15,6 @@ import {TextComponent} from "../text/text.component";
 })
 export class TextErrorComponent {
 
-    @Input() text!: string;
     @Input() textAlign: 'left' | 'right' | 'center' = 'left';
     
 }

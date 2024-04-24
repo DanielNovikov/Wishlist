@@ -9,8 +9,8 @@
         <div class="input-container">
             <input class="text-input" placeholder="Ім'я..." formControlName="name">
             <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
-                <app-text-error *ngIf="name?.errors?.['required']" text="Ім'я має бути заповнене."></app-text-error>
-                <app-text-error *ngIf="name?.errors?.['maxlength']" text="Ім'я не може бути довше 50 символів."></app-text-error>
+                <app-text-error *ngIf="name?.errors?.['required']">Ім'я має бути заповнене.</app-text-error>
+                <app-text-error *ngIf="name?.errors?.['maxlength']">Ім'я не може бути довше 50 символів.</app-text-error>
             </div>
         </div>
         
@@ -18,17 +18,17 @@
             <div class="input-container">
                 <input class="text-input" placeholder="Електронна пошта..." formControlName="email" type="email">
                 <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-                    <app-text-error *ngIf="email?.errors?.['required']" text="Електронна пошта має бути заповнена."></app-text-error>
-                    <app-text-error *ngIf="email?.errors?.['maxlength']" text="Електронна пошта не може бути довше 100 символів."></app-text-error>
-                    <app-text-error *ngIf="email?.errors?.['email']" text="Невірний формат електронної пошти."></app-text-error>
+                    <app-text-error *ngIf="email?.errors?.['required']">Електронна пошта має бути заповнена.</app-text-error>
+                    <app-text-error *ngIf="email?.errors?.['maxlength']">Електронна пошта не може бути довше 100 символів.</app-text-error>
+                    <app-text-error *ngIf="email?.errors?.['email']">Невірний формат електронної пошти.</app-text-error>
                 </div>
             </div>
     
             <div class="input-container">
                 <input class="text-input" placeholder="Пароль..." formControlName="password" type="password">
                 <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-                    <app-text-error *ngIf="password?.errors?.['required']" text="Пароль має бути заповнений."></app-text-error>
-                    <app-text-error *ngIf="password?.errors?.['maxlength']" text="Парот не може бути довше 50 символів."></app-text-error>
+                    <app-text-error *ngIf="password?.errors?.['required']">Пароль має бути заповнений.</app-text-error>
+                    <app-text-error *ngIf="password?.errors?.['maxlength']">Пароль не може бути довше 50 символів.</app-text-error>
                 </div>
             </div>
         }
