@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
-import {GradientButtonComponent} from "../../../shared/core/components/gradient-button/gradient-button.component";
-import {WishlistItemMutateComponent} from "../wishlist-item-mutate-dialog/wishlist-item-mutate.component";
-import {ModalService} from "../../../shared/modal/services/modal.service";
+import {GradientButtonComponent} from "../../../../shared/core/components/gradient-button/gradient-button.component";
+import {ModalService} from "../../../../shared/modal/services/modal.service";
+import {WishlistItemMutateDialogComponent} from "../../dialogs/wishlist-item-mutate-dialog/wishlist-item-mutate-dialog.component";
 
 @Component({
     selector: 'app-wishlist-item-create-card',
@@ -21,7 +21,7 @@ export class WishlistItemCreateCardComponent {
     }
     
     onAddClicked() {
-        this.modalService.open(WishlistItemMutateComponent)
+        this.modalService.open(WishlistItemMutateDialogComponent)
             .subscribe(output => {
                 if (output.hasResult) {
                     this.onCreated.emit();

@@ -8,23 +8,19 @@ import {
     signal,
     WritableSignal
 } from '@angular/core';
-import {WishlistResponse} from "../../models/wishlist-response";
-import {GradientButtonComponent} from "../../../shared/core/components/gradient-button/gradient-button.component";
-import {ModalService} from "../../../shared/modal/services/modal.service";
-import {
-    WishlistItemMutateComponent
-} from "../wishlist-item-mutate-dialog/wishlist-item-mutate.component";
-import {WishlistItemResponse} from "../../models/wishlist-item-response";
-import {WishlistApiService} from "../../services/wishlist-api.service";
-import {Destroyable} from "../../../shared/core/models/destroyable";
+import {WishlistResponse} from "../../../models/wishlist-response";
+import {GradientButtonComponent} from "../../../../shared/core/components/gradient-button/gradient-button.component";
+import {WishlistItemResponse} from "../../../models/wishlist-item-response";
+import {WishlistApiService} from "../../../services/wishlist-api.service";
+import {Destroyable} from "../../../../shared/core/models/destroyable";
 import {takeUntil} from "rxjs";
-import {CurrentUserService} from "../../../shared/current-user/services/current-user.service";
-import {TextComponent} from "../../../shared/core/components/text/text.component";
+import {CurrentUserService} from "../../../../shared/current-user/services/current-user.service";
+import {TextComponent} from "../../../../shared/core/components/text/text.component";
 import {WishlistItemCreateCardComponent} from "../wishlist-item-create-card/wishlist-item-create-card.component";
 import {WishlistItemCardComponent} from "../wishlist-item-card/wishlist-item-card.component";
 
 @Component({
-    selector: 'app-wishlist-items',
+    selector: 'app-wishlist-items-card',
     standalone: true,
     imports: [
         GradientButtonComponent,
@@ -32,11 +28,11 @@ import {WishlistItemCardComponent} from "../wishlist-item-card/wishlist-item-car
         WishlistItemCreateCardComponent,
         WishlistItemCardComponent
     ],
-    templateUrl: './wishlist-items.component.html',
-    styleUrl: './wishlist-items.component.scss',
+    templateUrl: './wishlist-items-card.component.html',
+    styleUrl: './wishlist-items-card.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WishlistItemsComponent extends Destroyable implements OnInit {
+export class WishlistItemsCardComponent extends Destroyable implements OnInit {
     @Input({required: true}) wishlist!: WishlistResponse;
 
     constructor(private wishlistApiService: WishlistApiService,

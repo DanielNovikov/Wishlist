@@ -7,21 +7,19 @@ import {
     SimpleChanges,
     WritableSignal
 } from '@angular/core';
-import { ModalBase } from "../../../shared/modal/models/modal-base";
-import { TextComponent } from "../../../shared/core/components/text/text.component";
-import { FormComponent } from "../../../shared/core/components/form/form.component";
+import { ModalBase } from "../../../../shared/modal/models/modal-base";
+import { TextComponent } from "../../../../shared/core/components/text/text.component";
+import { FormComponent } from "../../../../shared/core/components/form/form.component";
 import { NgIf } from "@angular/common";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { TextErrorComponent } from "../../../shared/core/components/text-error/text-error.component";
-import { urlValidator } from "../../../shared/core/services/validators/url-validator";
-import { debounceTime, distinctUntilChanged, EMPTY, of, switchMap, takeUntil } from "rxjs";
-import { WishlistItemApiService } from "../../services/wishlist-item-api.service";
-import { WishlistItemScrapRequest } from "../../models/wishlist-item-scrap-request";
-import {InputImageComponent} from "../../../shared/core/components/input-image/input-image.component";
-import {WishlistItemCreateRequest} from "../../models/wishlist-item-create-request";
-import {WishlistItemResponse} from "../../models/wishlist-item-response";
-import {WishlistItemUpdateRequest} from "../../models/wishlist-item-update-request";
-import {WishlistItemMutateRequest} from "../../models/base/wishlist-item-mutate-request";
+import { TextErrorComponent } from "../../../../shared/core/components/text-error/text-error.component";
+import { urlValidator } from "../../../../shared/core/services/validators/url-validator";
+import { EMPTY, switchMap, takeUntil } from "rxjs";
+import { WishlistItemApiService } from "../../../services/wishlist-item-api.service";
+import { WishlistItemScrapRequest } from "../../../models/wishlist-item-scrap-request";
+import {InputImageComponent} from "../../../../shared/core/components/input-image/input-image.component";
+import {WishlistItemResponse} from "../../../models/wishlist-item-response";
+import {WishlistItemMutateRequest} from "../../../models/base/wishlist-item-mutate-request";
 
 @Component({
     selector: 'app-wishlist-items-create-dialog',
@@ -34,11 +32,11 @@ import {WishlistItemMutateRequest} from "../../models/base/wishlist-item-mutate-
         TextErrorComponent,
         InputImageComponent
     ],
-    templateUrl: './wishlist-item-mutate.component.html',
-    styleUrl: './wishlist-item-mutate.component.scss',
+    templateUrl: './wishlist-item-mutate-dialog.component.html',
+    styleUrl: './wishlist-item-mutate-dialog.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WishlistItemMutateComponent extends ModalBase<WishlistItemResponse> implements OnInit, OnChanges {
+export class WishlistItemMutateDialogComponent extends ModalBase<WishlistItemResponse> implements OnInit, OnChanges {
     form = new FormGroup({
         url: new FormControl('', [urlValidator()]),
         title: new FormControl('', [Validators.required, Validators.maxLength(300)]),

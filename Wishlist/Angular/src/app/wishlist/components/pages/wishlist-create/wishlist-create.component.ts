@@ -7,18 +7,18 @@ import {
     signal,
     WritableSignal
 } from '@angular/core';
-import { GradientButtonComponent } from "../../../shared/core/components/gradient-button/gradient-button.component";
-import { WishlistApiService } from "../../services/wishlist-api.service";
+import { GradientButtonComponent } from "../../../../shared/core/components/gradient-button/gradient-button.component";
+import { WishlistApiService } from "../../../services/wishlist-api.service";
 import { finalize, Subscription, takeUntil } from "rxjs";
-import { WishlistCreateDialogComponent } from "../wishlist-create-dialog/wishlist-create-dialog.component";
-import { WishlistResponse } from "../../models/wishlist-response";
-import { Destroyable } from "../../../shared/core/models/destroyable";
-import { TextComponent } from "../../../shared/core/components/text/text.component";
-import { ModalService } from "../../../shared/modal/services/modal.service";
-import { AuthDialogService } from "../../../shared/auth/services/auth-dialog.service";
-import { DeviceService } from "../../../shared/core/services/device.service";
-import { CurrentUserService } from "../../../shared/current-user/services/current-user.service";
+import { WishlistResponse } from "../../../models/wishlist-response";
+import { Destroyable } from "../../../../shared/core/models/destroyable";
+import { TextComponent } from "../../../../shared/core/components/text/text.component";
+import { ModalService } from "../../../../shared/modal/services/modal.service";
+import { AuthDialogService } from "../../../../shared/auth/services/auth-dialog.service";
+import { DeviceService } from "../../../../shared/core/services/device.service";
+import { CurrentUserService } from "../../../../shared/current-user/services/current-user.service";
 import { Router } from "@angular/router";
+import {WishlistCreateDialogComponent} from "../../dialogs/wishlist-create-dialog/wishlist-create-dialog.component";
 
 @Component({
     selector: 'app-wishlist-create',

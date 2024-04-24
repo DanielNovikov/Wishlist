@@ -1,26 +1,25 @@
 import { ChangeDetectionStrategy, Component, Input, signal, WritableSignal } from '@angular/core';
-import { DeviceService } from "../../../shared/core/services/device.service";
-import { WishlistApiService } from "../../services/wishlist-api.service";
+import { DeviceService } from "../../../../shared/core/services/device.service";
+import { WishlistApiService } from "../../../services/wishlist-api.service";
 import { Router } from "@angular/router";
-import { Destroyable } from "../../../shared/core/models/destroyable";
+import { Destroyable } from "../../../../shared/core/models/destroyable";
 import { takeUntil } from "rxjs";
-import { WishlistResponse } from "../../models/wishlist-response";
-import { TextComponent } from "../../../shared/core/components/text/text.component";
-import { WishlistItemsComponent } from "../wishlist-items/wishlist-items.component";
+import { WishlistResponse } from "../../../models/wishlist-response";
+import { TextComponent } from "../../../../shared/core/components/text/text.component";
+import {WishlistItemsCardComponent} from "../../cards/wishlist-items-card/wishlist-items-card.component";
 
 @Component({
     selector: 'app-wishlist',
     standalone: true,
     imports: [
         TextComponent,
-        WishlistItemsComponent
+        WishlistItemsCardComponent
     ],
     templateUrl: './wishlist.component.html',
     styleUrl: './wishlist.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WishlistComponent extends Destroyable {
-    
     @Input()
     set wishlistId(wishlistIdStr: string) {
         const wishlistId = parseInt(wishlistIdStr);

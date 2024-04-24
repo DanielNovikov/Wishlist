@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { GradientButtonComponent } from "../../../shared/core/components/gradient-button/gradient-button.component";
+import { GradientButtonComponent } from "../../../../shared/core/components/gradient-button/gradient-button.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { takeUntil } from "rxjs";
-import { WishlistApiService } from "../../services/wishlist-api.service";
-import { WishlistCreateRequest } from "../../models/wishlist-create-request";
+import { WishlistApiService } from "../../../services/wishlist-api.service";
+import { WishlistCreateRequest } from "../../../models/wishlist-create-request";
 import { NgIf } from "@angular/common";
-import { FormComponent } from "../../../shared/core/components/form/form.component";
-import { TextErrorComponent } from "../../../shared/core/components/text-error/text-error.component";
-import { ModalBase } from "../../../shared/modal/models/modal-base";
+import { FormComponent } from "../../../../shared/core/components/form/form.component";
+import { TextErrorComponent } from "../../../../shared/core/components/text-error/text-error.component";
+import { ModalBase } from "../../../../shared/modal/models/modal-base";
 
 @Component({
     selector: 'app-wishlist-create-dialog',

@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import {AdvertComponent} from "./advert/components/advert/advert.component";
-import { WishlistCreateComponent } from "./wishlist/components/wishlist-create/wishlist-create.component";
-import { WishlistLayoutComponent } from "./wishlist/components/wishlist-layout/wishlist-layout.component";
-import { WishlistComponent } from "./wishlist/components/wishlist/wishlist.component";
+import {WishlistLayoutComponent} from "./wishlist/components/pages/wishlist-layout/wishlist-layout.component";
+import {WishlistCreateComponent} from "./wishlist/components/pages/wishlist-create/wishlist-create.component";
+import {WishlistComponent} from "./wishlist/components/pages/wishlist/wishlist.component";
 
 export const routes: Routes = [
     { path: '', component: AdvertComponent },
