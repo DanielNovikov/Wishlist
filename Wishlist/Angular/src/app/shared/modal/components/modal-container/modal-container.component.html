@@ -1,6 +1,6 @@
 
 @for (instance of modalService.instances(); track instance) {
-    <div class="modal-container" [ngClass]="{'show': instance.isVisible(), 'hide': !instance.isVisible()}">
+    <div class="modal-container" [class]="instance.size.toString()" [ngClass]="{'show': instance.isVisible(), 'hide': !instance.isVisible()}">
         <div class="close-button" (click)="close(instance)">
             <img src="assets/icons/shared/cross.svg" alt="Закрити">
         </div>

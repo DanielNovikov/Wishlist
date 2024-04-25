@@ -5,4 +5,5 @@ export class WishlistItemResponse {
     public price: number | undefined;
     public url: string | undefined;
     public imageSrc: string | undefined;
+    public isBooked: boolean = false;
 }

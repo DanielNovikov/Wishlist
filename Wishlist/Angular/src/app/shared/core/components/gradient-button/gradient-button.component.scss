@@ -20,8 +20,6 @@ button::before {
   background-color: var(--primary-background-color);
   border-radius: 48px;
   z-index: -1;
-  
-  @include transition();
 }
 
 button::after {
@@ -32,29 +30,34 @@ button::after {
   background: linear-gradient(to right, #EFA3FF, #AA8BFF, #87A6FF);
   -webkit-background-clip: text;
   color: transparent;
-
-  @include transition();
 }
 
-@include not-mobile() {
-  button:hover::before {
-    background: linear-gradient(to right, #EFA3FF, #AA8BFF, #87A6FF);
+
+button:not([disabled]) {
+  &:after {
+    @include transition();
   }
 
-  button:hover::after {
-    background: transparent;
-    color: white;
-  }
-}
+  @include not-mobile() {
+    &:hover::before {
+      background: linear-gradient(to right, #EFA3FF, #AA8BFF, #87A6FF);
+    }
 
-@include mobile() {
-  button:active::before {
-    background: linear-gradient(to right, #EFA3FF, #AA8BFF, #87A6FF);
+    &:hover::after {
+      background: transparent;
+      color: white;
+    }
   }
 
-  button:active::after {
-    background: transparent;
-    color: white;
+  @include mobile() {
+    &:active::before {
+      background: linear-gradient(to right, #EFA3FF, #AA8BFF, #87A6FF);
+    }
+
+    &:active::after {
+      background: transparent;
+      color: white;
+    }
   }
 }
 
@@ -62,7 +65,7 @@ button::after {
 button.normal {
   padding: 10px 25px;
   @include font-size-normal();
-  
+
   &::before {
     top: 2px;
     right: 2px;
@@ -97,4 +100,10 @@ button.huge {
 
 button.full-width {
   width: 100%;
+}
+
+// DISABLED STATE
+button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.35;
 }

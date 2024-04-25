@@ -14,6 +14,7 @@ export class GradientButtonComponent {
   @Input() text!: string;
   @Input() size: 'normal' | 'big' | 'huge' = 'normal';
   @Input() fullWidth: boolean = false;
+  @Input() isDisabled: boolean = false;
   
   @Output() onClick: EventEmitter<void> = new EventEmitter<void>();
   

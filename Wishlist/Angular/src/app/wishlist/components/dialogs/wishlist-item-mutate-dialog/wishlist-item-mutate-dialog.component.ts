@@ -92,22 +92,16 @@ export class WishlistItemMutateDialogComponent extends ModalBase<WishlistItemRes
         let request = this.form.value as WishlistItemMutateRequest;
         request.imageSrc = this.imageSrc();
         
-        if (this.input) {
-            this.wishlistItemApiService.update(this.input.id, request)
-                .pipe(takeUntil(this.destroy$))
-                .subscribe(result => {
-                    if (result) {
-                        this.output(true);
-                    }
-                });
-        } else {
-            this.wishlistItemApiService.create(request)
-                .pipe(takeUntil(this.destroy$))
-                .subscribe(result => {
-                    if (result) {
-                        this.output(true);
-                    }
-                });
-        }
+        const operation = this.input
+            ? this.wishlistItemApiService.update(this.input.id, request)
+            : this.wishlistItemApiService.create(request);
+        
+        operation
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(result => {
+                if (result) {
+                    this.output(true);
+                }
+            });
     }
 }

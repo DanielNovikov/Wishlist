@@ -50,5 +50,11 @@ public class WishlistItemController(
         
         return Ok(response);
     }
-    
+
+    [HttpPost("{id:int}/book")]
+    public async Task<IActionResult> Book(int id)
+    {
+        var result = await wishlistItemService.Book(id);
+        return Ok(result);
+    }
 }

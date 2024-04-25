@@ -1,0 +1,25 @@
+<app-text type="h1" textAlign="center">Побажання</app-text>
+
+<div class="details">
+    <app-text lineHeight="normal" type="h2" fontWeight="semi-bold">{{ input?.title }}</app-text>
+    
+    @if (input?.url) {
+        <a class="url" [href]="input?.url"><app-text lineHeight="normal">{{ input?.url }}</app-text></a>
+    }
+    
+    @if (input?.price) {
+        <app-text type="h3" fontWeight="semi-bold">{{ input?.price?.toString() }} грн.</app-text>
+    }
+    
+    @if (input?.description) {
+        <app-text type="h3" lineHeight="normal" fontColor="secondary" fontWeight="medium">{{ input?.description }}</app-text>
+    }
+    
+    @if (input?.imageSrc) {
+        <div class="image-wrapper">
+            <img [src]="input?.imageSrc" alt="Зображення побажання"/>
+        </div>
+    }
+</div>
+
+<app-gradient-button (click)="onBookClicked()" [text]="input?.isBooked ? 'ЗАРЕЗЕРВОВАНО' : 'Я ДАРУЮ'" [isDisabled]="input?.isBooked ?? false"></app-gradient-button>

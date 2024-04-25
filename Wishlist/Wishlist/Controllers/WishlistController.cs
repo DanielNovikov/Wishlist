@@ -47,4 +47,14 @@ public class WishlistController(
         var response = await wishlistService.Create(request);
         return Ok(response.ToResponse());
     }
+
+    [HttpPut("{id:int}")]
+    [Authorize]
+    public async Task<IActionResult> Edit(int id, [FromBody] WishlistEditRequest request)
+    {
+        if (!request.IsValid()) return BadRequest();
+        
+        var response = await wishlistService.Edit(id, request);
+        return Ok(response.ToResponse());
+    }
 }

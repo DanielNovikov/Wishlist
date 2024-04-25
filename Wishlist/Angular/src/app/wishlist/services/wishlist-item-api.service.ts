@@ -37,4 +37,9 @@ export class WishlistItemApiService {
         return this.httpClient.post<WishlistItemScrapResponse>(this.baseUrl + '/scrap', request)
             .pipe(catchError(error => of(null)));
     }
+    
+    book(id: number) : Observable<boolean> {
+        return this.httpClient.post<boolean>(this.baseUrl + `/${id}/book`, null)
+            .pipe(catchError(error => of(false)));
+    }
 }

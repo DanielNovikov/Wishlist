@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {NgClass, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet} from "@angular/common";
 
 @Component({
@@ -14,7 +14,7 @@ import {NgClass, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet} from "@angular/
   templateUrl: './text.component.html',
   styleUrl: './text.component.scss'
 })
-export class TextComponent implements OnChanges {
+export class TextComponent implements OnInit {
 
   @Input() fontWeight?: 'light' | 'regular' | 'medium' | 'semi-bold' | 'bold';
   @Input() fontFamily: 'primary' | 'secondary' = 'primary';
@@ -22,12 +22,13 @@ export class TextComponent implements OnChanges {
   @Input() textAlign: 'left' | 'right' | 'center' = 'left';
   @Input() fontColor: 'primary' | 'secondary' | 'white' | 'error' = 'primary';
   @Input() type: 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' = 'h3';
+  @Input() lineHeight?: 'normal' | 'big';
   @Input() inOneLine: boolean = false;
   @Input() underline: boolean = false;
 
   textClass: string = '';
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnInit() {
     
     let classes = [
       this.textAlign.toString(),
@@ -80,6 +81,7 @@ export class TextComponent implements OnChanges {
     else classes.push('break');
     
     if (this.underline) classes.push('underline');
+    if (this.lineHeight) classes.push(`line-height-${this.lineHeight}`);
 
     this.textClass = classes.join(' ');
   }

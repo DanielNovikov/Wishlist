@@ -1,11 +1,6 @@
-﻿using Wishlist.Wishlist.Utilities;
+﻿using Wishlist.Wishlist.Models.Base;
+using Wishlist.Wishlist.Utilities;
 
 namespace Wishlist.Wishlist.Models;
 
-public record WishlistCreateRequest(string Name)
-{
-    public bool IsValid()
-    {
-        return WishlistValidationUtilities.IsNameValid(Name);
-    }
-};
+public record WishlistCreateRequest(string Name) : WishlistMutateRequest(Name);

@@ -1,4 +1,4 @@
 import {WishlistMutateRequest} from "./base/wishlist-mutate-request";
 
-export class WishlistCreateRequest extends WishlistMutateRequest {
+export class WishlistEditRequest extends WishlistMutateRequest {
 }

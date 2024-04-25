@@ -76,4 +76,16 @@ public class WishlistItemService(
 
         await repository.Delete(entity);
     }
+
+    public async Task<bool> Book(int id)
+    {
+        var entity = await repository.GetById(id);
+        if (entity == null) return false;
+        if (entity.IsBooked) return false;
+
+        entity.IsBooked = true;
+        await repository.Update(entity);
+
+        return true;
+    }
 }

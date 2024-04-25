@@ -120,6 +120,17 @@
   word-break: break-word;
 }
 
+// LINE HEIGHTS
+
+.line-height-normal {
+  line-height: 1.25;
+}
+
+.line-height-big {
+  line-height: 1.5;
+}
+
+
 // URL
 
 //p.primary > ::deep a, h1.primary > ::deep a, h2.primary > ::deep a, h3.primary > ::deep a, h4.primary > ::deep a, h5.primary > ::deep a, h6.primary > ::deep a, span.primary > ::deep a {

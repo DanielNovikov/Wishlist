@@ -14,4 +14,6 @@ public interface IWishlistService
     Task<List<WishlistItemEntity>> GetItemsById(int id);
 
     Task<WishlistEntity> Create(WishlistCreateRequest request);
+    
+    Task<WishlistEntity> Edit(int id, WishlistEditRequest request);
 }

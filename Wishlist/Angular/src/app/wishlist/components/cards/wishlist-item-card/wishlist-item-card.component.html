@@ -1,21 +1,25 @@
 <div class="item">
     <div class="item-image-wrapper" (click)="onItemClicked()">
-        @if (item.imageSrc) {
-            <div class="item-image">
-                <img [src]="item.imageSrc" alt="Картинка"/>
-            </div>
-        } @else {
-            <div class="item-image-placeholder">
-                <img src="assets/icons/wishlist/create-placeholder.svg" alt="Картинка"/>
+        <div class="item-image-content">
+            @if (item.imageSrc) {
+                <img class="item-image" [src]="item.imageSrc" alt="Картинка"/>
+            } @else {
+                <img class="item-image-placeholder" src="assets/icons/wishlist/create-placeholder.svg" alt="Картинка"/>
+            }
+        </div>
+
+        @if (item.isBooked) {
+            <div class="item-image-content overlay">
+                <img class="item-image-placeholder" src="assets/icons/wishlist/booked.svg" alt="Заброньовано"/>
             </div>
         }
     </div>
-    
+
     <div class="item-information" (click)="onItemClicked()">
-        <app-text type="h3" [inOneLine]="true">{{item.title}}</app-text>
+        <app-text type="h3" [inOneLine]="true">{{ item.title }}</app-text>
 
         @if (item.price) {
-            <app-text type="h3" fontWeight="medium">{{item.price.toString()}} грн.</app-text>
+            <app-text type="h3" fontWeight="medium">{{ item.price.toString() }} грн.</app-text>
         }
     </div>
 

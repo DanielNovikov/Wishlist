@@ -19,6 +19,8 @@ public class WishlistItemEntity : EntityBase
     
     public WishlistItemPriority Priority { get; set; }
     
+    public bool IsBooked { get; set; }
+    
     public int? ImageId { get; set; }
     public ImageEntity? Image { get; set; }
     

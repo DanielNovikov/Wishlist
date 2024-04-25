@@ -47,19 +47,28 @@ public class WishlistService(
 
     public async Task<WishlistEntity> Create(WishlistCreateRequest request)
     {
-        var currentUser = await currentUserService.Get();
-        
-        var wishlist = await wishlistRepository.Query(query => query
-            .FirstOrDefaultAsync(x => x.UserId == currentUser.Id));
-
+        var wishlist = await TryGetCurrent();
         if (wishlist != null) throw new InvalidOperationException();
 
+        var currentUser = await currentUserService.Get();
+        
         wishlist = new WishlistEntity
         {
             Name = request.Name,
             UserId = currentUser.Id
         };
         await wishlistRepository.Add(wishlist);
+
+        return wishlist;
+    }
+
+    public async Task<WishlistEntity> Edit(int id, WishlistEditRequest request)
+    {
+        var wishlist = await GetCurrent();
+        if (wishlist.Id != id) throw new InvalidOperationException();
+
+        wishlist.Name = request.Name;
+        await wishlistRepository.Update(wishlist);
 
         return wishlist;
     }

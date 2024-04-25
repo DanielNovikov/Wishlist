@@ -1,9 +1,15 @@
 @if (wishlist()) {
     <div class="header">
-        <app-text type="h1">{{wishlist()?.name}}</app-text>
-        
+        <div class="title">
+            <app-text type="h1">{{ wishlist()!.name }}</app-text>
+
+            @if (isEditingAllowed()) {
+                <img src="assets/icons/wishlist/edit.svg" alt="Редагувати" class="edit-button" (click)="onEditClicked()"/>
+            }
+        </div>
+
         <img src="assets/icons/wishlist/share.svg" alt="Поділитися" class="share-button" (click)="onShareClicked()"/>
     </div>
 
-    <app-wishlist-items-card [wishlist]="wishlist()!"></app-wishlist-items-card>
+    <app-wishlist-items-card [wishlist]="wishlist()!" [isEditingAllowed]="isEditingAllowed"></app-wishlist-items-card>
 }

@@ -10,4 +10,6 @@ public interface IWishlistItemService
     Task Update(int id, WishlistItemUpdateRequest request);
 
     Task Delete(int id);
+
+    Task<bool> Book(int id);
 }

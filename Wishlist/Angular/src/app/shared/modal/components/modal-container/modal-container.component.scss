@@ -82,8 +82,14 @@ $fast-animation-delay: 0.17s;
     top: 50%;
 
     padding: 24px 20px;
-    width: 300px;
     border-radius: 8px;
+    
+    &.normal {
+      width: 300px;
+    }
+    &.big {
+      width: 500px;
+    }
 
     &.show {
       animation: modalShowPcDefault $animation-delay forwards;

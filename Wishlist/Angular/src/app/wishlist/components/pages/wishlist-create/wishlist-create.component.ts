@@ -18,7 +18,7 @@ import { AuthDialogService } from "../../../../shared/auth/services/auth-dialog.
 import { DeviceService } from "../../../../shared/core/services/device.service";
 import { CurrentUserService } from "../../../../shared/current-user/services/current-user.service";
 import { Router } from "@angular/router";
-import {WishlistCreateDialogComponent} from "../../dialogs/wishlist-create-dialog/wishlist-create-dialog.component";
+import {WishlistMutateDialogComponent} from "../../dialogs/wishlist-mutate-dialog/wishlist-mutate-dialog.component";
 
 @Component({
     selector: 'app-wishlist-create',
@@ -83,7 +83,7 @@ export class WishlistCreateComponent extends Destroyable {
     }
 
     openCreateModal() {
-        this.modalService.open(WishlistCreateDialogComponent).subscribe(output => {
+        this.modalService.open(WishlistMutateDialogComponent).subscribe(output => {
             if (output.hasResult) {
                 this.navigateToWishlist(output.result);
             }

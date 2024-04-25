@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+app-gradient-button {
+  align-self: center;
+}

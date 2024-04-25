@@ -1,4 +1,5 @@
-<app-form title="Новий Wishlist" submitButtonText="СТВОРИТИ"
+<app-form [title]="this.input ? 'Редагувати Wishlist' : 'Новий Wishlist'" 
+          [submitButtonText]="this.input ? 'РЕДАГУВАТИ' : 'СТВОРИТИ'"
           [formGroup]="form" (onSubmit)="onSubmit()">
 
     <div class="input-container">

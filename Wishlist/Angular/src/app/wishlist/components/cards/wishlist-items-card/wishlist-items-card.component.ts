@@ -4,7 +4,7 @@ import {
     EventEmitter,
     Input,
     OnInit,
-    Output,
+    Output, Signal,
     signal,
     WritableSignal
 } from '@angular/core';
@@ -34,17 +34,13 @@ import {WishlistItemCardComponent} from "../wishlist-item-card/wishlist-item-car
 })
 export class WishlistItemsCardComponent extends Destroyable implements OnInit {
     @Input({required: true}) wishlist!: WishlistResponse;
+    @Input({required: true}) isEditingAllowed!: Signal<boolean>;
 
-    constructor(private wishlistApiService: WishlistApiService,
-                protected currentUserService: CurrentUserService) {
-        
+    constructor(private wishlistApiService: WishlistApiService) {
         super();
     }
 
     protected items: WritableSignal<WishlistItemResponse[]> = signal([]);
-    
-    protected isEditingAllowed = computed(() => 
-        this.currentUserService.isAuthorized() && this.currentUserService.user()!.id === this.wishlist.userId)
     
     ngOnInit(): void {
         this.reload();

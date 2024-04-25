@@ -8,7 +8,16 @@ import {ModalService} from "../../../../shared/modal/services/modal.service";
 import {
     WishlistItemDeleteDialogComponent
 } from "../../dialogs/wishlist-item-delete-dialog/wishlist-item-delete-dialog.component";
-import {WishlistItemMutateDialogComponent} from "../../dialogs/wishlist-item-mutate-dialog/wishlist-item-mutate-dialog.component";
+import {
+    WishlistItemMutateDialogComponent
+} from "../../dialogs/wishlist-item-mutate-dialog/wishlist-item-mutate-dialog.component";
+import {
+    WishlistItemBookDialogComponent
+} from "../../dialogs/wishlist-item-book-dialog/wishlist-item-book-dialog.component";
+import {
+    WishlistItemAlreadyBookedDialogComponent
+} from "../../dialogs/wishlist-item-already-booked-dialog/wishlist-item-already-booked-dialog.component";
+import {ModalInstanceSize} from "../../../../shared/modal/models/modal-instance-size";
 
 @Component({
     selector: 'app-wishlist-item-card',
@@ -43,10 +52,26 @@ export class WishlistItemCardComponent extends Destroyable {
     }
     
     onItemClicked() {
+        // If user owns wishlist, then editing is allowed
         if (this.isEditingAllowed()) {
-            this.modalService.open(WishlistItemMutateDialogComponent, this.item).subscribe(result => {
-                if (result.hasResult) {
+            this.modalService.open(WishlistItemMutateDialogComponent, this.item).subscribe(output => {
+                if (output.hasResult) {
                     this.onChanged.emit();
+                }
+            });
+        } else {
+            // If it is external user, then allow them only booking
+            this.modalService.open(WishlistItemBookDialogComponent, this.item, ModalInstanceSize.Big).subscribe(output => {
+                if (output.hasResult) {
+                    // When booking is successful, just updating data
+                    if (output.result) {
+                        this.onChanged.emit();
+                    } else {
+                        // If booking failed, show the appropriate dialog
+                        this.modalService.open(WishlistItemAlreadyBookedDialogComponent).subscribe(result => {
+                            this.onChanged.emit();
+                        });
+                    }
                 }
             });
         }
