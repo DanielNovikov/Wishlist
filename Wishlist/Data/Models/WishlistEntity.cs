@@ -8,6 +8,9 @@ public class WishlistEntity : EntityBase
     [MaxLength(100)]
     public required string Name { get; set; }
     
+    [MaxLength(8)]
+    public required string PublicId { get; set; }
+    
     public int UserId { get; set; }
     public UserEntity User { get; set; } = default!;
     

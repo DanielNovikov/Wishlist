@@ -47,7 +47,7 @@ export class WishlistMutateDialogComponent extends ModalBase<WishlistResponse> i
         const request = this.form.value as WishlistMutateRequest;
         
         const operation = this.input
-            ? this.wishlistApiService.edit(this.input.id, request)
+            ? this.wishlistApiService.edit(this.input.publicId, request)
             : this.wishlistApiService.create(request);
         
         operation

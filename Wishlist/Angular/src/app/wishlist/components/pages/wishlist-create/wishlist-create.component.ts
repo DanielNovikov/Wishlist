@@ -91,6 +91,6 @@ export class WishlistCreateComponent extends Destroyable {
     }
 
     navigateToWishlist(response: WishlistResponse) {
-        this.router.navigate(["/wishlist/" + response.id])
+        this.router.navigate(["/wishlist/" + response.publicId])
     }
 }

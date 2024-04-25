@@ -9,7 +9,8 @@ namespace Wishlist.Wishlist.Services.Concrete;
 
 public class WishlistService(
     ICurrentUserService currentUserService,
-    IRepository<WishlistEntity> wishlistRepository)
+    IRepository<WishlistEntity> repository,
+    IWishlistPublicIdGenerator publicIdGenerator)
     : IWishlistService
 {
     public async Task<WishlistEntity?> TryGetCurrent()
@@ -17,7 +18,7 @@ public class WishlistService(
         var currentUser = await currentUserService.TryGet();
         if (currentUser == null) return null;
 
-        return await wishlistRepository.Query(query => query
+        return await repository.Query(query => query
             .Include(x => x.Items)
             .FirstOrDefaultAsync(x => x.UserId == currentUser.Id));
     }
@@ -27,21 +28,22 @@ public class WishlistService(
         return await TryGetCurrent() ?? throw new InvalidOperationException("Wishlist couldn't be found");
     }
 
-    public async Task<WishlistEntity?> GetById(int id)
+    public async Task<WishlistEntity?> GetByPublicId(string publicId)
     {
-        return await wishlistRepository.Query(query => query
+        return await repository.Query(query => query
             .Include(x => x.Items)
-            .FirstOrDefaultAsync(x => x.Id == id));
+            .FirstOrDefaultAsync(x => x.PublicId == publicId));
     }
 
-    public async Task<List<WishlistItemEntity>> GetItemsById(int id)
+    public async Task<List<WishlistItemEntity>> GetItemsByPublicId(string publicId)
     {
-        return await wishlistRepository.Query(query => query
+        return await repository.Query(query => query
             .Include(x => x.Items)
             .ThenInclude(x => x.Image)
-            .Where(x => x.Id == id)
+            .Where(x => x.PublicId == publicId)
             .SelectMany(x => x.Items)
-            .OrderBy(x => x.Created)
+            .OrderBy(x => x.IsBooked)
+            .ThenBy(x => x.Created)
             .ToListAsync());
     }
 
@@ -55,20 +57,21 @@ public class WishlistService(
         wishlist = new WishlistEntity
         {
             Name = request.Name,
-            UserId = currentUser.Id
+            UserId = currentUser.Id,
+            PublicId = publicIdGenerator.Generate()
         };
-        await wishlistRepository.Add(wishlist);
+        await repository.Add(wishlist);
 
         return wishlist;
     }
 
-    public async Task<WishlistEntity> Edit(int id, WishlistEditRequest request)
+    public async Task<WishlistEntity> Edit(string publicId, WishlistEditRequest request)
     {
         var wishlist = await GetCurrent();
-        if (wishlist.Id != id) throw new InvalidOperationException();
+        if (wishlist.PublicId != publicId) throw new InvalidOperationException();
 
         wishlist.Name = request.Name;
-        await wishlistRepository.Update(wishlist);
+        await repository.Update(wishlist);
 
         return wishlist;
     }

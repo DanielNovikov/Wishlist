@@ -14,6 +14,7 @@ public static class DependencyInjectionInitializer
             .AddTransient<IWishlistItemScrapService, WishlistItemScrapService>()
             .AddHttpClient<IHtmlLoadService, HtmlLoadService>().Services
             .AddHttpClient<IImageLoadService, ImageLoadService>().Services
-            .AddTransient<IHtmlParser, HtmlParser>();
+            .AddTransient<IHtmlParser, HtmlParser>()
+            .AddTransient<IWishlistPublicIdGenerator, WishlistPublicIdGenerator>();
     }
 }

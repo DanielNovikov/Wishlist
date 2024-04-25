@@ -9,11 +9,11 @@ public interface IWishlistService
     
     Task<WishlistEntity> GetCurrent();
     
-    Task<WishlistEntity?> GetById(int id);
+    Task<WishlistEntity?> GetByPublicId(string publicId);
     
-    Task<List<WishlistItemEntity>> GetItemsById(int id);
+    Task<List<WishlistItemEntity>> GetItemsByPublicId(string publicId);
 
     Task<WishlistEntity> Create(WishlistCreateRequest request);
     
-    Task<WishlistEntity> Edit(int id, WishlistEditRequest request);
+    Task<WishlistEntity> Edit(string publicId, WishlistEditRequest request);
 }

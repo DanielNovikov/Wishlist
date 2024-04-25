@@ -24,14 +24,8 @@ import {CurrentUserService} from "../../../../shared/current-user/services/curre
 })
 export class WishlistComponent extends Destroyable {
     @Input()
-    set wishlistId(wishlistIdStr: string) {
-        const wishlistId = parseInt(wishlistIdStr);
-        if (isNaN(wishlistId)) {
-            this.router.navigate(['/']);
-            return;
-        }
-        
-        this.wishlistApiService.getById(wishlistId)
+    set wishlistId(publicId: string) {
+        this.wishlistApiService.getByPublicId(publicId)
             .pipe((takeUntil(this.destroy$)))
             .subscribe(response => {
                 if (!response) {

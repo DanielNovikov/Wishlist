@@ -47,7 +47,7 @@ export class WishlistItemsCardComponent extends Destroyable implements OnInit {
     }
 
     reload() {
-        this.wishlistApiService.getItemsById(this.wishlist.id)
+        this.wishlistApiService.getItemsByPublicId(this.wishlist.publicId)
             .pipe(takeUntil(this.destroy$))
             .subscribe(result => {
                 this.items.set(result);

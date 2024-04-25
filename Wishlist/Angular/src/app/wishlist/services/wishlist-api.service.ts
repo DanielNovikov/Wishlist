@@ -22,13 +22,13 @@ export class WishlistApiService {
             .pipe(catchError(error => of(null)));
     }
 
-    getById(id: number): Observable<WishlistResponse | null> {
-        return this.httpClient.get<WishlistResponse>(this.baseUrl + `/${id}`)
+    getByPublicId(publicId: string): Observable<WishlistResponse | null> {
+        return this.httpClient.get<WishlistResponse>(this.baseUrl + `/${publicId}`)
             .pipe(catchError(error => of(null)));
     }
 
-    getItemsById(id: number): Observable<WishlistItemResponse[]> {
-        return this.httpClient.get<WishlistItemResponse[]>(this.baseUrl + `/${id}/items`)
+    getItemsByPublicId(publicId: string): Observable<WishlistItemResponse[]> {
+        return this.httpClient.get<WishlistItemResponse[]>(this.baseUrl + `/${publicId}/items`)
             .pipe(catchError(error => of([])));
     }
 
@@ -36,7 +36,7 @@ export class WishlistApiService {
         return this.httpClient.post<WishlistResponse>(this.baseUrl, request);
     }
     
-    edit(id: number, request: WishlistEditRequest): Observable<WishlistResponse> {
-        return this.httpClient.put<WishlistResponse>(this.baseUrl + `/${id}`, request);
+    edit(publicId: string, request: WishlistEditRequest): Observable<WishlistResponse> {
+        return this.httpClient.put<WishlistResponse>(this.baseUrl + `/${publicId}`, request);
     }
 }

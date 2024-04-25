@@ -20,21 +20,21 @@ public class WishlistController(
         return Ok(response.ToResponse());
     }
     
-    [HttpGet("{id:int}")]
+    [HttpGet("{publicId}")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetByPublicId(string publicId)
     {
-        var response = await wishlistService.GetById(id);
+        var response = await wishlistService.GetByPublicId(publicId);
         if (response == null) return NotFound();
         
         return Ok(response.ToResponse());
     }
 
-    [HttpGet("{id:int}/items")]
+    [HttpGet("{publicId}/items")]
     [AllowAnonymous]
-    public async Task<WishlistItemResponse[]> GetItemsById(int id)
+    public async Task<WishlistItemResponse[]> GetItemsByPublicId(string publicId)
     {
-        var response = await wishlistService.GetItemsById(id);
+        var response = await wishlistService.GetItemsByPublicId(publicId);
         return response.Select(x => x.ToResponse()).ToArray();
     }
 
@@ -48,13 +48,13 @@ public class WishlistController(
         return Ok(response.ToResponse());
     }
 
-    [HttpPut("{id:int}")]
+    [HttpPut("{publicId}")]
     [Authorize]
-    public async Task<IActionResult> Edit(int id, [FromBody] WishlistEditRequest request)
+    public async Task<IActionResult> Edit(string publicId, [FromBody] WishlistEditRequest request)
     {
         if (!request.IsValid()) return BadRequest();
         
-        var response = await wishlistService.Edit(id, request);
+        var response = await wishlistService.Edit(publicId, request);
         return Ok(response.ToResponse());
     }
 }
