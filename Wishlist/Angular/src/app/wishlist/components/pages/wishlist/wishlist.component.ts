@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, computed, Input, signal, WritableSignal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, Input, OnInit, signal, WritableSignal} from '@angular/core';
 import { DeviceService } from "../../../../shared/core/services/device.service";
 import { WishlistApiService } from "../../../services/wishlist-api.service";
 import { Router } from "@angular/router";
@@ -10,6 +10,7 @@ import {WishlistItemsCardComponent} from "../../cards/wishlist-items-card/wishli
 import {ModalService} from "../../../../shared/modal/services/modal.service";
 import {WishlistMutateDialogComponent} from "../../dialogs/wishlist-mutate-dialog/wishlist-mutate-dialog.component";
 import {CurrentUserService} from "../../../../shared/current-user/services/current-user.service";
+import {Meta, Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-wishlist',
@@ -24,7 +25,7 @@ import {CurrentUserService} from "../../../../shared/current-user/services/curre
 })
 export class WishlistComponent extends Destroyable {
     @Input()
-    set wishlistId(publicId: string) {
+    set wishlistId(publicId: string) {        
         this.wishlistApiService.getByPublicId(publicId)
             .pipe((takeUntil(this.destroy$)))
             .subscribe(response => {
@@ -34,6 +35,7 @@ export class WishlistComponent extends Destroyable {
                 }
                 
                 this.wishlist.set(response);
+                this.setMeta(response);
             });
     }
     
@@ -45,7 +47,9 @@ export class WishlistComponent extends Destroyable {
         private wishlistApiService: WishlistApiService,
         private router: Router,
         private modalService: ModalService,
-        private currentUserService: CurrentUserService) {
+        private currentUserService: CurrentUserService,
+        private title: Title,
+        private meta: Meta) {
         
         super();
     }
@@ -65,5 +69,15 @@ export class WishlistComponent extends Destroyable {
                 url: location.href
             })
         }
+    }
+
+    setMeta(wishlist: WishlistResponse): void {
+        const title = `${wishlist.name} - писок побажань`;
+        
+        this.title.setTitle(title);
+        
+        const description = `Ласкаво просимо до мого вішліста '${wishlist.name}'! Це місце, де я зібрав усі свої побажання та мрії на майбутнє святкування. Тут ви знайдете список подарунків, які я б хотів отримати. Ви можете переглядати список і, якщо забажаєте, зарезервувати певний подарунок, щоб підтримати мої мрії та зробити цей день особливим для мене. Дякую за вашу участь і любов!`;
+        this.meta.updateTag({ name: 'description', content: description });
+        this.meta.updateTag({ name: 'og:description', content: description });
     }
 }

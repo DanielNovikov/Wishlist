@@ -2,7 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component, effect,
     EventEmitter,
-    OnDestroy,
+    OnDestroy, OnInit,
     Output,
     signal,
     WritableSignal
@@ -19,6 +19,7 @@ import { DeviceService } from "../../../../shared/core/services/device.service";
 import { CurrentUserService } from "../../../../shared/current-user/services/current-user.service";
 import { Router } from "@angular/router";
 import {WishlistMutateDialogComponent} from "../../dialogs/wishlist-mutate-dialog/wishlist-mutate-dialog.component";
+import {Meta, Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-wishlist-create',
@@ -31,7 +32,7 @@ import {WishlistMutateDialogComponent} from "../../dialogs/wishlist-mutate-dialo
     styleUrl: './wishlist-create.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WishlistCreateComponent extends Destroyable {
+export class WishlistCreateComponent extends Destroyable implements OnInit {
 
     protected isLoaded: WritableSignal<boolean> = signal(false);
     
@@ -41,7 +42,9 @@ export class WishlistCreateComponent extends Destroyable {
         private wishlistApiService: WishlistApiService,
         private deviceService: DeviceService,
         private currentUserService: CurrentUserService,
-        private router: Router) {
+        private router: Router,
+        private title: Title,
+        private meta: Meta) {
         super();
 
         if (this.deviceService.isBrowser()) {
@@ -63,6 +66,12 @@ export class WishlistCreateComponent extends Destroyable {
                     });
             }, {allowSignalWrites: true});
         }
+    }
+
+    ngOnInit(): void {
+        this.title.setTitle('Створення Списку побажань - Wishlist');
+
+        this.meta.updateTag({ name: 'description', content: 'Створіть свій список побажань на сайті Вішліст! Додайте свої мрії, поділіться ними з близькими, і дозвольте іншим користувачам допомогти вам їх здійснити. Це ідеальний спосіб легко організувати подарунки на будь-який випадок!' })
     }
 
     create() {

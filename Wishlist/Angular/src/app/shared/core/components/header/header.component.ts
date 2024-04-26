@@ -5,6 +5,7 @@ import { ThemeService } from "../../../../advert/services/theme.service";
 import { Theme } from '../../../../advert/models/theme';
 import { CurrentUserEditService } from "../../../current-user/services/current-user-edit.service";
 import { CurrentUserService } from "../../../current-user/services/current-user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,8 @@ export class HeaderComponent {
   constructor(
       public themeService: ThemeService,
       public currentUserService: CurrentUserService,
-      private currentUserEditService: CurrentUserEditService ) {}
+      private currentUserEditService: CurrentUserEditService,
+      private router: Router) {}
 
   toggleTheme(): void {    
     this.themeService.toggle();
@@ -31,6 +33,10 @@ export class HeaderComponent {
   
   openCurrentUserEditModal() {
     this.currentUserEditService.open();
+  }
+  
+  onLogoClicked() {
+    this.router.navigate(['/']);
   }
 
   protected readonly Theme = Theme;
