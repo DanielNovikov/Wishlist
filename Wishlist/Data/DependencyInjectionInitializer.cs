@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Wishlist.Data.BackgroundJobs;
 using Wishlist.Data.Repositories.Abstract;
 using Wishlist.Data.Repositories.Concrete;
-using Wishlist.Shared.Core.BackgroundJobs;
 
 namespace Wishlist.Data;
 

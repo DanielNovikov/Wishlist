@@ -10,7 +10,8 @@ namespace Wishlist.Wishlist.Services.Concrete;
 public class WishlistService(
     ICurrentUserService currentUserService,
     IRepository<WishlistEntity> repository,
-    IWishlistPublicIdGenerator publicIdGenerator)
+    IWishlistPublicIdGenerator publicIdGenerator,
+    ILogger<WishlistService> logger)
     : IWishlistService
 {
     public async Task<WishlistEntity?> TryGetCurrent()
@@ -61,6 +62,8 @@ public class WishlistService(
             PublicId = publicIdGenerator.Generate()
         };
         await repository.Add(wishlist);
+        
+        logger.LogInformation("User created wishlist '{0}'", wishlist.PublicId);
 
         return wishlist;
     }

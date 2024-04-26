@@ -27,7 +27,6 @@ export class WishlistItemBookDialogComponent extends ModalBase<WishlistItemRespo
         super();
     }
 
-
     onBookClicked() {        
         if (!this.input?.isBooked) {
             this.wishlistItemApiService.book(this.input!.id)

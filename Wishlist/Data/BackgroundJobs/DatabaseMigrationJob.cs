@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Wishlist.Data;
 
-namespace Wishlist.Shared.Core.BackgroundJobs;
+namespace Wishlist.Data.BackgroundJobs;
 
 public class DatabaseMigrationJob(IServiceProvider serviceProvider) : IHostedService
 {

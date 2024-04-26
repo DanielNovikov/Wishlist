@@ -12,7 +12,8 @@ namespace Wishlist.Shared.CurrentUser.Services.Concrete;
 public class CurrentUserService(
     IRepository<UserEntity> userRepository,
     IHttpContextAccessor contextAccessor,
-    IUserService userService) 
+    IUserService userService,
+    ILogger<CurrentUserService> logger) 
     : ICurrentUserService
 {
     public async ValueTask<UserEntity?> TryGet()
@@ -62,6 +63,8 @@ public class CurrentUserService(
                 currentUser.Avatar.Path = request.AvatarPath;
             }
         }
+        
+        logger.LogInformation("User updated profile\nName: {0}", currentUser.Name);
 
         await userRepository.Update(currentUser);
         return currentUser;

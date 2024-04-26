@@ -12,7 +12,8 @@ namespace Wishlist.Shared.Auth.Services.Concrete;
 public class AuthByEmailService(
     IRepository<UserEntity> userRepository, 
     IUserService userService,
-    IAuthTokenGenerationService authTokenGenerationService) 
+    IAuthTokenGenerationService authTokenGenerationService,
+    ILogger<AuthByEmailService> logger) 
     : IAuthByEmailService
 {
     public async Task<AuthResponse?> SignIn(AuthSignInByEmailRequest request)
@@ -21,6 +22,8 @@ public class AuthByEmailService(
         
         if (user == null) return null;
 
+        logger.LogInformation("User logged in\nEmail: '{0}'", request.Email);
+        
         var authToken = authTokenGenerationService.Generate(user.Id);
         return new AuthResponse(authToken, user.ToResponse());
     }
@@ -39,6 +42,8 @@ public class AuthByEmailService(
         };
 
         await userRepository.Add(user);
+
+        logger.LogInformation("User signed up\nEmail: '{0}'", request.Email);
 
         var authToken = authTokenGenerationService.Generate(user.Id);
         return new AuthResponse(authToken, user.ToResponse());

@@ -1,10 +1,8 @@
 ﻿using Wishlist.Shared.Core.Models.Options;
 using Wishlist.Shared.Core.Services.Abstract;
 using Wishlist.Shared.Core.Services.Concrete;
-using Wishlist.Shared.CurrentUser.Services.Abstract;
-using Wishlist.Shared.CurrentUser.Services.Concrete;
 
-namespace Wishlist.Shared;
+namespace Wishlist.Shared.Core;
 
 public static class DependencyInjectionInitializer
 {
@@ -15,6 +13,6 @@ public static class DependencyInjectionInitializer
             .AddTransient<IFileUploadService, FileUploadService>()
             .AddTransient<IUserService, UserService>()
             .AddTransient<IImageService, ImageService>()
-            .AddTransient<ICurrentUserService, CurrentUserService>();
+            .AddSingleton<ILogger>(provider => new TelegramLogger(provider.GetRequiredService<IConfiguration>()));
     }
 }

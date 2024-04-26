@@ -14,7 +14,8 @@ namespace Wishlist.Shared.Auth.Services.Concrete;
 public class AuthByTelegramService(
     IOptions<TelegramLogOptions> options,
     IRepository<UserEntity> userRepository,
-    IAuthTokenGenerationService authTokenGenerationService) 
+    IAuthTokenGenerationService authTokenGenerationService,
+    ILogger<AuthByEmailService> logger) 
     : IAuthByTelegramService
 {
     public async ValueTask<AuthResponse?> SignIn(AuthSignInByTelegramRequest request)
@@ -40,6 +41,8 @@ public class AuthByTelegramService(
 
             await userRepository.Add(user);
         }
+        
+        logger.LogInformation("User logged in by telegram\nName: '{0}'", name);
 
         var authToken = authTokenGenerationService.Generate(user.Id);
         return new AuthResponse(authToken, user.ToResponse());

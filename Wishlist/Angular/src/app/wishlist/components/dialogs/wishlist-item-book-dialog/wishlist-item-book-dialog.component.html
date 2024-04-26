@@ -4,7 +4,7 @@
     <app-text lineHeight="normal" type="h2" fontWeight="semi-bold">{{ input?.title }}</app-text>
     
     @if (input?.url) {
-        <a class="url" [href]="input?.url"><app-text lineHeight="normal">{{ input?.url }}</app-text></a>
+        <a class="url" [href]="input?.url"><app-text lineHeight="normal" [underline]="true">{{ input?.url }}</app-text></a>
     }
     
     @if (input?.price) {
