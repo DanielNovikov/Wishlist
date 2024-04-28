@@ -23,6 +23,14 @@ public class WishlistItemScrapService(
         var imageUrl = htmlDocument.QuerySelector<IHtmlMetaElement>("meta[property='og:image']")?.Content;
         if (!string.IsNullOrEmpty(imageUrl))
         {
+            if (imageUrl.StartsWith("/"))
+            {
+                var uri = new Uri(request.Url);
+                var baseUrl = uri.GetLeftPart(UriPartial.Authority);
+                
+                imageUrl = baseUrl + imageUrl;
+            }
+            
             var image = await imageLoadService.Load(imageUrl);
             if (image != null)
                 imagePath = await fileUploadService.Upload(image, imageUrl);

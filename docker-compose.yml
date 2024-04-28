@@ -1,0 +1,40 @@
+version: '3.4'
+
+networks:
+  dockerapi-dev:
+    driver: bridge
+
+services:
+  server:
+    image: danilnovikovdev/wishlist-server:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile-BackEnd
+    restart: always
+    depends_on:
+      - "postgres"
+    ports:
+      - "5000:5000"
+    networks:
+      - dockerapi-dev
+
+  postgres:  
+    image: postgres:13.2
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - dockerapi-dev  
+
+  angular:
+    image: danilnovikovdev/wishlist-angular:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile-FrontEnd
+    ports:
+      - "4000:4000"
+    restart: always
+    networks:
+      - dockerapi-dev

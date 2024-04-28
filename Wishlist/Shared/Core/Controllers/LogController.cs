@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Wishlist.Shared.Core.Models;
@@ -10,6 +11,7 @@ namespace Wishlist.Shared.Core.Controllers;
 public class LogController(ILogger<LogController> logger) : ControllerBase
 {
     [HttpPost("form")]
+    [AllowAnonymous]
     public IActionResult LogForm([FromBody] LogFormRequest request)
     {
         var message = new StringBuilder();
