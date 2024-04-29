@@ -4,12 +4,12 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideServiceWorker } from '@angular/service-worker';
-import {ThemeService} from "./advert/services/theme.service";
 import {provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
 import { CurrentUserService } from "./shared/current-user/services/current-user.service";
 import { authInterceptor } from "./shared/core/services/interceptors/auth.interceptor";
 import { AuthAccessTokenService } from "./shared/auth/services/auth-access-token.service";
 import { of } from "rxjs";
+import {ThemeService} from "./shared/core/services/theme.service";
 
 
 export const appConfig: ApplicationConfig = {

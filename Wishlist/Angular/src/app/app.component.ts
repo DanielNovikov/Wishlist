@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnInit, signal, ViewChild, ViewContainerRef, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ThemeService } from "./advert/services/theme.service";
 import { NgClass } from "@angular/common";
-import { Theme } from "./advert/models/theme";
 import { LoaderComponent } from "./shared/core/components/loader/loader.component";
 import { ModalContainerComponent } from "./shared/modal/components/modal-container/modal-container.component";
+import {ThemeService} from "./shared/core/services/theme.service";
+import { Theme } from './shared/core/models/theme';
 
 @Component({
     selector: 'app-root',

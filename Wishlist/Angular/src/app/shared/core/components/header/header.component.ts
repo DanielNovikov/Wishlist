@@ -1,11 +1,11 @@
 import {Component, Input} from '@angular/core';
 import {NgClass} from "@angular/common";
 import {TextComponent} from "../text/text.component";
-import { ThemeService } from "../../../../advert/services/theme.service";
-import { Theme } from '../../../../advert/models/theme';
 import { CurrentUserEditService } from "../../../current-user/services/current-user-edit.service";
 import { CurrentUserService } from "../../../current-user/services/current-user.service";
 import {Router} from "@angular/router";
+import {ThemeService} from "../../services/theme.service";
+import { Theme } from '../../models/theme';
 
 @Component({
   selector: 'app-header',

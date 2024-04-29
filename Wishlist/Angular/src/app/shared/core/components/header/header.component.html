@@ -1,5 +1,5 @@
 <div class="header-main">
-    <img class="header-logo" src="assets/icons/advert/logo.svg" alt="Логотип" (click)="onLogoClicked()">
+    <img class="header-logo" src="assets/icons/shared/logo.svg" alt="Логотип" (click)="onLogoClicked()">
     
     @if (title) {
         <app-text type="h1">{{title}}</app-text>
@@ -10,16 +10,16 @@
     @if (currentUserService.user()?.avatarPath) {
         <img class="header-account" [src]="currentUserService.user()?.avatarPath" alt="Аккаунт" (click)="openCurrentUserEditModal()">
     } @else {
-        <img class="header-account" src="assets/icons/advert/account.svg" alt="Аккаунт" (click)="openCurrentUserEditModal()">
+        <img class="header-account" src="assets/icons/shared/account.svg" alt="Аккаунт" (click)="openCurrentUserEditModal()">
     }
 
     <div class="header-theme-selector" (click)="toggleTheme()">
         <div [ngClass]="{'header-active-theme': themeService.Value() === Theme.Light }">
-            <img src="assets/icons/advert/theme-mode-light.svg" alt="Світла тема">
+            <img src="assets/icons/shared/theme-mode-light.svg" alt="Світла тема">
         </div>
 
         <div [ngClass]="{'header-active-theme': themeService.Value() === Theme.Dark }">
-            <img src="assets/icons/advert/theme-mode-dark.svg" alt="Темна тема">
+            <img src="assets/icons/shared/theme-mode-dark.svg" alt="Темна тема">
         </div>
     </div>
 </div>
