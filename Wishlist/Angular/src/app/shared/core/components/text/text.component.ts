@@ -72,6 +72,7 @@ export class TextComponent implements OnInit {
         fontWeight ??= 'regular';
         fontSize ??= 'normal';
         break;
+        //uh, I just don't get sense of this component, can't it be achieved using regular tags and styling, there is no logic or specific markup
     }
 
     classes.push(fontWeight.toString());

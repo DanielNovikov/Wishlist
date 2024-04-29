@@ -17,7 +17,9 @@
         <div [ngClass]="{'header-active-theme': themeService.Value() === Theme.Light }">
             <img src="assets/icons/shared/theme-mode-light.svg" alt="Світла тема">
         </div>
+       
 
+        <!--[ngClass]="{'header-active-theme': themeService.Value() === Theme.Light }" - maybe set up some directive for handling themes?  -->
         <div [ngClass]="{'header-active-theme': themeService.Value() === Theme.Dark }">
             <img src="assets/icons/shared/theme-mode-dark.svg" alt="Темна тема">
         </div>

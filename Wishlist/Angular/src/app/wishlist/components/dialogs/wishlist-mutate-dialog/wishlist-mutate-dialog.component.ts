@@ -29,7 +29,7 @@ export class WishlistMutateDialogComponent extends ModalBase<WishlistResponse> i
 
     form = new FormGroup({
         name: new FormControl('', [Validators.required, Validators.maxLength(100)])
-    });
+    }); //use formbuilder
 
     get name() { return this.form.get('name'); }
 
