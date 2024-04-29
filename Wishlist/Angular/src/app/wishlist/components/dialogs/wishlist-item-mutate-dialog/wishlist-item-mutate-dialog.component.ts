@@ -20,6 +20,7 @@ import { WishlistItemScrapRequest } from "../../../models/wishlist-item-scrap-re
 import {InputImageComponent} from "../../../../shared/core/components/input-image/input-image.component";
 import {WishlistItemResponse} from "../../../models/wishlist-item-response";
 import {WishlistItemMutateRequest} from "../../../models/base/wishlist-item-mutate-request";
+import { FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-wishlist-items-create-dialog',
@@ -30,7 +31,7 @@ import {WishlistItemMutateRequest} from "../../../models/base/wishlist-item-muta
         NgIf,
         ReactiveFormsModule,
         TextErrorComponent,
-        InputImageComponent
+        InputImageComponent,
     ],
     templateUrl: './wishlist-item-mutate-dialog.component.html',
     styleUrl: './wishlist-item-mutate-dialog.component.scss',
@@ -44,12 +45,24 @@ export class WishlistItemMutateDialogComponent extends ModalBase<WishlistItemRes
         price: new FormControl<number | undefined>(undefined)
     });
 
+    // formB = this.formBuilder.group({
+    //     url: new FormControl('', [urlValidator()]),
+    //     title: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+    //     description: new FormControl('', [Validators.maxLength(500)]),
+    //     price: new FormControl<number | undefined>(undefined)
+    // })
+    // And then you can use:
+    //  this.formB.controls.description so it's type safe
+
     get title() { return this.form.get('title'); }
+    
     get description() { return this.form.get('description'); }
     get url() { return this.form.get('url'); }
     get price() { return this.form.get('price'); }
 
-    constructor(private wishlistItemApiService: WishlistItemApiService) {
+    constructor(private wishlistItemApiService: WishlistItemApiService,
+        private formBuilder: FormBuilder
+    ) {
         super();
     }
 
@@ -79,6 +92,7 @@ export class WishlistItemMutateDialogComponent extends ModalBase<WishlistItemRes
                 switchMap(url => {                    
                     let request = { url: url } as WishlistItemScrapRequest;
                     return this.wishlistItemApiService.scrap(request);
+                    // return this.wishlistItemApiService.scrap({ url: url! }); idk but seems shorter to me
                 }))
             .subscribe(response => {
                 if (!response) return;
@@ -105,7 +119,8 @@ export class WishlistItemMutateDialogComponent extends ModalBase<WishlistItemRes
         operation
             .pipe(takeUntil(this.destroy$))
             .subscribe(result => {
-                if (result) {
+                if (result) { // another option = filter => result
+                            // subscribe => this.output(true)
                     this.output(true);
                 }
             });

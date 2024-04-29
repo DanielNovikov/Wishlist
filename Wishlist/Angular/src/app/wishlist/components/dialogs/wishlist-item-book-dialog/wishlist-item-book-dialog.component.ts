@@ -30,7 +30,7 @@ export class WishlistItemBookDialogComponent extends ModalBase<WishlistItemRespo
     onBookClicked() {        
         if (!this.input?.isBooked) {
             this.wishlistItemApiService.book(this.input!.id)
-                .pipe(takeUntil(this.destroy$))
+                .pipe(takeUntil(this.destroy$)) // couse use filter to check if result not null and catch error
                 .subscribe(result => {
                     this.output(result);
                 });

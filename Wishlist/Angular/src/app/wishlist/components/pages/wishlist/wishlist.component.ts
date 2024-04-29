@@ -63,7 +63,7 @@ export class WishlistComponent extends Destroyable {
     }
     
     async onShareClicked() {
-        if (navigator && this.wishlist()) {
+        if (navigator && this.wishlist()) { // you can also use navigator.canShare here
             await navigator.share({
                 text: `"${this.wishlist()!.name}" - список побажань`,
                 url: location.href

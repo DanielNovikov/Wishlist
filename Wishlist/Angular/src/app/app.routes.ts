@@ -8,5 +8,5 @@ export const routes: Routes = [
     { path: '', component: AdvertComponent },
     { path: 'wishlist', component: WishlistLayoutComponent, children: [
         { path: '', component: WishlistCreateComponent },
-        { path: ':wishlistId', component: WishlistComponent }]},
+        { path: ':wishlistId', component: WishlistComponent }]}, // shouldn't it be guarded?
 ];
