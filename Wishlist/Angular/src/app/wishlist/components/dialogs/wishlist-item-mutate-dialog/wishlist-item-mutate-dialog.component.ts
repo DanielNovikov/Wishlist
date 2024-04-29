@@ -14,7 +14,7 @@ import { NgIf } from "@angular/common";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { TextErrorComponent } from "../../../../shared/core/components/text-error/text-error.component";
 import { urlValidator } from "../../../../shared/core/services/validators/url-validator";
-import { EMPTY, switchMap, takeUntil } from "rxjs";
+import {distinctUntilChanged, EMPTY, filter, map, switchMap, takeUntil, tap} from "rxjs";
 import { WishlistItemApiService } from "../../../services/wishlist-item-api.service";
 import { WishlistItemScrapRequest } from "../../../models/wishlist-item-scrap-request";
 import {InputImageComponent} from "../../../../shared/core/components/input-image/input-image.component";
@@ -67,10 +67,16 @@ export class WishlistItemMutateDialogComponent extends ModalBase<WishlistItemRes
     ngOnInit(): void {        
         this.url?.valueChanges
             .pipe(
+                map(value => value?.toLowerCase()),
                 takeUntil(this.destroy$),
-                switchMap(url => {
-                    if (this.url?.invalid || !this.url?.value) return EMPTY;
-                    
+                distinctUntilChanged(),
+                tap(url => {
+                    if (this.url?.value !== url) {
+                        this.url?.setValue(url!, { emitEvent: false });
+                    }
+                }),
+                filter(() => this.url?.valid === true && !!this.url.value),
+                switchMap(url => {                    
                     let request = { url: url } as WishlistItemScrapRequest;
                     return this.wishlistItemApiService.scrap(request);
                 }))
@@ -82,7 +88,7 @@ export class WishlistItemMutateDialogComponent extends ModalBase<WishlistItemRes
                     this.title?.updateValueAndValidity();
                 }
                 
-                if (response.imagePath) {+
+                if (response.imagePath) {
                     this.imageSrc.set(response.imagePath);
                 }
             });

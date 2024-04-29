@@ -53,7 +53,7 @@ export class AuthSignInComponent extends Destroyable {
             .pipe(takeUntil(this.destroy$))
             .subscribe(success => {
                 if (!success) {
-                    this.submitFailureMessage.set('Користувач з такою електронною адресою вже зареєстрований');
+                    this.submitFailureMessage.set('Електронна пошта або пароль не вірні');
                 } else {
                     this.onAuthenticated.emit();
                 }

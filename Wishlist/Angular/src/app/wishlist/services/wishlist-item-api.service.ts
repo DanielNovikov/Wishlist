@@ -7,39 +7,33 @@ import {WishlistItemScrapRequest} from "../models/wishlist-item-scrap-request";
 import {WishlistItemScrapResponse} from "../models/wishlist-item-scrap-response";
 import {WishlistItemCreateRequest} from "../models/wishlist-item-create-request";
 import {WishlistItemUpdateRequest} from "../models/wishlist-item-update-request";
+import {ApiService} from "../../shared/core/services/api.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class WishlistItemApiService {
 
-    private baseUrl: string = environment.apiUrl + 'wishlist-item';
-
-    constructor(private httpClient: HttpClient) {
+    constructor(private api: ApiService) {
     }
 
     create(request: WishlistItemCreateRequest): Observable<boolean> {
-        return this.httpClient.post<boolean>(this.baseUrl + '/', request)
-            .pipe(catchError(error => of(false)));
+        return this.api.post('wishlist-item', request, false);
     }
 
     update(id: number, request: WishlistItemUpdateRequest): Observable<boolean> {
-        return this.httpClient.put<boolean>(this.baseUrl + `/${id}`, request)
-            .pipe(catchError(error => of(false)));
+        return this.api.put(`wishlist-item/${id}`, request, false);
     }
 
     delete(id: number): Observable<any> {
-        return this.httpClient.delete(this.baseUrl + `/${id}`)
-            .pipe(catchError(error => of()));
+        return this.api.delete(`wishlist-item/${id}`);
     }
 
     scrap(request: WishlistItemScrapRequest): Observable<WishlistItemScrapResponse | null> {
-        return this.httpClient.post<WishlistItemScrapResponse>(this.baseUrl + '/scrap', request)
-            .pipe(catchError(error => of(null)));
+        return this.api.post('wishlist-item/scrap', request);
     }
     
     book(id: number) : Observable<boolean> {
-        return this.httpClient.post<boolean>(this.baseUrl + `/${id}/book`, null)
-            .pipe(catchError(error => of(false)));
+        return this.api.post(`wishlist-item/${id}/book`, null, false);
     }
 }

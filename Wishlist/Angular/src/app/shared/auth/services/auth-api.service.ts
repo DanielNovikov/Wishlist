@@ -6,29 +6,24 @@ import { AuthSignInByEmailRequest } from "../models/auth-sign-in-by-email-reques
 import { AuthSignUpByEmailRequest } from "../models/auth-sign-up-by-email-request";
 import { AuthSignInByTelegramRequest } from "../models/auth-sign-in-by-telegram-request";
 import { environment } from "../../core/environments/environment";
+import {ApiService} from "../../core/services/api.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthApiService {
-
-    private baseUrl: string = environment.apiUrl + 'auth';
-
-    constructor(private httpClient: HttpClient) {
+    constructor(private api: ApiService) {
     }
 
     signInByEmail(request: AuthSignInByEmailRequest): Observable<AuthResponse | null> {
-        return this.httpClient.post<AuthResponse>(this.baseUrl + '/email/sign-in', request)
-            .pipe(catchError(error => of(null)));
+        return this.api.post('auth/email/sign-in', request);
     }
 
     signUpByEmail(request: AuthSignUpByEmailRequest): Observable<AuthResponse | null> {
-        return this.httpClient.post<AuthResponse>(this.baseUrl + '/email/sign-up', request)
-            .pipe(catchError(error => of(null)));
+        return this.api.post('auth/email/sign-up', request);
     }
 
     signInByTelegram(request: AuthSignInByTelegramRequest): Observable<AuthResponse | null> {
-        return this.httpClient.post<AuthResponse>(this.baseUrl + '/telegram', request)
-            .pipe(catchError(error => of(null)));
+        return this.api.post('auth/telegram', request);
     }
 }

@@ -4,7 +4,7 @@
 .container-mobile {
   display: flex;
   flex-direction: column;
-  gap: 70px;
+  gap: 50px;
   align-items: center;
   text-align: center;
   
@@ -86,6 +86,10 @@
 
 .banner-image {
   text-align: center;
+  
+  @include mobile() {
+    @include content-padding();
+  }
 
   img {
     width: 100%;

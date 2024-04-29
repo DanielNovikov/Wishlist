@@ -6,37 +6,33 @@ import {WishlistCreateRequest} from "../models/wishlist-create-request";
 import {environment} from "../../shared/core/environments/environment";
 import {WishlistItemResponse} from "../models/wishlist-item-response";
 import {WishlistEditRequest} from "../models/wishlist-edit-request";
+import {ApiService} from "../../shared/core/services/api.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class WishlistApiService {
-
-    private baseUrl: string = environment.apiUrl + 'wishlist';
-
-    constructor(private httpClient: HttpClient) {
+    
+    constructor(private api: ApiService) {
     }
 
     get(): Observable<WishlistResponse | null> {
-        return this.httpClient.get<WishlistResponse>(this.baseUrl)
-            .pipe(catchError(error => of(null)));
+        return this.api.get('wishlist');
     }
 
-    getByPublicId(publicId: string): Observable<WishlistResponse | null> {
-        return this.httpClient.get<WishlistResponse>(this.baseUrl + `/${publicId}`)
-            .pipe(catchError(error => of(null)));
+    getByPublicId(publicId: string): Observable<WishlistResponse | null> {        
+        return this.api.get(`wishlist/${publicId}`);
     }
 
     getItemsByPublicId(publicId: string): Observable<WishlistItemResponse[]> {
-        return this.httpClient.get<WishlistItemResponse[]>(this.baseUrl + `/${publicId}/items`)
-            .pipe(catchError(error => of([])));
+        return this.api.get(`wishlist/${publicId}/items`);
     }
 
     create(request: WishlistCreateRequest): Observable<WishlistResponse> {
-        return this.httpClient.post<WishlistResponse>(this.baseUrl, request);
+        return this.api.post(`wishlist`, request);
     }
     
     edit(publicId: string, request: WishlistEditRequest): Observable<WishlistResponse> {
-        return this.httpClient.put<WishlistResponse>(this.baseUrl + `/${publicId}`, request);
+        return this.api.put(`wishlist/${publicId}`, request);
     }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "Angular",
-  "short_name": "Angular",
+  "name": "My Wishlist - Створи свій список побажань",
+  "short_name": "My Wishlist",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
