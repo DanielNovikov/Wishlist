@@ -4,4 +4,4 @@
     <app-auth-sign-up (onSignInClicked)="onAuthTypeChanged('sign-in')" (onAuthenticated)="onAuthenticated()"></app-auth-sign-up>
 }
     
-<app-auth-external></app-auth-external>
+<app-auth-external (onAuthenticated)="onAuthenticated()"></app-auth-external>

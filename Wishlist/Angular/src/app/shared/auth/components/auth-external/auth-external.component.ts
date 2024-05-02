@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
 import {AuthExternalTelegramComponent} from "../auth-external-telegram/auth-external-telegram.component";
 import { TextComponent } from "../../../core/components/text/text.component";
 import { DeviceService } from "../../../core/services/device.service";
@@ -16,6 +16,8 @@ import { DeviceService } from "../../../core/services/device.service";
 })
 export class AuthExternalComponent {
 
+  @Output() onAuthenticated: EventEmitter<void> = new EventEmitter<void>();
+  
   constructor(protected deviceService: DeviceService) {
   }
   

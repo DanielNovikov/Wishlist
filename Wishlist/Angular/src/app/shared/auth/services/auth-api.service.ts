@@ -23,7 +23,7 @@ export class AuthApiService {
         return this.api.post('auth/email/sign-up', request);
     }
 
-    signInByTelegram(request: AuthSignInByTelegramRequest): Observable<AuthResponse | null> {
-        return this.api.post('auth/telegram', request);
+    signInByTelegram(query: string, request: AuthSignInByTelegramRequest): Observable<AuthResponse | null> {
+        return this.api.post(`auth/telegram?${query}`, request);
     }
 }

@@ -36,7 +36,7 @@ public class AuthController(
         return Ok(response);
     }
 
-    [HttpGet("telegram")]
+    [HttpPost("telegram")]
     [AllowAnonymous]
     public async Task<IActionResult> SignInByTelegram([FromBody] AuthSignInByTelegramRequest request)
     {

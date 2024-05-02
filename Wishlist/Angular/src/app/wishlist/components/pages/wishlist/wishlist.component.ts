@@ -25,7 +25,7 @@ import {Meta, Title} from "@angular/platform-browser";
 })
 export class WishlistComponent extends Destroyable {
     @Input()
-    set wishlistId(publicId: string) {        
+    set wishlistId(publicId: string) {
         this.wishlistApiService.getByPublicId(publicId)
             .pipe((takeUntil(this.destroy$)))
             .subscribe(response => {
@@ -72,7 +72,7 @@ export class WishlistComponent extends Destroyable {
     }
 
     setMeta(wishlist: WishlistResponse): void {
-        const title = `${wishlist.name} - писок побажань`;
+        const title = `${wishlist.name} - список побажань`;
         
         this.title.setTitle(title);
         

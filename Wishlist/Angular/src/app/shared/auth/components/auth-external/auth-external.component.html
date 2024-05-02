@@ -2,7 +2,7 @@
 
 <div class="external-buttons">
     @if (!deviceService.isIos()) {
-        <app-auth-external-telegram></app-auth-external-telegram>
+        <app-auth-external-telegram (onAuthenticated)="onAuthenticated.emit()"></app-auth-external-telegram>
     }
     
     <img src="assets/icons/auth/google.svg" alt="Google">

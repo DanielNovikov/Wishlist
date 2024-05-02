@@ -17,9 +17,9 @@ public class TelegramLogger : ILogger
             _minimumLogLevel = LogLevel.Information;
         }
 
-        var accessToken = configuration.GetValue<string>("TelegramLogClient:AccessToken") ?? throw new ArgumentNullException();
-        _primaryChatId = configuration.GetValue<string>("TelegramLogClient:UserId") ?? throw new ArgumentNullException();
-        _secondChatId = configuration.GetValue<string>("TelegramLogClient:SecondaryUserId");
+        var accessToken = configuration.GetValue<string>("TelegramLogOptions:AccessToken") ?? throw new ArgumentNullException();
+        _primaryChatId = configuration.GetValue<string>("TelegramLogOptions:UserId") ?? throw new ArgumentNullException();
+        _secondChatId = configuration.GetValue<string>("TelegramLogOptions:SecondaryUserId");
 
         _botClient = new TelegramBotClient(accessToken);
     }

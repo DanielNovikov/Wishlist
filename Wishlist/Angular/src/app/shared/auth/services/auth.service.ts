@@ -28,8 +28,8 @@ export class AuthService {
             map(response => this.authenticate(response)));
     }
 
-    signInByTelegram(request: AuthSignInByTelegramRequest): Observable<boolean> {
-        return this.authApiService.signInByTelegram(request).pipe(
+    signInByTelegram(query: string, request: AuthSignInByTelegramRequest): Observable<boolean> {
+        return this.authApiService.signInByTelegram(query, request).pipe(
             map(response => this.authenticate(response)));
     }
 

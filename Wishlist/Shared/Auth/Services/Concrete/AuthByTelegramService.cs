@@ -15,13 +15,17 @@ public class AuthByTelegramService(
     IOptions<TelegramLogOptions> options,
     IRepository<UserEntity> userRepository,
     IAuthTokenGenerationService authTokenGenerationService,
-    ILogger<AuthByEmailService> logger) 
+    ILogger<AuthByEmailService> logger,
+    IHttpContextAccessor httpContextAccessor) 
     : IAuthByTelegramService
 {
     public async ValueTask<AuthResponse?> SignIn(AuthSignInByTelegramRequest request)
     {
+        var requestQuery = httpContextAccessor.HttpContext?.Request.Query
+            .ToDictionary(x => x.Key, x => x.Value.First() ?? string.Empty);
+        
         using var loginWidget = new LoginWidget(options.Value.AccessToken);
-        if (loginWidget.CheckAuthorization(request.Query) != Authorization.Valid) return null;
+        if (loginWidget.CheckAuthorization(requestQuery) != Authorization.Valid) return null;
 
         var user = await userRepository.Query(query => query
             .Include(x => x.Avatar)
